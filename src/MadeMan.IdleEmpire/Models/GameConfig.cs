@@ -58,7 +58,11 @@ public static class GameConfig
     };
 
     // === PRESTIGE ===
+#if DEBUG
+    public const double PrestigeThreshold = 100;  // Lower for testing
+#else
     public const double PrestigeThreshold = 10_000;
+#endif
     public const double PrestigeBonusPerReset = 0.25;
 
     // === OFFLINE ===

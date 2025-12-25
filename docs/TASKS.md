@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Current Task
-**TASK-011**: Verify Game Loop - READY
+**TASK-015**: UI Polish - READY
 
 ---
 
@@ -59,15 +59,15 @@
 
 | Task | Name | Status | Dependencies | Estimate |
 |------|------|--------|--------------|----------|
-| TASK-011 | Verify Game Loop | BLOCKED | TASK-010, TASK-028 | 1 hour |
-| TASK-012 | Verify Prestige | BLOCKED | TASK-011 | 30 min |
+| TASK-011 | Verify Game Loop | COMPLETED | TASK-010 | 1 hour |
+| TASK-012 | Verify Prestige | COMPLETED | TASK-011 | 30 min |
 
 ## Phase 5: Persistence
 
 | Task | Name | Status | Dependencies | Estimate |
 |------|------|--------|--------------|----------|
-| TASK-013 | Test Save/Load | BLOCKED | TASK-012 | 30 min |
-| TASK-014 | Test Offline Earnings | BLOCKED | TASK-013 | 30 min |
+| TASK-013 | Test Save/Load | COMPLETED | TASK-012 | 30 min |
+| TASK-014 | Test Offline Earnings | COMPLETED | TASK-013 | 30 min |
 
 ## Phase 6: Polish
 
@@ -93,6 +93,10 @@
 | TASK-008 | MainViewModel | 2024-12-25 | dd8cf82 |
 | TASK-009 | MainPage UI | 2024-12-25 | 8dd4516 |
 | TASK-010 | Add Icons | 2024-12-25 | 8dd4516 |
+| TASK-011 | Verify Game Loop | 2024-12-25 | (pending) |
+| TASK-012 | Verify Prestige | 2024-12-25 | (pending) |
+| TASK-013 | Test Save/Load | 2024-12-25 | (pending) |
+| TASK-014 | Test Offline Earnings | 2024-12-25 | (pending) |
 
 ---
 

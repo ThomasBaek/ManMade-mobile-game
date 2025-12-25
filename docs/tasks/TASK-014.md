@@ -4,7 +4,7 @@
 - **Phase**: 4 - Persistence
 - **Dependencies**: TASK-013
 - **Estimated Time**: 30 min
-- **Status**: BLOCKED
+- **Status**: COMPLETED
 - **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md
 - **Requires Design Input**: NO
 
@@ -45,12 +45,13 @@ Max Hours = 4
 
 ## Acceptance Criteria
 
-- [ ] Offline earnings calculated on app start
-- [ ] 50% efficiency applied
-- [ ] Max 4 hour cap
-- [ ] Very short offline = no bonus
+- [x] Offline earnings calculated on app start
+- [x] 50% efficiency applied
+- [x] Max 4 hour cap
+- [x] Very short offline = no bonus
 
 ---
 
-**Task Status**: BLOCKED (waiting for TASK-013)
+**Task Status**: COMPLETED
 **Last Updated**: 2024-12-25
+**Commit**: (pending)
