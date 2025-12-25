@@ -13,6 +13,13 @@ public class GameState
     // Operations
     public List<OperationState> Operations { get; set; } = new();
 
+    // Skills
+    public List<SkillState> Skills { get; set; } = new();
+    public int MilestoneCount { get; set; } = 0;
+
+    // Session tracking (for Compound Interest skill)
+    public DateTime SessionStartUtc { get; set; } = DateTime.UtcNow;
+
     // Meta
     public DateTime LastPlayedUtc { get; set; } = DateTime.UtcNow;
 }

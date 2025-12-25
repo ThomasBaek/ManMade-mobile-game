@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Current Task
-**TASK-015**: UI Polish - READY
+**Bundle C**: TASK-023 + TASK-024 (Integrate Skills into GameEngine + DI) - READY
 
 ---
 
@@ -37,12 +37,12 @@
 
 | Task | Name | Status | Dependencies | Estimate |
 |------|------|--------|--------------|----------|
-| TASK-018 | Skill Models | BLOCKED | TASK-002 | 30 min |
-| TASK-019 | Skill Config (18 Skills) | BLOCKED | TASK-018 | 45 min |
-| TASK-020 | Skill Calculator | BLOCKED | TASK-019 | 30 min |
-| TASK-021 | Skill Service | BLOCKED | TASK-020 | 45 min |
-| TASK-022 | Milestone Service | BLOCKED | TASK-021 | 30 min |
-| TASK-023 | Integrate Skills into GameEngine | BLOCKED | TASK-021, TASK-022 | 45 min |
+| TASK-018 | Skill Models | COMPLETED | TASK-002 | 30 min |
+| TASK-019 | Skill Config (18 Skills) | COMPLETED | TASK-018 | 45 min |
+| TASK-020 | Skill Calculator | COMPLETED | TASK-019 | 30 min |
+| TASK-021 | Skill Service | COMPLETED | TASK-020 | 45 min |
+| TASK-022 | Milestone Service | COMPLETED | TASK-021 | 30 min |
+| TASK-023 | Integrate Skills into GameEngine | READY | TASK-021, TASK-022 | 45 min |
 | TASK-024 | Update DI for Skills | BLOCKED | TASK-023 | 15 min |
 | TASK-025 | SkillViewModel | BLOCKED | TASK-024 | 30 min |
 | TASK-026 | Skill Selection Modal | BLOCKED | TASK-025 | 45 min |
@@ -97,6 +97,11 @@
 | TASK-012 | Verify Prestige | 2024-12-25 | a6782d5 |
 | TASK-013 | Test Save/Load | 2024-12-25 | a6782d5 |
 | TASK-014 | Test Offline Earnings | 2024-12-25 | a6782d5 |
+| TASK-018 | Skill Models | 2024-12-25 | (Bundle B) |
+| TASK-019 | Skill Config (18 Skills) | 2024-12-25 | (Bundle B) |
+| TASK-020 | Skill Calculator | 2024-12-25 | (Bundle B) |
+| TASK-021 | Skill Service | 2024-12-25 | (Bundle B) |
+| TASK-022 | Milestone Service | 2024-12-25 | (Bundle B) |
 
 ---
 
