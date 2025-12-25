@@ -91,8 +91,8 @@
 | TASK-006 | Implement Theme | 2024-12-25 | f6cb1c7 |
 | TASK-007 | OperationViewModel | 2024-12-25 | 01bd4f0 |
 | TASK-008 | MainViewModel | 2024-12-25 | dd8cf82 |
-| TASK-009 | MainPage UI | 2024-12-25 | (pending) |
-| TASK-010 | Add Icons | 2024-12-25 | (pending) |
+| TASK-009 | MainPage UI | 2024-12-25 | 8dd4516 |
+| TASK-010 | Add Icons | 2024-12-25 | 8dd4516 |
 
 ---
 
