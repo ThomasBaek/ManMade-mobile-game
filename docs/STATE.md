@@ -20,18 +20,22 @@
 | Colors.xaml | Eksisterer | Default farver (ikke game theme) |
 | Styles.xaml | Eksisterer | Default styles |
 
-### Tomme Mapper (klar til brug)
-- `/Models/` - Tom
+### Mapper Status
+- `/Models/` - ✅ 3 filer oprettet
 - `/Services/` - Tom
 - `/ViewModels/` - Tom
 - `/Views/` - Tom
 
+### Oprettede Filer (Game-specifik)
+| Fil | Oprettet i Task |
+|-----|-----------------|
+| Models/GameState.cs | TASK-002 ✅ |
+| Models/Operation.cs | TASK-002 ✅ |
+| Models/GameConfig.cs | TASK-002 ✅ |
+
 ### Manglende Filer
 | Fil | Oprettes i Task |
 |-----|-----------------|
-| Models/GameState.cs | TASK-002 |
-| Models/Operation.cs | TASK-002 |
-| Models/GameConfig.cs | TASK-002 |
 | Services/SaveManager.cs | TASK-003 |
 | Services/IGameEngine.cs | TASK-004 |
 | Services/GameEngine.cs | TASK-004 |
@@ -94,10 +98,10 @@
 **Klar til implementation** - Environment verificeret, build virker
 
 ## Aktiv Task
-TASK-002 (Implement Models)
+TASK-003 (Implement SaveManager)
 
 ## Sidst Completed Task
-TASK-001 (Install CommunityToolkit.Mvvm) - 2024-12-25
+TASK-002 (Implement Models) - 2024-12-25
 
 ---
 
@@ -127,5 +131,5 @@ Ingen
 - **Build Status**: ✅ Success
 - **Errors**: 0
 - **Warnings**: 0
-- **Files Created**: 0 (af game-specifikke)
-- **Lines of Code**: 0 (af game-specifikke)
+- **Files Created**: 3 (Models: GameState.cs, Operation.cs, GameConfig.cs)
+- **Lines of Code**: ~90 (af game-specifikke)

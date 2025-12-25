@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Aktuel Task
-**TASK-002**: Implement Models - READY
+**TASK-003**: Implement SaveManager - READY
 
 ---
 
@@ -18,8 +18,8 @@
 | Task | Navn | Status | Dependencies | Estimat |
 |------|------|--------|--------------|---------|
 | TASK-001 | Install CommunityToolkit.Mvvm | COMPLETED | None | 15 min |
-| TASK-002 | Implement Models | READY | TASK-001 | 45 min |
-| TASK-003 | Implement SaveManager | BLOCKED | TASK-002 | 30 min |
+| TASK-002 | Implement Models | COMPLETED | TASK-001 | 45 min |
+| TASK-003 | Implement SaveManager | READY | TASK-002 | 30 min |
 | TASK-004 | Implement GameEngine | BLOCKED | TASK-003 | 1 time |
 | TASK-005 | Setup DI & Lifecycle | BLOCKED | TASK-004 | 30 min |
 
@@ -61,7 +61,8 @@
 
 | Task | Navn | Completed | Commit |
 |------|------|-----------|--------|
-| TASK-001 | Install CommunityToolkit.Mvvm | 2024-12-25 | (pending) |
+| TASK-001 | Install CommunityToolkit.Mvvm | 2024-12-25 | ae0df75 |
+| TASK-002 | Implement Models | 2024-12-25 | (pending) |
 
 ---
 
