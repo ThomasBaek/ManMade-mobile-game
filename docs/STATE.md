@@ -43,8 +43,8 @@
 ### NuGet Packages Status
 | Package | Required | Installed |
 |---------|----------|-----------|
-| CommunityToolkit.Mvvm | 8.2.2+ | NEJ |
-| Microsoft.Maui.Controls | Ja | Ja |
+| CommunityToolkit.Mvvm | 8.2.2+ | JA (8.2.2) |
+| Microsoft.Maui.Controls | Ja | Ja (10.0.1) |
 
 ### Build Status
 ```
@@ -80,9 +80,9 @@
 ~~**Problem:** Projektet er oprettet med `net10.0-android` i stedet for `net8.0-android`~~
 **Status:** ✅ LØST - Vi bruger net10.0 da det er hvad der er installeret og virker
 
-### CommunityToolkit.Mvvm Mangler
-**Problem:** MVVM toolkit er ikke installeret
-**Løsning:** Tilføj package i TASK-001
+### ~~CommunityToolkit.Mvvm Mangler~~
+~~**Problem:** MVVM toolkit er ikke installeret~~
+**Status:** ✅ LØST i TASK-001
 
 ### Default Template Kode
 **Problem:** MainPage.xaml har "Hello World" counter
@@ -94,10 +94,10 @@
 **Klar til implementation** - Environment verificeret, build virker
 
 ## Aktiv Task
-Ingen
+TASK-002 (Implement Models)
 
 ## Sidst Completed Task
-Ingen (pre-flight check done)
+TASK-001 (Install CommunityToolkit.Mvvm) - 2024-12-25
 
 ---
 

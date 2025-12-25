@@ -99,9 +99,9 @@ Forventet: CommunityToolkit.Mvvm 8.2.2 (eller højere) listet
 
 ## Acceptance Criteria
 
-- [ ] CommunityToolkit.Mvvm package installeret
-- [ ] Build succeeds med 0 errors
-- [ ] Ingen nye warnings introduceret
+- [x] CommunityToolkit.Mvvm package installeret
+- [x] Build succeeds med 0 errors
+- [x] Ingen nye warnings introduceret
 
 ---
 
@@ -141,5 +141,6 @@ Ingen - CommunityToolkit.Mvvm er standard for MAUI MVVM
 
 ---
 
-**Task Status**: READY to implement
+**Task Status**: COMPLETED
 **Last Updated**: 2024-12-25
+**Completed**: 2024-12-25
