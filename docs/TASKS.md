@@ -93,10 +93,10 @@
 | TASK-008 | MainViewModel | 2024-12-25 | dd8cf82 |
 | TASK-009 | MainPage UI | 2024-12-25 | 8dd4516 |
 | TASK-010 | Add Icons | 2024-12-25 | 8dd4516 |
-| TASK-011 | Verify Game Loop | 2024-12-25 | (pending) |
-| TASK-012 | Verify Prestige | 2024-12-25 | (pending) |
-| TASK-013 | Test Save/Load | 2024-12-25 | (pending) |
-| TASK-014 | Test Offline Earnings | 2024-12-25 | (pending) |
+| TASK-011 | Verify Game Loop | 2024-12-25 | a6782d5 |
+| TASK-012 | Verify Prestige | 2024-12-25 | a6782d5 |
+| TASK-013 | Test Save/Load | 2024-12-25 | a6782d5 |
+| TASK-014 | Test Offline Earnings | 2024-12-25 | a6782d5 |
 
 ---
 
