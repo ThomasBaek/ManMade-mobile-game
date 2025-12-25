@@ -90,7 +90,7 @@
 | TASK-005 | Setup DI & Lifecycle | 2024-12-25 | a5bd9e0 |
 | TASK-006 | Implement Theme | 2024-12-25 | f6cb1c7 |
 | TASK-007 | OperationViewModel | 2024-12-25 | 01bd4f0 |
-| TASK-008 | MainViewModel | 2024-12-25 | (pending) |
+| TASK-008 | MainViewModel | 2024-12-25 | dd8cf82 |
 
 ---
 
