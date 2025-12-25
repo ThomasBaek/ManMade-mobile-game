@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Aktuel Task
-**TASK-006**: Implement Theme - READY
+**TASK-007**: OperationViewModel - READY
 
 ---
 
@@ -27,8 +27,8 @@
 
 | Task | Navn | Status | Dependencies | Estimat |
 |------|------|--------|--------------|---------|
-| TASK-006 | Implement Theme | READY | TASK-005 | 30 min |
-| TASK-007 | OperationViewModel | BLOCKED | TASK-006 | 45 min |
+| TASK-006 | Implement Theme | COMPLETED | TASK-005 | 30 min |
+| TASK-007 | OperationViewModel | READY | TASK-006 | 45 min |
 | TASK-008 | MainViewModel | BLOCKED | TASK-007 | 1 time |
 | TASK-009 | MainPage UI | BLOCKED | TASK-008 | 1.5 time |
 | TASK-010 | Add Icons | BLOCKED | TASK-009 | 30 min |
@@ -88,6 +88,7 @@
 | TASK-003 | Implement SaveManager | 2024-12-25 | fe72620 |
 | TASK-004 | Implement GameEngine | 2024-12-25 | 7f52788 |
 | TASK-005 | Setup DI & Lifecycle | 2024-12-25 | a5bd9e0 |
+| TASK-006 | Implement Theme | 2024-12-25 | f6cb1c7 |
 
 ---
 
