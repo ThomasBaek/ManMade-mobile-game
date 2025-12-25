@@ -96,19 +96,21 @@ dotnet publish -f net10.0-android -c Release
 
 ## Status Checklist
 - [x] Projekt oprettet
-- [ ] NuGet packages installeret (TASK-001)
+- [x] NuGet packages installeret (TASK-001) ✅
 - [x] Mappestruktur klar
-- [ ] Models implementeret (TASK-002)
-- [ ] Services implementeret (TASK-003, TASK-004)
+- [x] Models implementeret (TASK-002) ✅
+- [x] Services implementeret (TASK-003, TASK-004) ✅
+- [ ] DI & Lifecycle setup (TASK-005)
+- [ ] Theme/farver sat op (TASK-006)
 - [ ] ViewModels implementeret (TASK-007, TASK-008)
 - [ ] UI implementeret (TASK-009)
-- [ ] Theme/farver sat op (TASK-006)
 - [ ] Ikoner tilføjet (TASK-010)
-- [ ] Test på emulator (TASK-011)
-- [ ] Offline earnings virker (TASK-014)
-- [ ] Prestige virker (TASK-012)
+- [ ] Game loop test (TASK-011)
+- [ ] Prestige test (TASK-012)
+- [ ] Save/Load test (TASK-013)
+- [ ] Offline earnings test (TASK-014)
 
-**Naeste task:** TASK-001 (Project Setup & Packages)
+**Næste task:** TASK-005 (Setup DI & Lifecycle)
 
 ## Farve Palette
 ```
@@ -164,12 +166,40 @@ Se projektets andre markdown filer for:
 | `Naeste` | Hvad er næste task? |
 
 ### Task Flow
-1. Sig: `Start TASK-XXX`
-2. Claude implementerer og tester
-3. Claude færdigmelder med test instruktioner
-4. Du tester i emulator
-5. Sig: `Godkend TASK-XXX`
-6. Claude committer og opdaterer docs
+
+**1. Bruger siger:** `Start TASK-XXX`
+
+**2. Claude implementerer:**
+- Læser task specifikation
+- Implementerer koden
+- Stiller spørgsmål hvis nødvendigt
+
+**3. Claude tester INDEN færdigmelding:**
+- Kører `dotnet build -f net10.0-android`
+- Verificerer 0 errors, 0 warnings
+- Code review mod task specifikation
+- Tjekker at alle acceptance criteria er opfyldt
+
+**4. Claude præsenterer for review (STOPPER HER - INGEN COMMIT):**
+- Hvad er implementeret (filer, metoder)
+- Test resultater (build output)
+- Code review mod spec
+- **Hvad bruger skal teste** (konkrete test instruktioner)
+- Venter på godkendelse
+
+**5. Bruger tester:**
+- Kører tests/build selv
+- Code review i IDE
+- Emulator test (hvis UI)
+
+**6. Bruger godkender:** `Godkend TASK-XXX`
+
+**7. FØRST NU committer Claude:**
+- Git commit med task ID
+- Opdaterer TASK-XXX.md (status: COMPLETED)
+- Opdaterer TASKS.md (næste task READY)
+- Opdaterer STATE.md
+- Melder næste task klar
 
 ### Projekt Management Filer
 ```
