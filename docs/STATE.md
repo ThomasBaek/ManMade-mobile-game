@@ -22,7 +22,7 @@
 
 ### Mapper Status
 - `/Models/` - ✅ 3 filer oprettet
-- `/Services/` - ✅ 1 fil oprettet
+- `/Services/` - ✅ 3 filer oprettet
 - `/ViewModels/` - Tom
 - `/Views/` - Tom
 
@@ -33,12 +33,12 @@
 | Models/Operation.cs | TASK-002 ✅ |
 | Models/GameConfig.cs | TASK-002 ✅ |
 | Services/SaveManager.cs | TASK-003 ✅ |
+| Services/IGameEngine.cs | TASK-004 ✅ |
+| Services/GameEngine.cs | TASK-004 ✅ |
 
 ### Manglende Filer
 | Fil | Oprettes i Task |
 |-----|-----------------|
-| Services/IGameEngine.cs | TASK-004 |
-| Services/GameEngine.cs | TASK-004 |
 | ViewModels/OperationViewModel.cs | TASK-007 |
 | ViewModels/MainViewModel.cs | TASK-008 |
 | Resources/Styles/Theme.xaml | TASK-006 |
@@ -98,10 +98,10 @@
 **Klar til implementation** - Environment verificeret, build virker
 
 ## Aktiv Task
-TASK-004 (Implement GameEngine)
+TASK-005 (Setup DI & Lifecycle)
 
 ## Sidst Completed Task
-TASK-003 (Implement SaveManager) - 2024-12-25
+TASK-004 (Implement GameEngine) - 2024-12-25
 
 ---
 
