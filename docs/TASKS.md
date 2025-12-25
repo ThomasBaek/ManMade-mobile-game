@@ -97,11 +97,11 @@
 | TASK-012 | Verify Prestige | 2024-12-25 | a6782d5 |
 | TASK-013 | Test Save/Load | 2024-12-25 | a6782d5 |
 | TASK-014 | Test Offline Earnings | 2024-12-25 | a6782d5 |
-| TASK-018 | Skill Models | 2024-12-25 | (Bundle B) |
-| TASK-019 | Skill Config (18 Skills) | 2024-12-25 | (Bundle B) |
-| TASK-020 | Skill Calculator | 2024-12-25 | (Bundle B) |
-| TASK-021 | Skill Service | 2024-12-25 | (Bundle B) |
-| TASK-022 | Milestone Service | 2024-12-25 | (Bundle B) |
+| TASK-018 | Skill Models | 2024-12-25 | 79e430e |
+| TASK-019 | Skill Config (18 Skills) | 2024-12-25 | 79e430e |
+| TASK-020 | Skill Calculator | 2024-12-25 | 79e430e |
+| TASK-021 | Skill Service | 2024-12-25 | 79e430e |
+| TASK-022 | Milestone Service | 2024-12-25 | 79e430e |
 
 ---
 
