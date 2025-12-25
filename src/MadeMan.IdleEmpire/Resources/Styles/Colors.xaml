@@ -29,6 +29,16 @@
     <!-- Legacy Colors (for MAUI compatibility) -->
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
+    <Color x:Key="OffBlack">#1A1A2E</Color>
+
+    <!-- Text Colors for Dark Theme (MAUI Styles compatibility) -->
+    <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
+    <Color x:Key="SecondaryDarkText">#8892A0</Color>
+
+    <!-- Accent Colors (MAUI Styles compatibility) -->
+    <Color x:Key="Secondary">#16213E</Color>
+    <Color x:Key="Magenta">#E94560</Color>
+    <Color x:Key="MidnightBlue">#1A1A2E</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
     <Color x:Key="Gray300">#ACACAC</Color>

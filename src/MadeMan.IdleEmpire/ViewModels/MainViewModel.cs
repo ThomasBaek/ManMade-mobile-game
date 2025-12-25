@@ -1,71 +1,3 @@
-# Task 008: MainViewModel
-
-## Metadata
-- **Phase**: 2 - UI
-- **Dependencies**: TASK-007
-- **Estimated Time**: 1 hour
-- **Status**: COMPLETED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (line 590-711)
-- **Requires Design Input**: NO
-
----
-
-## Purpose
-
-Implement MainViewModel - main controller for the entire game.
-
-**Why this is important:**
-- Game loop (timer) lives here
-- Coordinates all OperationViewModels
-- Handles prestige
-
----
-
-## Risks
-
-### Potential Issues
-1. **Timer Leak**:
-   - Edge case: Timer not stopped on page leave
-   - Impact: Memory leak, multiple timers
-
-2. **UI Thread Issues**:
-   - Edge case: State update from background
-   - Impact: Cross-thread exception
-
-### Mitigation
-- StopTimers() in OnDisappearing
-- DispatcherTimer runs on UI thread
-
----
-
-## Analysis - What to Implement
-
-### MainViewModel.cs
-**Location**: `ViewModels/MainViewModel.cs`
-
-**Properties:**
-- CashDisplay, IncomeDisplay (formatted)
-- CanPrestige, PrestigeButtonText
-- Operations (ObservableCollection)
-
-**Methods:**
-- OnAppearing/OnDisappearing (lifecycle)
-- StartGameLoop/StopTimers
-- OnGameTick (10x per second)
-- UpdateDisplay
-
-**Commands:**
-- PrestigeCommand
-
----
-
-## Implementation Guide
-
-### Step 1: Create MainViewModel.cs
-
-**Path**: `src/MadeMan.IdleEmpire/ViewModels/MainViewModel.cs`
-
-```csharp
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -83,16 +15,16 @@ public partial class MainViewModel : ObservableObject
     private DateTime _lastTick;
 
     [ObservableProperty]
-    private string cashDisplay = "$0";
+    private string _cashDisplay = "$0";
 
     [ObservableProperty]
-    private string incomeDisplay = "+$0/s";
+    private string _incomeDisplay = "+$0/s";
 
     [ObservableProperty]
-    private bool canPrestige;
+    private bool _canPrestige;
 
     [ObservableProperty]
-    private string prestigeButtonText = "BECOME A MADE MAN";
+    private string _prestigeButtonText = "BECOME A MADE MAN";
 
     public ObservableCollection<OperationViewModel> Operations { get; } = new();
 
@@ -202,66 +134,3 @@ public partial class MainViewModel : ObservableObject
         return $"${value:F2}";
     }
 }
-```
-
-### Step 2: Register in MauiProgram.cs
-
-Add to builder.Services in MauiProgram.cs:
-
-```csharp
-builder.Services.AddTransient<MainViewModel>();
-```
-
----
-
-## Verification Steps
-
-### 1. Build Test
-```bash
-dotnet build src/MadeMan.IdleEmpire -f net10.0-android
-```
-Expected: 0 errors
-
-### 2. Conceptual Test
-- Game timer runs 10x/sec
-- CashDisplay updates
-- Operations collection populated
-
----
-
-## Acceptance Criteria
-
-- [x] MainViewModel.cs created
-- [x] Game loop timer works
-- [x] Auto-save timer works
-- [x] FormatCash formats K/M/B correctly
-- [x] Prestige command works
-- [x] Registered in DI
-- [x] Build succeeds with 0 errors
-
----
-
-## Code Evaluation
-
-### Simplification Check
-- **Simple timer**: DispatcherTimer, no Task.Run
-- **Pull model**: Refresh() instead of events
-- **No caching**: Calculates IncomePerSecond every tick
-
-### Known Limitations
-- Calculates income 10x per second (OK for 5 operations)
-- No debounce on UI updates
-- Acceptable for MVP
-
----
-
-## Design Files Reference
-
-- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (line 590-711)
-- **Related Tasks**: TASK-007, TASK-009
-
----
-
-**Task Status**: COMPLETED
-**Last Updated**: 2024-12-25
-**Commit**: (pending)

@@ -102,7 +102,8 @@ dotnet publish -f net10.0-android -c Release
 - [x] Services implemented (TASK-003, TASK-004) ✅
 - [x] DI & Lifecycle setup (TASK-005) ✅
 - [x] Theme/colors set up (TASK-006) ✅
-- [ ] ViewModels implemented (TASK-007, TASK-008)
+- [x] OperationViewModel (TASK-007) ✅
+- [x] MainViewModel (TASK-008) ✅
 - [ ] UI implemented (TASK-009)
 - [ ] Icons added (TASK-010)
 - [ ] Game loop test (TASK-011)
@@ -110,7 +111,7 @@ dotnet publish -f net10.0-android -c Release
 - [ ] Save/Load test (TASK-013)
 - [ ] Offline earnings test (TASK-014)
 
-**Next task:** TASK-007 (OperationViewModel)
+**Next task:** TASK-009 (MainPage UI)
 
 ## Color Palette
 ```
@@ -251,6 +252,55 @@ docs/
 3. Manual test in emulator (if UI)
 4. All acceptance criteria met
 5. Code evaluation filled in task file
+
+---
+
+## Testing Instructions Per Task
+
+### After Each Task - Claude Must Provide:
+
+1. **Build Verification**
+   - Command to run: `dotnet build -f net10.0-android`
+   - Expected result: 0 errors, 0 warnings
+
+2. **Code Review Points**
+   - Which files to review in IDE
+   - Key methods/properties to verify
+   - What patterns to look for
+
+3. **Emulator Testing** (if UI task)
+   - How to start: `dotnet build -f net10.0-android -t:Run`
+   - Prerequisite: Android emulator must be running
+   - What to look for in the UI
+   - Expected behaviors to verify
+
+4. **Functional Testing**
+   - Step-by-step test scenarios
+   - Expected outcomes for each step
+   - Edge cases to check
+
+### Testing Commands Reference
+```bash
+# Start emulator (from Android Studio or):
+"$LOCALAPPDATA/Android/Sdk/emulator/emulator.exe" -avd <emulator_name>
+
+# Check emulator is running:
+"$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe" devices
+
+# Build and deploy:
+dotnet build -f net10.0-android -t:Run
+
+# View logs (for debugging):
+adb logcat -s DOTNET
+```
+
+### Task-Specific Testing Notes
+
+| Task | Testable in Emulator? | What to Test |
+|------|----------------------|--------------|
+| TASK-001 to TASK-006 | No | Build only - backend/setup |
+| TASK-007, TASK-008 | No | Build only - no UI binding yet |
+| TASK-009+ | Yes | UI visible and interactive |
 
 ---
 

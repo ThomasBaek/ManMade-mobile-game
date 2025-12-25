@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using MadeMan.IdleEmpire.Services;
+using MadeMan.IdleEmpire.ViewModels;
 
 namespace MadeMan.IdleEmpire;
 
@@ -19,6 +20,9 @@ public static class MauiProgram
 		// Services
 		builder.Services.AddSingleton<SaveManager>();
 		builder.Services.AddSingleton<IGameEngine, GameEngine>();
+
+		// ViewModels
+		builder.Services.AddTransient<MainViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
