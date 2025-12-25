@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
+using MadeMan.IdleEmpire.Services;
 
 namespace MadeMan.IdleEmpire;
 
@@ -14,6 +15,10 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+
+		// Services
+		builder.Services.AddSingleton<SaveManager>();
+		builder.Services.AddSingleton<IGameEngine, GameEngine>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
