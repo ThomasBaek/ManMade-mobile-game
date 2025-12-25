@@ -4,7 +4,7 @@
 - **Phase**: 1 - Foundation
 - **Dependencies**: TASK-004
 - **Estimated Time**: 30 min
-- **Status**: BLOCKED
+- **Status**: COMPLETED
 - **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md
 - **Requires Design Input**: NO
 
@@ -57,7 +57,7 @@ Konfigurer Dependency Injection i MauiProgram.cs og lifecycle hooks i App.xaml.c
 ## Dependencies Check
 
 **Krævet Før Start**:
-- [ ] TASK-004 completed (GameEngine)
+- [x] TASK-004 completed (GameEngine)
 
 **Antagelser**:
 - Standard MAUI DI container
@@ -163,11 +163,11 @@ Forventet: 0 errors
 
 ## Acceptance Criteria
 
-- [ ] SaveManager registreret som Singleton
-- [ ] GameEngine registreret som Singleton (via IGameEngine)
-- [ ] App.xaml.cs modtager dependencies via constructor
-- [ ] OnSleep gemmer game state
-- [ ] Build succeeds med 0 errors
+- [x] SaveManager registreret som Singleton
+- [x] GameEngine registreret som Singleton (via IGameEngine)
+- [x] App.xaml.cs modtager dependencies via constructor
+- [x] OnSleep gemmer game state
+- [x] Build succeeds med 0 errors
 
 ---
 
@@ -194,9 +194,9 @@ builder.Services.AddScoped<IGameEngine, GameEngine>();
 
 ## Kode Kvalitet Checklist
 
-- [ ] **KISS**: Minimal DI configuration
-- [ ] **Lifecycle**: Save on sleep korrekt
-- [ ] **Dependency Chain**: SaveManager -> GameEngine
+- [x] **KISS**: Minimal DI configuration
+- [x] **Lifecycle**: Save on sleep korrekt
+- [x] **Dependency Chain**: SaveManager -> GameEngine
 
 ---
 
@@ -214,5 +214,6 @@ builder.Services.AddScoped<IGameEngine, GameEngine>();
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-004)
+**Task Status**: COMPLETED
 **Last Updated**: 2024-12-25
+**Completed**: 2024-12-25

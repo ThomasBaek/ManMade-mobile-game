@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Aktuel Task
-**TASK-005**: Setup DI & Lifecycle - READY
+**TASK-006**: Implement Theme - READY
 
 ---
 
@@ -21,13 +21,13 @@
 | TASK-002 | Implement Models | COMPLETED | TASK-001 | 45 min |
 | TASK-003 | Implement SaveManager | COMPLETED | TASK-002 | 30 min |
 | TASK-004 | Implement GameEngine | COMPLETED | TASK-003 | 1 time |
-| TASK-005 | Setup DI & Lifecycle | READY | TASK-004 | 30 min |
+| TASK-005 | Setup DI & Lifecycle | COMPLETED | TASK-004 | 30 min |
 
 ## Phase 2: UI
 
 | Task | Navn | Status | Dependencies | Estimat |
 |------|------|--------|--------------|---------|
-| TASK-006 | Implement Theme | BLOCKED | TASK-005 | 30 min |
+| TASK-006 | Implement Theme | READY | TASK-005 | 30 min |
 | TASK-007 | OperationViewModel | BLOCKED | TASK-006 | 45 min |
 | TASK-008 | MainViewModel | BLOCKED | TASK-007 | 1 time |
 | TASK-009 | MainPage UI | BLOCKED | TASK-008 | 1.5 time |
@@ -65,6 +65,7 @@
 | TASK-002 | Implement Models | 2024-12-25 | ddc7d58 |
 | TASK-003 | Implement SaveManager | 2024-12-25 | fe72620 |
 | TASK-004 | Implement GameEngine | 2024-12-25 | 7f52788 |
+| TASK-005 | Setup DI & Lifecycle | 2024-12-25 | a5bd9e0 |
 
 ---
 
