@@ -1,55 +1,3 @@
-# Task 009: MainPage UI
-
-## Metadata
-- **Phase**: 2 - UI
-- **Dependencies**: TASK-008
-- **Estimated Time**: 1.5 hours
-- **Status**: COMPLETED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (lines 453-584)
-- **Requires Design Input**: NO
-
----
-
-## Purpose
-
-Implement MainPage.xaml - the only screen in the game.
-
-**Why this is important:**
-- All gameplay happens here
-- Cash header always visible
-- Operations list with upgrade buttons
-- Prestige panel when available
-
----
-
-## Risks
-
-### Potential Problems
-1. **XAML Binding Errors**:
-   - Edge case: Incorrect DataType
-   - Impact: UI doesn't display data
-
-2. **Layout Issues**:
-   - Edge case: Different screen sizes
-   - Impact: UI looks wrong
-
-### Mitigation
-- Use x:DataType for compile-time checking
-- Test on different emulator sizes
-
----
-
-## Implementation Guide
-
-### Step 1: Move MainPage.xaml to Views folder
-
-Move the file from root to Views/ and update namespace.
-
-### Step 2: Update MainPage.xaml
-
-**Path**: `src/MadeMan.IdleEmpire/Views/MainPage.xaml`
-
-```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -108,19 +56,18 @@ Move the file from root to Views/ and update namespace.
 
                             <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto">
 
-                                <!-- Icon placeholder -->
+                                <!-- Icon -->
                                 <Frame Grid.RowSpan="2"
                                        BackgroundColor="{StaticResource SurfaceLight}"
                                        CornerRadius="8"
-                                       Padding="8"
+                                       Padding="0"
                                        HeightRequest="50"
                                        WidthRequest="50"
                                        BorderColor="Transparent">
-                                    <Label Text="$"
-                                           FontSize="24"
+                                    <Label Text="{Binding IconEmoji}"
+                                           FontSize="28"
                                            HorizontalOptions="Center"
-                                           VerticalOptions="Center"
-                                           TextColor="{StaticResource Gold}"/>
+                                           VerticalOptions="Center"/>
                                 </Frame>
 
                                 <!-- Name + Level -->
@@ -140,7 +87,7 @@ Move the file from root to Views/ and update namespace.
                                        FontSize="14"
                                        TextColor="{StaticResource Gold}"
                                        IsVisible="{Binding IsUnlocked}"
-                                       Margin="12,0,0,0"/>
+                                       Margin="12,4,0,0"/>
 
                                 <!-- Action Button -->
                                 <Button Grid.Column="2" Grid.RowSpan="2"
@@ -185,89 +132,3 @@ Move the file from root to Views/ and update namespace.
 
     </Grid>
 </ContentPage>
-```
-
-### Step 3: Update MainPage.xaml.cs
-
-**Path**: `src/MadeMan.IdleEmpire/Views/MainPage.xaml.cs`
-
-```csharp
-using MadeMan.IdleEmpire.ViewModels;
-
-namespace MadeMan.IdleEmpire.Views;
-
-public partial class MainPage : ContentPage
-{
-    private readonly MainViewModel _viewModel;
-
-    public MainPage(MainViewModel viewModel)
-    {
-        InitializeComponent();
-        _viewModel = viewModel;
-        BindingContext = _viewModel;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        _viewModel.OnAppearing();
-    }
-
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-        _viewModel.OnDisappearing();
-    }
-}
-```
-
-### Step 4: Update AppShell.xaml
-
-Update route to new location:
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="MadeMan.IdleEmpire.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:MadeMan.IdleEmpire.Views"
-    Shell.FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="False">
-
-    <ShellContent
-        ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage" />
-
-</Shell>
-```
-
-### Step 5: Register in MauiProgram.cs
-
-Add:
-```csharp
-builder.Services.AddTransient<Views.MainPage>();
-```
-
-### Step 6: Delete old MainPage files from root
-
-Delete:
-- `MainPage.xaml` (in root)
-- `MainPage.xaml.cs` (in root)
-
----
-
-## Acceptance Criteria
-
-- [x] MainPage.xaml in Views folder
-- [x] Cash header displays correctly
-- [x] Operations list with all 5 operations
-- [x] Buttons show prices
-- [x] Prestige panel shows when available
-- [x] Build succeeds with 0 errors
-
----
-
-**Task Status**: COMPLETED
-**Last Updated**: 2024-12-25
-**Commit**: (pending)

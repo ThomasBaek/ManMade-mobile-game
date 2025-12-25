@@ -13,6 +13,17 @@ public partial class OperationViewModel : ObservableObject
     public string Name => _operation.Name;
     public string Icon => _operation.Icon;
 
+    // Emoji icons for MVP (real icons in polish phase)
+    public string IconEmoji => _operation.Id switch
+    {
+        "pickpocket" => "\U0001F91A",  // Raised back of hand
+        "cartheft" => "\U0001F697",     // Car
+        "burglary" => "\U0001F3E0",     // House
+        "speakeasy" => "\U0001F37A",    // Beer mug
+        "casino" => "\U0001F3B0",       // Slot machine
+        _ => "\U0001F4B0"               // Money bag
+    };
+
     [ObservableProperty]
     private string _levelDisplay = string.Empty;
 

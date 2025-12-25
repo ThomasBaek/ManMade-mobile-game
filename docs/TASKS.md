@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Current Task
-**TASK-009**: MainPage UI - READY
+**TASK-011**: Verify Game Loop - READY
 
 ---
 
@@ -30,8 +30,8 @@
 | TASK-006 | Implement Theme | COMPLETED | TASK-005 | 30 min |
 | TASK-007 | OperationViewModel | COMPLETED | TASK-006 | 45 min |
 | TASK-008 | MainViewModel | COMPLETED | TASK-007 | 1 hour |
-| TASK-009 | MainPage UI | READY | TASK-008 | 1.5 hours |
-| TASK-010 | Add Icons | BLOCKED | TASK-009 | 30 min |
+| TASK-009 | MainPage UI | COMPLETED | TASK-008 | 1.5 hours |
+| TASK-010 | Add Icons | COMPLETED | TASK-009 | 30 min |
 
 ## Phase 3: Skill System (NEW)
 
@@ -91,6 +91,8 @@
 | TASK-006 | Implement Theme | 2024-12-25 | f6cb1c7 |
 | TASK-007 | OperationViewModel | 2024-12-25 | 01bd4f0 |
 | TASK-008 | MainViewModel | 2024-12-25 | dd8cf82 |
+| TASK-009 | MainPage UI | 2024-12-25 | (pending) |
+| TASK-010 | Add Icons | 2024-12-25 | (pending) |
 
 ---
 

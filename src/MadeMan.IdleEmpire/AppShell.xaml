@@ -3,12 +3,12 @@
     x:Class="MadeMan.IdleEmpire.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MadeMan.IdleEmpire"
-    Title="MadeMan.IdleEmpire">
+    xmlns:views="clr-namespace:MadeMan.IdleEmpire.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
 
 </Shell>

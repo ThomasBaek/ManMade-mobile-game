@@ -104,14 +104,14 @@ dotnet publish -f net10.0-android -c Release
 - [x] Theme/colors set up (TASK-006) ✅
 - [x] OperationViewModel (TASK-007) ✅
 - [x] MainViewModel (TASK-008) ✅
-- [ ] UI implemented (TASK-009)
-- [ ] Icons added (TASK-010)
+- [x] UI implemented (TASK-009) ✅
+- [x] Icons added (TASK-010) ✅
 - [ ] Game loop test (TASK-011)
 - [ ] Prestige test (TASK-012)
 - [ ] Save/Load test (TASK-013)
 - [ ] Offline earnings test (TASK-014)
 
-**Next task:** TASK-009 (MainPage UI)
+**Next task:** TASK-011 (Verify Game Loop)
 
 ## Color Palette
 ```
