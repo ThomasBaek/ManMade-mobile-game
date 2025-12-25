@@ -10,34 +10,34 @@
 
 ---
 
-## Formål
+## Purpose
 
-Integrer skill effects i GameEngine's core calculations.
+Integrate skill effects into GameEngine's core calculations.
 
-**Hvorfor dette er vigtigt:**
-- Skills skal påvirke indkomst beregninger
-- Milestones skal tjekkes hver tick
-- Skill bonuses skal anvendes korrekt
+**Why this is important:**
+- Skills must affect income calculations
+- Milestones must be checked each tick
+- Skill bonuses must be applied correctly
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
-### GameEngine.cs (udvid)
-**Ændringer:**
+### GameEngine.cs (extend)
+**Changes:**
 
-1. Tilføj ISkillService og IMilestoneService dependencies
-2. Modificer indkomst beregning til at bruge skill multipliers
-3. Kald `CheckForMilestone()` i game loop
-4. Håndter offline earnings med skill bonuses
+1. Add ISkillService and IMilestoneService dependencies
+2. Modify income calculation to use skill multipliers
+3. Call `CheckForMilestone()` in game loop
+4. Handle offline earnings with skill bonuses
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Udvid GameEngine constructor
+### Step 1: Extend GameEngine constructor
 
-Tilføj skill service dependencies:
+Add skill service dependencies:
 
 ```csharp
 private readonly ISkillService _skillService;
@@ -54,9 +54,9 @@ public GameEngine(
 }
 ```
 
-### Step 2: Modificer CalculateIncome
+### Step 2: Modify CalculateIncome
 
-Opdater indkomst beregning:
+Update income calculation:
 
 ```csharp
 public double CalculateOperationIncome(OperationState operation)
@@ -81,7 +81,7 @@ public double CalculateOperationIncome(OperationState operation)
 }
 ```
 
-### Step 3: Tilføj milestone check i game loop
+### Step 3: Add milestone check in game loop
 
 ```csharp
 public void Tick(double deltaSeconds)
@@ -98,7 +98,7 @@ public void Tick(double deltaSeconds)
 }
 ```
 
-### Step 4: Opdater upgrade costs
+### Step 4: Update upgrade costs
 
 ```csharp
 public double GetUpgradeCost(OperationState operation)
@@ -119,7 +119,7 @@ public double GetUnlockCost(string operationId)
 }
 ```
 
-### Step 5: Opdater offline earnings
+### Step 5: Update offline earnings
 
 ```csharp
 public double CalculateOfflineEarnings(TimeSpan offlineTime)
@@ -139,7 +139,7 @@ public double CalculateOfflineEarnings(TimeSpan offlineTime)
 }
 ```
 
-### Step 6: Tilføj cashback ved køb
+### Step 6: Add cashback on purchase
 
 ```csharp
 public bool TryUpgrade(OperationState operation)
@@ -168,35 +168,35 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
 
 ### 2. Integration Check
-- [ ] GameEngine compiles med nye dependencies
-- [ ] Skill effects anvendes i income calculation
-- [ ] Milestone check kører hver tick
-- [ ] Offline earnings bruger skill bonuses
+- [ ] GameEngine compiles with new dependencies
+- [ ] Skill effects applied in income calculation
+- [ ] Milestone check runs every tick
+- [ ] Offline earnings uses skill bonuses
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] ISkillService og IMilestoneService injected
-- [ ] CalculateOperationIncome bruger skill multipliers
-- [ ] GetUpgradeCost bruger reduction
-- [ ] GetUnlockCost bruger reduction
-- [ ] CalculateOfflineEarnings bruger skill bonuses
-- [ ] Cashback implementeret ved køb
-- [ ] Passive income tilføjet i Tick
-- [ ] CheckForMilestone kaldes i loop
-- [ ] Lucky Break rolls på hver income
-- [ ] Build succeeds med 0 errors
+- [ ] ISkillService and IMilestoneService injected
+- [ ] CalculateOperationIncome uses skill multipliers
+- [ ] GetUpgradeCost uses reduction
+- [ ] GetUnlockCost uses reduction
+- [ ] CalculateOfflineEarnings uses skill bonuses
+- [ ] Cashback implemented on purchase
+- [ ] Passive income added in Tick
+- [ ] CheckForMilestone called in loop
+- [ ] Lucky Break rolls on each income
+- [ ] Build succeeds with 0 errors
 
 ---
 
 ## Edge Cases
 
-- [ ] Ingen skills → Alle multipliers = 1.0
-- [ ] Compound Interest → Korrekt tid tracking
-- [ ] Lucky Break → Random roll hver gang
+- [ ] No skills → All multipliers = 1.0
+- [ ] Compound Interest → Correct time tracking
+- [ ] Lucky Break → Random roll each time
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-021 og TASK-022)
+**Task Status**: BLOCKED (waiting for TASK-021 and TASK-022)
 **Last Updated**: 2024-12-25

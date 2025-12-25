@@ -5,43 +5,43 @@
 - **Dependencies**: TASK-009
 - **Estimated Time**: 30 min
 - **Status**: BLOCKED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 858-948)
+- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (lines 858-948)
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Tilføj ikoner for alle 5 operations.
+Add icons for all 5 operations.
 
-**Hvorfor dette er vigtigt:**
-- Visuel genkendelse af operations
-- Forbedret UX
-- Professionelt look
+**Why this is important:**
+- Visual recognition of operations
+- Improved UX
+- Professional look
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret PNG ikoner
+### Step 1: Create PNG icons
 
-Opret simple placeholder ikoner som 64x64 PNG filer i:
+Create simple placeholder icons as 64x64 PNG files in:
 `src/MadeMan.IdleEmpire/Resources/Images/`
 
-**Filer:**
+**Files:**
 - icon_pickpocket.png
 - icon_car.png
 - icon_burglary.png
 - icon_speakeasy.png
 - icon_casino.png
 
-### Step 2: Opdater OperationViewModel
+### Step 2: Update OperationViewModel
 
-I OperationViewModel, brug Icon property fra Operation model.
+In OperationViewModel, use Icon property from Operation model.
 
-### Step 3: Opdater MainPage.xaml
+### Step 3: Update MainPage.xaml
 
-Erstat placeholder Label med Image:
+Replace placeholder Label with Image:
 
 ```xml
 <Image Source="{Binding Icon}"
@@ -54,18 +54,18 @@ Erstat placeholder Label med Image:
 
 ## Note
 
-For MVP kan vi bruge simple emoji-baserede eller text placeholders.
-Rigtige ikoner kan tilføjes i polish fase.
+For MVP we can use simple emoji-based or text placeholders.
+Real icons can be added in polish phase.
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] 5 ikon-filer i Resources/Images
-- [ ] Ikoner vises i UI
-- [ ] Build succeeds med 0 errors
+- [ ] 5 icon files in Resources/Images
+- [ ] Icons display in UI
+- [ ] Build succeeds with 0 errors
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-009)
+**Task Status**: BLOCKED (waiting for TASK-009)
 **Last Updated**: 2024-12-25

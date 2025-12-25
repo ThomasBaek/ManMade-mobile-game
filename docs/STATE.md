@@ -1,53 +1,52 @@
 # Made Man: Idle Empire - Current State
 
-## Sidst Opdateret
-2024-12-25 (Skill System tasks tilføjet)
+## Last Updated
+2024-12-25 (Skill System tasks added)
 
 ---
 
-## Projekt Analyse
+## Project Analysis
 
-### Eksisterende Filer
-| Fil | Status | Noter |
-|-----|--------|-------|
-| MadeMan.IdleEmpire.csproj | ✅ OK | Bruger net10.0 (verificeret bygger) |
-| App.xaml | Eksisterer | Default MAUI template |
-| App.xaml.cs | Eksisterer | ✅ Lifecycle hooks færdig |
-| AppShell.xaml | Eksisterer | Default template |
-| MainPage.xaml | Eksisterer | Default "Hello World" |
-| MainPage.xaml.cs | Eksisterer | Default counter |
-| MauiProgram.cs | Eksisterer | ✅ DI setup færdig |
-| Colors.xaml | Eksisterer | Default farver (ikke game theme) |
-| Styles.xaml | Eksisterer | Default styles |
+### Existing Files
+| File | Status | Notes |
+|------|--------|-------|
+| MadeMan.IdleEmpire.csproj | ✅ OK | Uses net10.0 (verified builds) |
+| App.xaml | Exists | Default MAUI template |
+| App.xaml.cs | Exists | ✅ Lifecycle hooks complete |
+| AppShell.xaml | Exists | Default template |
+| MainPage.xaml | Exists | Default "Hello World" |
+| MainPage.xaml.cs | Exists | Default counter |
+| MauiProgram.cs | Exists | ✅ DI setup complete |
+| Colors.xaml | Exists | ✅ Game theme colors |
+| Styles.xaml | Exists | Default styles |
 
-### Mapper Status
-- `/Models/` - ✅ 3 filer oprettet (GameState, Operation, GameConfig)
-- `/Services/` - ✅ 3 filer oprettet (SaveManager, IGameEngine, GameEngine)
-- `/ViewModels/` - Tom
-- `/Views/` - Tom
-- `/docs/tasks/` - ✅ 17 task filer + 11 nye skill tasks
+### Directory Status
+- `/Models/` - ✅ 3 files created (GameState, Operation, GameConfig)
+- `/Services/` - ✅ 3 files created (SaveManager, IGameEngine, GameEngine)
+- `/ViewModels/` - ✅ 1 file created (OperationViewModel)
+- `/Views/` - Empty
+- `/docs/tasks/` - ✅ 17 task files + 11 new skill tasks
 
-### Oprettede Filer (Game-specifik)
-| Fil | Oprettet i Task |
-|-----|-----------------|
+### Created Files (Game-specific)
+| File | Created in Task |
+|------|-----------------|
 | Models/GameState.cs | TASK-002 ✅ |
 | Models/Operation.cs | TASK-002 ✅ |
 | Models/GameConfig.cs | TASK-002 ✅ |
 | Services/SaveManager.cs | TASK-003 ✅ |
 | Services/IGameEngine.cs | TASK-004 ✅ |
 | Services/GameEngine.cs | TASK-004 ✅ |
+| ViewModels/OperationViewModel.cs | TASK-007 ✅ |
 
-### Manglende Filer (Core)
-| Fil | Oprettes i Task |
-|-----|-----------------|
-| ViewModels/OperationViewModel.cs | TASK-007 |
+### Missing Files (Core)
+| File | Created in Task |
+|------|-----------------|
 | ViewModels/MainViewModel.cs | TASK-008 |
-| Resources/Styles/Theme.xaml | TASK-006 |
 | Resources/Images/*.png | TASK-010 |
 
-### Manglende Filer (Skill System)
-| Fil | Oprettes i Task |
-|-----|-----------------|
+### Missing Files (Skill System)
+| File | Created in Task |
+|------|-----------------|
 | Models/Skill.cs | TASK-018 |
 | Models/SkillConfig.cs | TASK-019 |
 | Services/SkillCalculator.cs | TASK-020 |
@@ -62,8 +61,8 @@
 ### NuGet Packages Status
 | Package | Required | Installed |
 |---------|----------|-----------|
-| CommunityToolkit.Mvvm | 8.2.2+ | JA (8.2.2) |
-| Microsoft.Maui.Controls | Ja | Ja (10.0.1) |
+| CommunityToolkit.Mvvm | 8.2.2+ | YES (8.2.2) |
+| Microsoft.Maui.Controls | Yes | Yes (10.0.1) |
 
 ### Build Status
 ```
@@ -79,87 +78,88 @@
 ## Environment Status
 
 ### SDK & Workloads
-| Komponent | Version | Status |
+| Component | Version | Status |
 |-----------|---------|--------|
-| .NET SDK | 10.0.101 | ✅ Installeret |
-| MAUI Workload | 10.0.1 | ✅ Installeret |
-| Android Workload | 36.1.2 | ✅ Installeret |
+| .NET SDK | 10.0.101 | ✅ Installed |
+| MAUI Workload | 10.0.1 | ✅ Installed |
+| Android Workload | 36.1.2 | ✅ Installed |
 
 ### Android Tools
-| Tool | Lokation | Status |
+| Tool | Location | Status |
 |------|----------|--------|
-| ADB | C:\Users\thbk1\AppData\Local\Android\Sdk\platform-tools\adb.exe | ✅ Fundet |
-| Emulator | Android Studio | ⚠️ Skal startes manuelt |
+| ADB | C:\Users\thbk1\AppData\Local\Android\Sdk\platform-tools\adb.exe | ✅ Found |
+| Emulator | Android Studio | ⚠️ Must be started manually |
 
 ---
 
-## Identificerede Issues
+## Identified Issues
 
-### LØST: .NET Version
-~~**Problem:** Projektet er oprettet med `net10.0-android` i stedet for `net8.0-android`~~
-**Status:** ✅ LØST - Vi bruger net10.0 da det er hvad der er installeret og virker
+### RESOLVED: .NET Version
+~~**Problem:** Project created with `net10.0-android` instead of `net8.0-android`~~
+**Status:** ✅ RESOLVED - Using net10.0 as it's installed and works
 
-### ~~CommunityToolkit.Mvvm Mangler~~
-~~**Problem:** MVVM toolkit er ikke installeret~~
-**Status:** ✅ LØST i TASK-001
+### ~~CommunityToolkit.Mvvm Missing~~
+~~**Problem:** MVVM toolkit not installed~~
+**Status:** ✅ RESOLVED in TASK-001
 
-### Default Template Kode
-**Problem:** MainPage.xaml har "Hello World" counter
-**Løsning:** Erstattes i TASK-009
+### Default Template Code
+**Problem:** MainPage.xaml has "Hello World" counter
+**Solution:** Replaced in TASK-009
 
 ---
 
-## Nuværende Status
-**Phase 1 COMPLETED** - Foundation færdig
-**Phase 3 PLANNED** - Skill System tasks tilføjet (TASK-018 til TASK-028)
+## Current Status
+**Phase 1 COMPLETED** - Foundation complete
+**Phase 2 IN PROGRESS** - UI implementation (TASK-008 ready)
+**Phase 3 PLANNED** - Skill System tasks added (TASK-018 to TASK-028)
 
-Næste: Phase 2 (UI) starter med TASK-006
+Next: Continue with TASK-008 (MainViewModel)
 
 ## Task Overview
 | Phase | Tasks | Status |
 |-------|-------|--------|
-| Phase 1: Foundation | TASK-001 til TASK-005 | ✅ COMPLETED |
-| Phase 2: UI | TASK-006 til TASK-010 | READY |
-| Phase 3: Skill System | TASK-018 til TASK-028 | PLANNED |
+| Phase 1: Foundation | TASK-001 to TASK-005 | ✅ COMPLETED |
+| Phase 2: UI | TASK-006 to TASK-010 | IN PROGRESS |
+| Phase 3: Skill System | TASK-018 to TASK-028 | PLANNED |
 | Phase 4: Gameplay | TASK-011, TASK-012 | BLOCKED |
 | Phase 5: Persistence | TASK-013, TASK-014 | BLOCKED |
-| Phase 6: Polish | TASK-015 til TASK-017 | BLOCKED |
+| Phase 6: Polish | TASK-015 to TASK-017 | BLOCKED |
 
-## Aktiv Task
-TASK-006 (Implement Theme)
+## Active Task
+TASK-008 (MainViewModel)
 
-## Sidst Completed Task
-TASK-005 (Setup DI & Lifecycle) - 2024-12-25
+## Last Completed Task
+TASK-007 (OperationViewModel) - 2024-12-25
 
 ---
 
-## Beslutninger Taget
-1. Single-page design (kun MainPage)
+## Decisions Made
+1. Single-page design (only MainPage)
 2. Unified Operation model
 3. File-based workflow
-4. KISS/YAGNI/SOLID principper
-5. **Bruger .NET 10 (ikke .NET 8)** - da det er installeret og virker
-6. **Skill System integreret i MVP** - 18 skills, 10 milestones, max 5 aktive skills
+4. KISS/YAGNI/SOLID principles
+5. **Using .NET 10 (not .NET 8)** - as it's installed and works
+6. **Skill System integrated in MVP** - 18 skills, 10 milestones, max 5 active skills
 
-## Antagelser
-- ✅ .NET SDK installeret (verificeret: 10.0.101)
-- ✅ Android SDK tilgængelig (verificeret: ADB fundet)
-- ⚠️ Emulator skal startes fra Android Studio før test
+## Assumptions
+- ✅ .NET SDK installed (verified: 10.0.101)
+- ✅ Android SDK available (verified: ADB found)
+- ⚠️ Emulator must be started from Android Studio before testing
 
 ## Blockers
-Ingen
+None
 
-## Næste Skridt
-1. Start TASK-006 (Implement Theme)
-2. Fortsæt med Phase 2 UI tasks
-3. TASK-018 kan startes parallelt (afhænger kun af TASK-002 som er færdig)
+## Next Steps
+1. Complete TASK-008 (MainViewModel)
+2. Continue with Phase 2 UI tasks
+3. TASK-018 can be started in parallel (only depends on TASK-002 which is complete)
 
 ---
 
-## Kode Metrics
+## Code Metrics
 - **Build Status**: ✅ Success
 - **Errors**: 0
 - **Warnings**: 0
-- **Files Created**: 6 (Models + Services)
-- **Task Files Created**: 28 (TASK-001 til TASK-028)
-- **Lines of Code**: ~90 (game-specifik kode)
+- **Files Created**: 8 (Models + Services + ViewModels)
+- **Task Files Created**: 28 (TASK-001 to TASK-028)
+- **Lines of Code**: ~230 (game-specific code)

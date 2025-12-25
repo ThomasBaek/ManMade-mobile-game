@@ -10,22 +10,22 @@
 
 ---
 
-## Formål
+## Purpose
 
-Registrer skill services i DI container.
+Register skill services in DI container.
 
-**Hvorfor dette er vigtigt:**
-- Alle services skal være tilgængelige via DI
-- GameEngine kræver skill services
-- ViewModels skal kunne tilgå skill info
+**Why this is important:**
+- All services must be available via DI
+- GameEngine requires skill services
+- ViewModels must be able to access skill info
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
-### MauiProgram.cs (udvid)
+### MauiProgram.cs (extend)
 
-Tilføj registreringer:
+Add registrations:
 - `ISkillService` → `SkillService`
 - `IMilestoneService` → `MilestoneService`
 
@@ -33,9 +33,9 @@ Tilføj registreringer:
 
 ## Implementation Guide
 
-### Step 1: Opdater MauiProgram.cs
+### Step 1: Update MauiProgram.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/MauiProgram.cs`
+**Path**: `src/MadeMan.IdleEmpire/MauiProgram.cs`
 
 ```csharp
 using Microsoft.Extensions.Logging;
@@ -85,28 +85,28 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
 
 ### 2. DI Verification
-- [ ] App starter uden DI exceptions
-- [ ] GameEngine får skill services injected
-- [ ] Services er singletons (samme instans)
+- [ ] App starts without DI exceptions
+- [ ] GameEngine gets skill services injected
+- [ ] Services are singletons (same instance)
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] ISkillService registreret
-- [ ] IMilestoneService registreret
-- [ ] Services registreret FØR GameEngine
-- [ ] Build succeeds med 0 errors
-- [ ] App starter uden DI fejl
+- [ ] ISkillService registered
+- [ ] IMilestoneService registered
+- [ ] Services registered BEFORE GameEngine
+- [ ] Build succeeds with 0 errors
+- [ ] App starts without DI errors
 
 ---
 
 ## Notes
 
-- Rækkefølge er vigtig: Skill services skal registreres før GameEngine
-- Alle services er Singletons for at dele state
+- Order is important: Skill services must be registered before GameEngine
+- All services are Singletons to share state
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-023)
+**Task Status**: BLOCKED (waiting for TASK-023)
 **Last Updated**: 2024-12-25

@@ -10,39 +10,39 @@
 
 ---
 
-## Formål
+## Purpose
 
-Opret ViewModel for skill display og selection.
+Create ViewModel for skill display and selection.
 
-**Hvorfor dette er vigtigt:**
-- UI skal vise aktive skills
-- Modal skal præsentere skill valg
-- Bindings til XAML views
+**Why this is important:**
+- UI must display active skills
+- Modal must present skill choices
+- Bindings to XAML views
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### SkillViewModel.cs
-**Placering**: `ViewModels/SkillViewModel.cs`
+**Location**: `ViewModels/SkillViewModel.cs`
 
 Properties:
-- `ActiveSkills` - Liste af spillerens skills
-- `SelectionPool` - 3 valgmuligheder ved milestone
+- `ActiveSkills` - List of player's skills
+- `SelectionPool` - 3 choices at milestone
 - `IsSelectionModalVisible` - Modal state
 - `MilestoneProgress` - Progress bar (0-1)
 - `NextMilestoneThreshold` - Formatted string
 
 Commands:
-- `SelectSkillCommand` - Vælg skill fra modal
+- `SelectSkillCommand` - Select skill from modal
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret SkillViewModel.cs
+### Step 1: Create SkillViewModel.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/ViewModels/SkillViewModel.cs`
+**Path**: `src/MadeMan.IdleEmpire/ViewModels/SkillViewModel.cs`
 
 ```csharp
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -143,12 +143,12 @@ public class SkillDisplayModel
 }
 ```
 
-### Step 2: Integrer i MainViewModel
+### Step 2: Integrate in MainViewModel
 
-Tilføj SkillViewModel som property eller som del af MainViewModel:
+Add SkillViewModel as property or as part of MainViewModel:
 
 ```csharp
-// I MainViewModel.cs
+// In MainViewModel.cs
 public SkillViewModel SkillVM { get; }
 
 public MainViewModel(IGameEngine engine, SkillViewModel skillVM)
@@ -169,30 +169,30 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 
 ### 2. ViewModel Verification
 - [ ] SkillViewModel compiles
-- [ ] ObservableCollections opdaterer UI
-- [ ] Commands er bindbare
+- [ ] ObservableCollections update UI
+- [ ] Commands are bindable
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] SkillViewModel oprettet med alle properties
+- [ ] SkillViewModel created with all properties
 - [ ] SkillDisplayModel helper class
 - [ ] OnMilestoneReached handler
-- [ ] SelectSkillCommand implementeret
-- [ ] RefreshActiveSkills opdaterer liste
-- [ ] UpdateProgress beregner korrekt
-- [ ] Build succeeds med 0 errors
+- [ ] SelectSkillCommand implemented
+- [ ] RefreshActiveSkills updates list
+- [ ] UpdateProgress calculates correctly
+- [ ] Build succeeds with 0 errors
 
 ---
 
 ## Notes
 
-- SkillDisplayModel er en UI-venlig wrapper
-- ObservableCollection for automatisk UI updates
+- SkillDisplayModel is a UI-friendly wrapper
+- ObservableCollection for automatic UI updates
 - Event subscription for milestone notifications
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-024)
+**Task Status**: BLOCKED (waiting for TASK-024)
 **Last Updated**: 2024-12-25

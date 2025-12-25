@@ -10,65 +10,65 @@
 
 ---
 
-## Formål
+## Purpose
 
-Implementer SaveManager service til at gemme og hente GameState via Preferences API.
+Implement SaveManager service to save and load GameState via Preferences API.
 
-**Hvorfor dette er vigtigt:**
-- Spillere skal kunne lukke appen og vende tilbage
-- Offline earnings kræver viden om sidste session
-- Data persistence er kritisk for idle games
+**Why this is important:**
+- Players must be able to close the app and return
+- Offline earnings require knowledge of last session
+- Data persistence is critical for idle games
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
-1. **JSON Serialization Fejl**:
-   - Edge case: Korrupt data i Preferences
-   - Impact: Spillet crasher ved load
+### Potential Problems
+1. **JSON Serialization Errors**:
+   - Edge case: Corrupt data in Preferences
+   - Impact: Game crashes on load
 
 2. **Data Loss**:
-   - Edge case: App crasher under save
-   - Impact: Spilleren mister progress
+   - Edge case: App crashes during save
+   - Impact: Player loses progress
 
-### Mitigering
-- Try-catch around al I/O
-- Return null ved fejl (fallback til nyt spil)
-- Brug System.Text.Json for simpel serialisering
+### Mitigation
+- Try-catch around all I/O
+- Return null on error (fallback to new game)
+- Use System.Text.Json for simple serialization
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What Needs to be Implemented
 
 ### SaveManager.cs
-**Placering**: `Services/SaveManager.cs`
+**Location**: `Services/SaveManager.cs`
 
-**Funktioner:**
-- `Save(GameState state)` - Gem til Preferences
-- `Load()` - Hent fra Preferences, return null hvis fejl
-- `Delete()` - Slet gemt data (til testing/reset)
+**Functions:**
+- `Save(GameState state)` - Save to Preferences
+- `Load()` - Load from Preferences, return null on error
+- `Delete()` - Delete saved data (for testing/reset)
 
 ---
 
 ## Dependencies Check
 
-**Krævet Før Start**:
-- [x] TASK-002 completed (GameState model eksisterer)
+**Required Before Start**:
+- [x] TASK-002 completed (GameState model exists)
 
-**Antagelser**:
-- Preferences API er tilgængelig (MAUI standard)
-- System.Text.Json er tilgængelig
+**Assumptions**:
+- Preferences API is available (MAUI standard)
+- System.Text.Json is available
 
-**Blockers**: TASK-002 skal være færdig
+**Blockers**: TASK-002 must be complete
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret SaveManager.cs
+### Step 1: Create SaveManager.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Services/SaveManager.cs`
+**Path**: `src/MadeMan.IdleEmpire/Services/SaveManager.cs`
 
 ```csharp
 using System.Text.Json;
@@ -134,68 +134,68 @@ public class SaveManager
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. Conceptual Test
-- Save kaldes med valid GameState -> Ingen exception
-- Load på tom data -> Returns null
-- Load på valid data -> Returns GameState
+- Save called with valid GameState -> No exception
+- Load on empty data -> Returns null
+- Load on valid data -> Returns GameState
 
 ---
 
 ## Acceptance Criteria
 
-- [x] SaveManager.cs oprettet
-- [x] Save metode serialiserer GameState til JSON
-- [x] Load metode deserialiserer JSON til GameState
-- [x] Error handling på alle operationer
-- [x] Build succeeds med 0 errors
+- [x] SaveManager.cs created
+- [x] Save method serializes GameState to JSON
+- [x] Load method deserializes JSON to GameState
+- [x] Error handling on all operations
+- [x] Build succeeds with 0 errors
 
 ---
 
-## Kode Evaluering
+## Code Evaluation
 
-### Simplifikations-tjek
-- **Preferences API**: Simplere end SQLite for MVP
-- **Ingen async**: Preferences er synkront (OK for små data)
-- **Enkelt save key**: Ingen versioning kompleksitet
+### Simplification Check
+- **Preferences API**: Simpler than SQLite for MVP
+- **No async**: Preferences is synchronous (OK for small data)
+- **Single save key**: No versioning complexity
 
-### Alternativer overvejet
+### Alternatives Considered
 
-**Alternativ: SQLite database**
+**Alternative: SQLite database**
 ```csharp
-// SQLite ville kræve mere setup
+// SQLite would require more setup
 using SQLite;
 public class SaveService { ... }
 ```
-**Hvorfor fravalgt**: Over-engineering for MVP, Preferences er nok
+**Why rejected**: Over-engineering for MVP, Preferences is enough
 
-### Kendte begrænsninger
-- Kun ét save slot
-- Ingen backup
-- Acceptabelt for MVP
+### Known Limitations
+- Only one save slot
+- No backup
+- Acceptable for MVP
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
-- [x] **KISS**: Simpleste persistence løsning
-- [x] **Error handling**: Try-catch på alle operationer
-- [x] **Logging**: Debug output for fejlfinding
+- [x] **KISS**: Simplest persistence solution
+- [x] **Error handling**: Try-catch on all operations
+- [x] **Logging**: Debug output for troubleshooting
 
 ---
 
 ## Design Files Reference
 
-- **Spec Reference**: docs/MVP_Specification_MAUI.md (linje 397-429)
+- **Spec Reference**: docs/MVP_Specification_MAUI.md (lines 397-429)
 - **Related Tasks**: TASK-002, TASK-004
 
 ---
 
 ## Notes
 
-- Versioned save key (gamestate_v1) for fremtidig migration
-- Preferences API gemmer i app-specific storage
+- Versioned save key (gamestate_v1) for future migration
+- Preferences API saves to app-specific storage
 
 ---
 

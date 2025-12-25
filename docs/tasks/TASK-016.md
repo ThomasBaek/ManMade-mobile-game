@@ -10,37 +10,37 @@
 
 ---
 
-## Formål
+## Purpose
 
-Fix eventuelle bugs fundet under test.
+Fix any bugs found during testing.
 
 **Bug Tracking:**
 
-Bugs tilføjes her efterhånden som de findes:
+Bugs added here as they are found:
 
-| # | Beskrivelse | Prioritet | Status |
-|---|-------------|-----------|--------|
-| - | Ingen bugs endnu | - | - |
+| # | Description | Priority | Status |
+|---|-------------|----------|--------|
+| - | No bugs yet | - | - |
 
 ---
 
 ## Process
 
-1. Bug identificeres under test
-2. Tilføj til tabel ovenfor
-3. Prioritér (High/Medium/Low)
-4. Fix og verificer
-5. Opdater status
+1. Bug identified during testing
+2. Add to table above
+3. Prioritize (High/Medium/Low)
+4. Fix and verify
+5. Update status
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] Alle High priority bugs fixet
-- [ ] Alle Medium priority bugs fixet
-- [ ] Low priority bugs dokumenteret for v1.1
+- [ ] All High priority bugs fixed
+- [ ] All Medium priority bugs fixed
+- [ ] Low priority bugs documented for v1.1
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-015)
+**Task Status**: BLOCKED (waiting for TASK-015)
 **Last Updated**: 2024-12-25

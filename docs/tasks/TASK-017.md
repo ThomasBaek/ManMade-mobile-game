@@ -3,53 +3,53 @@
 ## Metadata
 - **Phase**: 5 - Polish
 - **Dependencies**: TASK-016
-- **Estimated Time**: 1 time
+- **Estimated Time**: 1 hour
 - **Status**: BLOCKED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 1009-1030)
+- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (lines 1009-1030)
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Fuld gennemgang af alle features før release.
+Full walkthrough of all features before release.
 
-**Test Checkliste:**
+**Test Checklist:**
 
-### Funktionel Test
-- [ ] App starter uden crash
-- [ ] Cash ticker opdaterer hvert 100ms
-- [ ] Pickpocket er auto-unlocked ved start
-- [ ] Kan købe upgrades når man har råd
-- [ ] Knapper er disabled når man ikke har råd
-- [ ] Nye operations unlocker ved korrekt beløb
-- [ ] Prestige knap vises ved $10,000 total earned
-- [ ] Prestige nulstiller korrekt men beholder bonus
-- [ ] Data gemmes ved app close
-- [ ] Data loader ved app open
-- [ ] Offline earnings beregnes korrekt
+### Functional Test
+- [ ] App starts without crash
+- [ ] Cash ticker updates every 100ms
+- [ ] Pickpocket is auto-unlocked at start
+- [ ] Can buy upgrades when affordable
+- [ ] Buttons are disabled when not affordable
+- [ ] New operations unlock at correct amount
+- [ ] Prestige button shows at $10,000 total earned
+- [ ] Prestige resets correctly but keeps bonus
+- [ ] Data saves on app close
+- [ ] Data loads on app open
+- [ ] Offline earnings calculate correctly
 
 ### UX Test
-- [ ] Første upgrade mulig inden 15 sekunder
-- [ ] Første unlock (Car Theft) mulig inden 2 minutter
-- [ ] Tal formateres korrekt (K, M, B)
-- [ ] Knap farver indikerer affordability tydeligt
-- [ ] Ingen UI jank eller stuttering
+- [ ] First upgrade possible within 15 seconds
+- [ ] First unlock (Car Theft) possible within 2 minutes
+- [ ] Numbers format correctly (K, M, B)
+- [ ] Button colors indicate affordability clearly
+- [ ] No UI jank or stuttering
 
 ### Platform Test
-- [ ] Kører på Android emulator
-- [ ] Kører på fysisk Android device (hvis tilgængelig)
+- [ ] Runs on Android emulator
+- [ ] Runs on physical Android device (if available)
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] Alle funktionelle tests bestået
-- [ ] Alle UX tests bestået
-- [ ] Platform test bestået
-- [ ] MVP klar til "release"
+- [ ] All functional tests passed
+- [ ] All UX tests passed
+- [ ] Platform test passed
+- [ ] MVP ready for "release"
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-016)
+**Task Status**: BLOCKED (waiting for TASK-016)
 **Last Updated**: 2024-12-25

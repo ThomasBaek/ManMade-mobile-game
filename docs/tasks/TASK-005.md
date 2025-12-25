@@ -10,67 +10,67 @@
 
 ---
 
-## Formål
+## Purpose
 
-Konfigurer Dependency Injection i MauiProgram.cs og lifecycle hooks i App.xaml.cs.
+Configure Dependency Injection in MauiProgram.cs and lifecycle hooks in App.xaml.cs.
 
-**Hvorfor dette er vigtigt:**
-- Services skal være tilgængelige via DI
-- App skal gemme ved baggrund/lukning
-- Korrekt lifetime management
+**Why this is important:**
+- Services must be accessible via DI
+- App must save on background/close
+- Correct lifetime management
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
+### Potential Problems
 1. **Circular Dependencies**:
-   - Edge case: Services der afhænger af hinanden
-   - Impact: DI container fejler
+   - Edge case: Services that depend on each other
+   - Impact: DI container fails
 
 2. **Missing Registration**:
-   - Edge case: Service ikke registreret
+   - Edge case: Service not registered
    - Impact: Runtime exception
 
-### Mitigering
-- Simpel dependency chain: SaveManager -> GameEngine
-- Verificer alle registrations før build
+### Mitigation
+- Simple dependency chain: SaveManager -> GameEngine
+- Verify all registrations before build
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What Needs to be Implemented
 
 ### 1. MauiProgram.cs
-**Ændringer:**
-- Registrer SaveManager som Singleton
-- Registrer GameEngine som Singleton
-- (Fremtid: Registrer ViewModels og Pages)
+**Changes:**
+- Register SaveManager as Singleton
+- Register GameEngine as Singleton
+- (Future: Register ViewModels and Pages)
 
 ### 2. App.xaml.cs
-**Ændringer:**
-- Inject IGameEngine og SaveManager
-- OnSleep: Gem game state
-- OnResume: Beregn offline earnings (via Initialize)
+**Changes:**
+- Inject IGameEngine and SaveManager
+- OnSleep: Save game state
+- OnResume: Calculate offline earnings (via Initialize)
 
 ---
 
 ## Dependencies Check
 
-**Krævet Før Start**:
+**Required Before Start**:
 - [x] TASK-004 completed (GameEngine)
 
-**Antagelser**:
+**Assumptions**:
 - Standard MAUI DI container
 
-**Blockers**: TASK-004 skal være færdig
+**Blockers**: TASK-004 must be complete
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opdater MauiProgram.cs
+### Step 1: Update MauiProgram.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/MauiProgram.cs`
+**Path**: `src/MadeMan.IdleEmpire/MauiProgram.cs`
 
 ```csharp
 using Microsoft.Extensions.Logging;
@@ -104,9 +104,9 @@ public static class MauiProgram
 }
 ```
 
-### Step 2: Opdater App.xaml.cs
+### Step 2: Update App.xaml.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/App.xaml.cs`
+**Path**: `src/MadeMan.IdleEmpire/App.xaml.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.Services;
@@ -139,8 +139,8 @@ public partial class App : Application
     protected override void OnResume()
     {
         base.OnResume();
-        // Offline earnings beregnes automatisk i Initialize
-        // som kaldes fra MainViewModel
+        // Offline earnings calculated automatically in Initialize
+        // which is called from MainViewModel
     }
 }
 ```
@@ -153,64 +153,64 @@ public partial class App : Application
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. DI Verification
-- App starter uden DI exceptions
-- IGameEngine kan injectes
+- App starts without DI exceptions
+- IGameEngine can be injected
 
 ---
 
 ## Acceptance Criteria
 
-- [x] SaveManager registreret som Singleton
-- [x] GameEngine registreret som Singleton (via IGameEngine)
-- [x] App.xaml.cs modtager dependencies via constructor
-- [x] OnSleep gemmer game state
-- [x] Build succeeds med 0 errors
+- [x] SaveManager registered as Singleton
+- [x] GameEngine registered as Singleton (via IGameEngine)
+- [x] App.xaml.cs receives dependencies via constructor
+- [x] OnSleep saves game state
+- [x] Build succeeds with 0 errors
 
 ---
 
-## Kode Evaluering
+## Code Evaluation
 
-### Simplifikations-tjek
-- **Minimal DI**: Kun nødvendige services
-- **Singleton pattern**: Game state delt på tværs af app
-- **Ingen factory pattern**: Overkill for MVP
+### Simplification Check
+- **Minimal DI**: Only necessary services
+- **Singleton pattern**: Game state shared across app
+- **No factory pattern**: Overkill for MVP
 
-### Alternativer overvejet
+### Alternatives Considered
 
-**Alternativ: Scoped services**
+**Alternative: Scoped services**
 ```csharp
 builder.Services.AddScoped<IGameEngine, GameEngine>();
 ```
-**Hvorfor fravalgt**: Game state skal persistere, Singleton er korrekt
+**Why rejected**: Game state must persist, Singleton is correct
 
-### Kendte begrænsninger
-- Ingen scope per page
-- Acceptabelt for single-page app
+### Known Limitations
+- No scope per page
+- Acceptable for single-page app
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
 - [x] **KISS**: Minimal DI configuration
-- [x] **Lifecycle**: Save on sleep korrekt
+- [x] **Lifecycle**: Save on sleep correct
 - [x] **Dependency Chain**: SaveManager -> GameEngine
 
 ---
 
 ## Design Files Reference
 
-- **Spec Reference**: docs/MVP_Specification_MAUI.md (linje 823-889)
+- **Spec Reference**: docs/MVP_Specification_MAUI.md (lines 823-889)
 - **Related Tasks**: TASK-004, TASK-006
 
 ---
 
 ## Notes
 
-- ViewModels registreres i senere tasks
-- MainPage registreres når UI er klar
+- ViewModels registered in later tasks
+- MainPage registered when UI is ready
 
 ---
 

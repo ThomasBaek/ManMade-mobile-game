@@ -10,31 +10,31 @@
 
 ---
 
-## Formål
+## Purpose
 
-Verificer at offline earnings beregnes korrekt.
+Verify that offline earnings calculate correctly.
 
-**Test Scenarler:**
+**Test Scenarios:**
 
 1. **Short Offline (1 min)**
-   - Noter cash og income
-   - Luk app, vent 1 min
-   - Genåbn: Cash += Income * 60 * 0.5
+   - Note cash and income
+   - Close app, wait 1 min
+   - Reopen: Cash += Income * 60 * 0.5
 
 2. **Medium Offline (5 min)**
-   - Samme beregning, skaleret
+   - Same calculation, scaled
 
-3. **Max Offline (4+ timer)**
-   - Luk app, ændre device tid +5 timer
-   - Genåbn: Max 4 timers earnings
+3. **Max Offline (4+ hours)**
+   - Close app, change device time +5 hours
+   - Reopen: Max 4 hours earnings
 
 4. **No Earnings**
-   - Offline < 36 sek (0.01 timer)
-   - Ingen offline bonus
+   - Offline < 36 sec (0.01 hours)
+   - No offline bonus
 
 ---
 
-## Beregning
+## Calculation
 
 ```
 Offline Earnings = IncomePerSecond * Hours * 3600 * 0.5
@@ -45,12 +45,12 @@ Max Hours = 4
 
 ## Acceptance Criteria
 
-- [ ] Offline earnings beregnes ved app start
+- [ ] Offline earnings calculated on app start
 - [ ] 50% efficiency applied
-- [ ] Max 4 timer cap
-- [ ] Meget kort offline = ingen bonus
+- [ ] Max 4 hour cap
+- [ ] Very short offline = no bonus
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-013)
+**Task Status**: BLOCKED (waiting for TASK-013)
 **Last Updated**: 2024-12-25

@@ -10,68 +10,68 @@
 
 ---
 
-## Formål
+## Purpose
 
-Installer CommunityToolkit.Mvvm NuGet package til MVVM support.
+Install CommunityToolkit.Mvvm NuGet package for MVVM support.
 
-**Hvorfor dette er vigtigt:**
-- CommunityToolkit.Mvvm er nødvendig for [ObservableProperty] og [RelayCommand]
-- Reducerer boilerplate kode betydeligt
+**Why this is important:**
+- CommunityToolkit.Mvvm is necessary for [ObservableProperty] and [RelayCommand]
+- Significantly reduces boilerplate code
 - Standard pattern for .NET MAUI apps
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
-1. **Package Version Konflikt**:
-   - Edge case: Inkompatibel version med .NET 10
+### Potential Problems
+1. **Package Version Conflict**:
+   - Edge case: Incompatible version with .NET 10
    - Impact: Compile errors
 
-### Mitigering
-- Brug nyeste stabile version (8.2.2 eller højere)
-- Test build efter installation
+### Mitigation
+- Use latest stable version (8.2.2 or higher)
+- Test build after installation
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What Needs to be Implemented
 
-### 1. Tilføj NuGet Package
-**Placering**: `src/MadeMan.IdleEmpire/MadeMan.IdleEmpire.csproj`
+### 1. Add NuGet Package
+**Location**: `src/MadeMan.IdleEmpire/MadeMan.IdleEmpire.csproj`
 
-**Ændringer:**
-- Tilføj CommunityToolkit.Mvvm package reference
+**Changes:**
+- Add CommunityToolkit.Mvvm package reference
 
-### 2. Verificer Build
-**Kommando**: `dotnet build -f net10.0-android`
+### 2. Verify Build
+**Command**: `dotnet build -f net10.0-android`
 
 ---
 
 ## Dependencies Check
 
-**Krævet Før Start**:
-- [x] Projekt eksisterer og bygger (verificeret 2024-12-25)
+**Required Before Start**:
+- [x] Project exists and builds (verified 2024-12-25)
 
-**Antagelser**:
-- NuGet feeds er tilgængelige
+**Assumptions**:
+- NuGet feeds are accessible
 
-**Blockers**: Ingen
+**Blockers**: None
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Tilføj CommunityToolkit.Mvvm Package
+### Step 1: Add CommunityToolkit.Mvvm Package
 
-**Sti**: `src/MadeMan.IdleEmpire/MadeMan.IdleEmpire.csproj`
+**Path**: `src/MadeMan.IdleEmpire/MadeMan.IdleEmpire.csproj`
 
-Tilføj i ItemGroup med andre PackageReference:
+Add in ItemGroup with other PackageReference:
 
 ```xml
 <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 ```
 
-### Step 2: Restore og Build
+### Step 2: Restore and Build
 
 ```bash
 cd src/MadeMan.IdleEmpire
@@ -87,43 +87,43 @@ dotnet build -f net10.0-android
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. Package Verification
 ```bash
 dotnet list src/MadeMan.IdleEmpire package
 ```
-Forventet: CommunityToolkit.Mvvm 8.2.2 (eller højere) listet
+Expected: CommunityToolkit.Mvvm 8.2.2 (or higher) listed
 
 ---
 
 ## Acceptance Criteria
 
-- [x] CommunityToolkit.Mvvm package installeret
-- [x] Build succeeds med 0 errors
-- [x] Ingen nye warnings introduceret
+- [x] CommunityToolkit.Mvvm package installed
+- [x] Build succeeds with 0 errors
+- [x] No new warnings introduced
 
 ---
 
-## Kode Evaluering
+## Code Evaluation
 
-### Simplifikations-tjek
-- **Minimal ændring**: Kun én linje tilføjet til .csproj
-- **Ingen ny kode**: Kun package reference
+### Simplification Check
+- **Minimal change**: Only one line added to .csproj
+- **No new code**: Only package reference
 
-### Alternativer overvejet
-Ingen - CommunityToolkit.Mvvm er standard for MAUI MVVM
+### Alternatives Considered
+None - CommunityToolkit.Mvvm is standard for MAUI MVVM
 
-### Kendte begrænsninger
-- Ingen
+### Known Limitations
+- None
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
-- [x] **KISS**: Simpleste løsning
-- [x] **Læsbarhed**: Standard .csproj format
-- [x] **DRY**: Ingen duplikering
+- [x] **KISS**: Simplest solution
+- [x] **Readability**: Standard .csproj format
+- [x] **DRY**: No duplication
 
 ---
 
@@ -136,8 +136,8 @@ Ingen - CommunityToolkit.Mvvm er standard for MAUI MVVM
 
 ## Notes
 
-- CommunityToolkit.Mvvm 8.2.2 er kompatibel med .NET 10
-- Source generators kræver partial classes
+- CommunityToolkit.Mvvm 8.2.2 is compatible with .NET 10
+- Source generators require partial classes
 
 ---
 

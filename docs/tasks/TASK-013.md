@@ -10,44 +10,44 @@
 
 ---
 
-## Formål
+## Purpose
 
-Verificer at game state gemmes og hentes korrekt.
+Verify that game state saves and loads correctly.
 
-**Test Scenarler:**
+**Test Scenarios:**
 
 1. **Auto-Save**
-   - Spil i 30+ sek
-   - Luk app (ikke kill)
-   - Genåbn: State bevaret
+   - Play for 30+ sec
+   - Close app (not kill)
+   - Reopen: State preserved
 
 2. **Manual Save (OnSleep)**
-   - Spil og opnå progress
-   - Tryk Home knap
-   - Kill app fra task manager
-   - Genåbn: State bevaret
+   - Play and achieve progress
+   - Press Home button
+   - Kill app from task manager
+   - Reopen: State preserved
 
 3. **Data Integrity**
-   - Cash værdier korrekte
-   - Operation levels korrekte
-   - PrestigeCount korrekt
+   - Cash values correct
+   - Operation levels correct
+   - PrestigeCount correct
 
 4. **Fresh Install**
    - Uninstall app
    - Reinstall
-   - Start med clean state
+   - Start with clean state
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] Auto-save hvert 30 sek
-- [ ] Save ved app sleep
-- [ ] Load ved app start
-- [ ] Alle værdier bevaret
-- [ ] Ny installation starter fresh
+- [ ] Auto-save every 30 sec
+- [ ] Save on app sleep
+- [ ] Load on app start
+- [ ] All values preserved
+- [ ] New installation starts fresh
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-012)
+**Task Status**: BLOCKED (waiting for TASK-012)
 **Last Updated**: 2024-12-25

@@ -10,35 +10,35 @@
 
 ---
 
-## Formål
+## Purpose
 
-Vis spillerens aktive skills og milestone progress i UI.
+Display player's active skills and milestone progress in UI.
 
-**Hvorfor dette er vigtigt:**
-- Spilleren skal se sine skills
-- Progress mod næste milestone
-- Visuelt feedback for skill levels
+**Why this is important:**
+- Player must see their skills
+- Progress toward next milestone
+- Visual feedback for skill levels
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### SkillsPanel.xaml
-**Placering**: `Views/Components/SkillsPanel.xaml`
+**Location**: `Views/Components/SkillsPanel.xaml`
 
-UI Elementer:
+UI Elements:
 - Milestone progress bar
 - "Next milestone: $X" text
-- Grid af aktive skills (max 5)
-- Hver skill viser: ikon, navn, level
+- Grid of active skills (max 5)
+- Each skill shows: icon, name, level
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret SkillsPanel.xaml
+### Step 1: Create SkillsPanel.xaml
 
-**Sti**: `src/MadeMan.IdleEmpire/Views/Components/SkillsPanel.xaml`
+**Path**: `src/MadeMan.IdleEmpire/Views/Components/SkillsPanel.xaml`
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -128,9 +128,9 @@ UI Elementer:
 </ContentView>
 ```
 
-### Step 2: Opret code-behind
+### Step 2: Create code-behind
 
-**Sti**: `src/MadeMan.IdleEmpire/Views/Components/SkillsPanel.xaml.cs`
+**Path**: `src/MadeMan.IdleEmpire/Views/Components/SkillsPanel.xaml.cs`
 
 ```csharp
 namespace MadeMan.IdleEmpire.Views.Components;
@@ -144,9 +144,9 @@ public partial class SkillsPanel : ContentView
 }
 ```
 
-### Step 3: Opret Converters (hvis ikke findes)
+### Step 3: Create Converters (if not exists)
 
-**Sti**: `src/MadeMan.IdleEmpire/Converters/ProgressToWidthConverter.cs`
+**Path**: `src/MadeMan.IdleEmpire/Converters/ProgressToWidthConverter.cs`
 
 ```csharp
 using System.Globalization;
@@ -173,12 +173,12 @@ public class ProgressToWidthConverter : IValueConverter
 }
 ```
 
-### Step 4: Integrer i MainPage.xaml
+### Step 4: Integrate in MainPage.xaml
 
-Tilføj SkillsPanel i hovedlayout:
+Add SkillsPanel in main layout:
 
 ```xml
-<!-- Efter operations list, før prestige knap -->
+<!-- After operations list, before prestige button -->
 <views:SkillsPanel />
 ```
 
@@ -192,30 +192,30 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
 
 ### 2. Visual Test
-- [ ] Panel vises korrekt
-- [ ] Progress bar opdateres
-- [ ] Skills vises i grid
-- [ ] Empty state vises uden skills
+- [ ] Panel displays correctly
+- [ ] Progress bar updates
+- [ ] Skills display in grid
+- [ ] Empty state shows without skills
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] SkillsPanel.xaml oprettet
-- [ ] Code-behind oprettet
-- [ ] Binding til ActiveSkills
-- [ ] Binding til MilestoneProgress
-- [ ] Progress bar visualiserer progress
-- [ ] Skill cards viser level
-- [ ] Empty state tekst
-- [ ] Integreret i MainPage
-- [ ] Build succeeds med 0 errors
+- [ ] SkillsPanel.xaml created
+- [ ] Code-behind created
+- [ ] Binding to ActiveSkills
+- [ ] Binding to MilestoneProgress
+- [ ] Progress bar visualizes progress
+- [ ] Skill cards show level
+- [ ] Empty state text
+- [ ] Integrated in MainPage
+- [ ] Build succeeds with 0 errors
 
 ---
 
-## UI Specifikationer
+## UI Specifications
 
-- **Panel Background**: Surface farve
+- **Panel Background**: Surface color
 - **Progress Bar Height**: 8dp
 - **Progress Bar Color**: Gold
 - **Skill Card Size**: 100x80dp
@@ -223,5 +223,5 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-025)
+**Task Status**: BLOCKED (waiting for TASK-025)
 **Last Updated**: 2024-12-25

@@ -10,31 +10,31 @@
 
 ---
 
-## Formål
+## Purpose
 
-Opret modal UI for skill selection ved milestones.
+Create modal UI for skill selection at milestones.
 
-**Hvorfor dette er vigtigt:**
-- Spilleren skal kunne vælge mellem 3 skills
-- Tydelig præsentation af skill info
-- Blokerer gameplay indtil valg er truffet
+**Why this is important:**
+- Player must be able to choose between 3 skills
+- Clear presentation of skill info
+- Blocks gameplay until choice is made
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### SkillSelectionModal.xaml
-**Placering**: `Views/Components/SkillSelectionModal.xaml`
+**Location**: `Views/Components/SkillSelectionModal.xaml`
 
-UI Elementer:
-- Overlay baggrund (semi-transparent)
+UI Elements:
+- Overlay background (semi-transparent)
 - Modal container
-- Titel "Choose a Skill"
-- 3 skill cards med:
-  - Ikon
-  - Navn
-  - Level (ny eller upgrade)
-  - Beskrivelse
+- Title "Choose a Skill"
+- 3 skill cards with:
+  - Icon
+  - Name
+  - Level (new or upgrade)
+  - Description
   - Effect preview
 - Tap gesture for selection
 
@@ -42,9 +42,9 @@ UI Elementer:
 
 ## Implementation Guide
 
-### Step 1: Opret SkillSelectionModal.xaml
+### Step 1: Create SkillSelectionModal.xaml
 
-**Sti**: `src/MadeMan.IdleEmpire/Views/Components/SkillSelectionModal.xaml`
+**Path**: `src/MadeMan.IdleEmpire/Views/Components/SkillSelectionModal.xaml`
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -144,9 +144,9 @@ UI Elementer:
 </ContentView>
 ```
 
-### Step 2: Opret code-behind
+### Step 2: Create code-behind
 
-**Sti**: `src/MadeMan.IdleEmpire/Views/Components/SkillSelectionModal.xaml.cs`
+**Path**: `src/MadeMan.IdleEmpire/Views/Components/SkillSelectionModal.xaml.cs`
 
 ```csharp
 namespace MadeMan.IdleEmpire.Views.Components;
@@ -160,12 +160,12 @@ public partial class SkillSelectionModal : ContentView
 }
 ```
 
-### Step 3: Integrer i MainPage.xaml
+### Step 3: Integrate in MainPage.xaml
 
-Tilføj modal som overlay i MainPage:
+Add modal as overlay in MainPage:
 
 ```xml
-<!-- I MainPage.xaml, efter hovedindhold -->
+<!-- In MainPage.xaml, after main content -->
 <views:SkillSelectionModal />
 ```
 
@@ -179,35 +179,35 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
 
 ### 2. Visual Test
-- [ ] Modal vises centreret
-- [ ] Overlay dækker baggrund
-- [ ] Skill cards er tappable
-- [ ] Info vises korrekt
+- [ ] Modal displays centered
+- [ ] Overlay covers background
+- [ ] Skill cards are tappable
+- [ ] Info displays correctly
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] SkillSelectionModal.xaml oprettet
-- [ ] Code-behind oprettet
-- [ ] Binding til SkillVM.SelectionPool
-- [ ] Binding til IsSelectionModalVisible
-- [ ] TapGestureRecognizer på hver skill
-- [ ] SelectSkillCommand kaldes med skill ID
-- [ ] Integreret i MainPage
-- [ ] Build succeeds med 0 errors
+- [ ] SkillSelectionModal.xaml created
+- [ ] Code-behind created
+- [ ] Binding to SkillVM.SelectionPool
+- [ ] Binding to IsSelectionModalVisible
+- [ ] TapGestureRecognizer on each skill
+- [ ] SelectSkillCommand called with skill ID
+- [ ] Integrated in MainPage
+- [ ] Build succeeds with 0 errors
 
 ---
 
-## UI Specifikationer
+## UI Specifications
 
-- **Overlay**: #CC000000 (80% sort)
-- **Modal Background**: Surface farve
+- **Overlay**: #CC000000 (80% black)
+- **Modal Background**: Surface color
 - **Corner Radius**: 16dp
 - **Card Spacing**: 8dp
 - **Padding**: 20dp
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-025)
+**Task Status**: BLOCKED (waiting for TASK-025)
 **Last Updated**: 2024-12-25

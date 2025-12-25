@@ -3,55 +3,55 @@
 ## Metadata
 - **Phase**: 2 - UI
 - **Dependencies**: TASK-007
-- **Estimated Time**: 1 time
+- **Estimated Time**: 1 hour
 - **Status**: BLOCKED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 590-711)
+- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (line 590-711)
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Implementer MainViewModel - hovedcontroller for hele spillet.
+Implement MainViewModel - main controller for the entire game.
 
-**Hvorfor dette er vigtigt:**
-- Game loop (timer) lever her
-- Koordinerer alle OperationViewModels
-- Håndterer prestige
+**Why this is important:**
+- Game loop (timer) lives here
+- Coordinates all OperationViewModels
+- Handles prestige
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
+### Potential Issues
 1. **Timer Leak**:
-   - Edge case: Timer ikke stoppet ved page leave
+   - Edge case: Timer not stopped on page leave
    - Impact: Memory leak, multiple timers
 
 2. **UI Thread Issues**:
-   - Edge case: State update fra background
+   - Edge case: State update from background
    - Impact: Cross-thread exception
 
-### Mitigering
-- StopTimers() i OnDisappearing
-- DispatcherTimer kører på UI thread
+### Mitigation
+- StopTimers() in OnDisappearing
+- DispatcherTimer runs on UI thread
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### MainViewModel.cs
-**Placering**: `ViewModels/MainViewModel.cs`
+**Location**: `ViewModels/MainViewModel.cs`
 
 **Properties:**
-- CashDisplay, IncomeDisplay (formateret)
+- CashDisplay, IncomeDisplay (formatted)
 - CanPrestige, PrestigeButtonText
 - Operations (ObservableCollection)
 
 **Methods:**
 - OnAppearing/OnDisappearing (lifecycle)
 - StartGameLoop/StopTimers
-- OnGameTick (10x per sekund)
+- OnGameTick (10x per second)
 - UpdateDisplay
 
 **Commands:**
@@ -61,9 +61,9 @@ Implementer MainViewModel - hovedcontroller for hele spillet.
 
 ## Implementation Guide
 
-### Step 1: Opret MainViewModel.cs
+### Step 1: Create MainViewModel.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/ViewModels/MainViewModel.cs`
+**Path**: `src/MadeMan.IdleEmpire/ViewModels/MainViewModel.cs`
 
 ```csharp
 using System.Collections.ObjectModel;
@@ -204,9 +204,9 @@ public partial class MainViewModel : ObservableObject
 }
 ```
 
-### Step 2: Registrer i MauiProgram.cs
+### Step 2: Register in MauiProgram.cs
 
-Tilføj til builder.Services i MauiProgram.cs:
+Add to builder.Services in MauiProgram.cs:
 
 ```csharp
 builder.Services.AddTransient<MainViewModel>();
@@ -220,47 +220,47 @@ builder.Services.AddTransient<MainViewModel>();
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. Conceptual Test
-- Game timer kører 10x/sek
-- CashDisplay opdateres
+- Game timer runs 10x/sec
+- CashDisplay updates
 - Operations collection populated
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] MainViewModel.cs oprettet
-- [ ] Game loop timer virker
-- [ ] Auto-save timer virker
-- [ ] FormatCash formatter K/M/B korrekt
-- [ ] Prestige command virker
-- [ ] Registreret i DI
-- [ ] Build succeeds med 0 errors
+- [ ] MainViewModel.cs created
+- [ ] Game loop timer works
+- [ ] Auto-save timer works
+- [ ] FormatCash formats K/M/B correctly
+- [ ] Prestige command works
+- [ ] Registered in DI
+- [ ] Build succeeds with 0 errors
 
 ---
 
-## Kode Evaluering
+## Code Evaluation
 
-### Simplifikations-tjek
-- **Simpel timer**: DispatcherTimer, ingen Task.Run
-- **Pull model**: Refresh() i stedet for events
-- **No caching**: Beregner IncomePerSecond hver tick
+### Simplification Check
+- **Simple timer**: DispatcherTimer, no Task.Run
+- **Pull model**: Refresh() instead of events
+- **No caching**: Calculates IncomePerSecond every tick
 
-### Kendte begrænsninger
-- Beregner income 10x per sekund (OK for 5 operations)
-- Ingen debounce på UI updates
-- Acceptabelt for MVP
+### Known Limitations
+- Calculates income 10x per second (OK for 5 operations)
+- No debounce on UI updates
+- Acceptable for MVP
 
 ---
 
 ## Design Files Reference
 
-- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 590-711)
+- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (line 590-711)
 - **Related Tasks**: TASK-007, TASK-009
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-007)
+**Task Status**: BLOCKED (waiting for TASK-007)
 **Last Updated**: 2024-12-25

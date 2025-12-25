@@ -10,37 +10,37 @@
 
 ---
 
-## Formål
+## Purpose
 
-Implementer core skill service til at håndtere skill state og effects.
+Implement core skill service to handle skill state and effects.
 
-**Hvorfor dette er vigtigt:**
-- Central service for al skill logik
-- Enforcer max 5 skills og max level 5
-- Beregner samlede skill effects for GameEngine
+**Why this is important:**
+- Central service for all skill logic
+- Enforces max 5 skills and max level 5
+- Calculates combined skill effects for GameEngine
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### ISkillService.cs & SkillService.cs
-**Placering**: `Services/`
+**Location**: `Services/`
 
-Funktioner:
-- `GetSkillLevel(skillId)` - Hent spillerens level for en skill
-- `AddOrUpgradeSkill(skillId)` - Tilføj ny eller opgrader eksisterende
-- `CanAddNewSkill()` - Check om der er plads (< 5 skills)
-- `IsSkillMaxed(skillId)` - Check om skill er level 5
-- `GetActiveSkillCount()` - Antal aktive skills
-- Effect getters for hver kategori
+Functions:
+- `GetSkillLevel(skillId)` - Get player's level for a skill
+- `AddOrUpgradeSkill(skillId)` - Add new or upgrade existing
+- `CanAddNewSkill()` - Check if there's room (< 5 skills)
+- `IsSkillMaxed(skillId)` - Check if skill is level 5
+- `GetActiveSkillCount()` - Number of active skills
+- Effect getters for each category
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret ISkillService.cs
+### Step 1: Create ISkillService.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Services/ISkillService.cs`
+**Path**: `src/MadeMan.IdleEmpire/Services/ISkillService.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.Models;
@@ -78,9 +78,9 @@ public interface ISkillService
 }
 ```
 
-### Step 2: Opret SkillService.cs
+### Step 2: Create SkillService.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Services/SkillService.cs`
+**Path**: `src/MadeMan.IdleEmpire/Services/SkillService.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.Models;
@@ -294,31 +294,31 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
 
 ### 2. Logic Verification (conceptual)
-- AddOrUpgradeSkill på ny skill → Level 1
-- AddOrUpgradeSkill på eksisterende → Level + 1
-- AddOrUpgradeSkill når 5 skills → Ingen ændring (for ny)
-- ResetSkills → Tom liste, MilestoneCount = 0
+- AddOrUpgradeSkill on new skill → Level 1
+- AddOrUpgradeSkill on existing → Level + 1
+- AddOrUpgradeSkill when 5 skills → No change (for new)
+- ResetSkills → Empty list, MilestoneCount = 0
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] ISkillService interface oprettet
-- [ ] SkillService implementerer alle metoder
+- [ ] ISkillService interface created
+- [ ] SkillService implements all methods
 - [ ] Max 5 skills enforced
 - [ ] Max level 5 enforced
-- [ ] Alle effect getters beregner korrekt
-- [ ] ResetSkills nulstiller alt
-- [ ] Build succeeds med 0 errors
+- [ ] All effect getters calculate correctly
+- [ ] ResetSkills resets everything
+- [ ] Build succeeds with 0 errors
 
 ---
 
 ## Notes
 
-- SkillService får GameState via Func for at undgå circular dependency
-- Alternativt kan den få State injected fra GameEngine
+- SkillService gets GameState via Func to avoid circular dependency
+- Alternatively it can get State injected from GameEngine
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-020)
+**Task Status**: BLOCKED (waiting for TASK-020)
 **Last Updated**: 2024-12-25

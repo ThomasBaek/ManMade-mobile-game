@@ -10,25 +10,25 @@
 
 ---
 
-## Formål
+## Purpose
 
-Definér alle 18 skills med deres effekter og værdier.
+Define all 18 skills with their effects and values.
 
-**Hvorfor dette er vigtigt:**
-- Alle skill effects skal være korrekt defineret
-- Balance tal fra spec skal overholdes
-- Central konfiguration for nem justering
+**Why this is important:**
+- All skill effects must be correctly defined
+- Balance numbers from spec must be followed
+- Central configuration for easy adjustment
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### SkillConfig.cs
-**Placering**: `Models/SkillConfig.cs`
+**Location**: `Models/SkillConfig.cs`
 
-Definerer alle 18 skills:
+Defines all 18 skills:
 
-**💰 Income (6 stk):**
+**💰 Income (6 skills):**
 - Cash Flow (+4% total income per level)
 - Street Smarts (+10% Tier 1 per level)
 - Business Acumen (+12% Tier 2 per level)
@@ -36,19 +36,19 @@ Definerer alle 18 skills:
 - The Skim (+5% cashback per level)
 - Compound Interest (+3% per 5 min per level)
 
-**⚡ Operations (4 stk):**
+**⚡ Operations (4 skills):**
 - Quick Hands (+25% Pickpocket per level)
 - Chop Shop (+20% Car Theft per level)
 - Inside Man (+18% Burglary per level)
 - Happy Hour (+15% Speakeasy per level)
 
-**📴 Offline (4 stk):**
+**📴 Offline (4 skills):**
 - Night Owl (+10% offline efficiency per level)
 - Extended Shift (+1 hour max offline per level)
 - Passive Income (+$1/s baseline per level)
 - Godfather's Cut (+8% offline bonus per level)
 
-**⭐ Prestige (4 stk):**
+**⭐ Prestige (4 skills):**
 - Old Connections (+$100 start cash per level)
 - Reputation (+6% prestige bonus per level)
 - Fast Learner (-4% upgrade costs per level)
@@ -58,16 +58,16 @@ Definerer alle 18 skills:
 
 ## Dependencies Check
 
-**Krævet Før Start**:
+**Required Before Start**:
 - [ ] TASK-018 completed (Skill models)
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret SkillConfig.cs
+### Step 1: Create SkillConfig.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Models/SkillConfig.cs`
+**Path**: `src/MadeMan.IdleEmpire/Models/SkillConfig.cs`
 
 ```csharp
 namespace MadeMan.IdleEmpire.Models;
@@ -101,7 +101,7 @@ public static class SkillConfig
         {
             Id = "cash_flow",
             Name = "Cash Flow",
-            Description = "Øger total indkomst",
+            Description = "Increases total income",
             Icon = "skill_cash_flow.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
@@ -111,7 +111,7 @@ public static class SkillConfig
         {
             Id = "street_smarts",
             Name = "Street Smarts",
-            Description = "Booster Tier 1 operationer",
+            Description = "Boosts Tier 1 operations",
             Icon = "skill_street_smarts.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
@@ -122,7 +122,7 @@ public static class SkillConfig
         {
             Id = "business_acumen",
             Name = "Business Acumen",
-            Description = "Booster Tier 2 operationer",
+            Description = "Boosts Tier 2 operations",
             Icon = "skill_business_acumen.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
@@ -133,7 +133,7 @@ public static class SkillConfig
         {
             Id = "lucky_break",
             Name = "Lucky Break",
-            Description = "Chance for dobbelt indkomst",
+            Description = "Chance for double income",
             Icon = "skill_lucky_break.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Chance,
@@ -143,7 +143,7 @@ public static class SkillConfig
         {
             Id = "the_skim",
             Name = "The Skim",
-            Description = "Cashback på alle køb",
+            Description = "Cashback on all purchases",
             Icon = "skill_the_skim.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
@@ -153,7 +153,7 @@ public static class SkillConfig
         {
             Id = "compound_interest",
             Name = "Compound Interest",
-            Description = "Indkomst stiger over tid",
+            Description = "Income grows over time",
             Icon = "skill_compound_interest.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
@@ -165,7 +165,7 @@ public static class SkillConfig
         {
             Id = "quick_hands",
             Name = "Quick Hands",
-            Description = "Booster Pickpocketing",
+            Description = "Boosts Pickpocketing",
             Icon = "skill_quick_hands.png",
             Category = SkillCategory.Operations,
             EffectType = SkillEffectType.Multiplier,
@@ -176,7 +176,7 @@ public static class SkillConfig
         {
             Id = "chop_shop",
             Name = "Chop Shop",
-            Description = "Booster Car Theft",
+            Description = "Boosts Car Theft",
             Icon = "skill_chop_shop.png",
             Category = SkillCategory.Operations,
             EffectType = SkillEffectType.Multiplier,
@@ -187,7 +187,7 @@ public static class SkillConfig
         {
             Id = "inside_man",
             Name = "Inside Man",
-            Description = "Booster Burglary",
+            Description = "Boosts Burglary",
             Icon = "skill_inside_man.png",
             Category = SkillCategory.Operations,
             EffectType = SkillEffectType.Multiplier,
@@ -198,7 +198,7 @@ public static class SkillConfig
         {
             Id = "happy_hour",
             Name = "Happy Hour",
-            Description = "Booster Speakeasy",
+            Description = "Boosts Speakeasy",
             Icon = "skill_happy_hour.png",
             Category = SkillCategory.Operations,
             EffectType = SkillEffectType.Multiplier,
@@ -211,7 +211,7 @@ public static class SkillConfig
         {
             Id = "night_owl",
             Name = "Night Owl",
-            Description = "Øger offline efficiency",
+            Description = "Increases offline efficiency",
             Icon = "skill_night_owl.png",
             Category = SkillCategory.Offline,
             EffectType = SkillEffectType.Multiplier,
@@ -221,7 +221,7 @@ public static class SkillConfig
         {
             Id = "extended_shift",
             Name = "Extended Shift",
-            Description = "Forlænger max offline tid",
+            Description = "Extends max offline time",
             Icon = "skill_extended_shift.png",
             Category = SkillCategory.Offline,
             EffectType = SkillEffectType.Duration,
@@ -231,7 +231,7 @@ public static class SkillConfig
         {
             Id = "passive_income",
             Name = "Passive Income",
-            Description = "Baseline indkomst uanset operationer",
+            Description = "Baseline income regardless of operations",
             Icon = "skill_passive_income.png",
             Category = SkillCategory.Offline,
             EffectType = SkillEffectType.FlatBonus,
@@ -241,7 +241,7 @@ public static class SkillConfig
         {
             Id = "godfathers_cut",
             Name = "Godfather's Cut",
-            Description = "Bonus på offline earnings",
+            Description = "Bonus on offline earnings",
             Icon = "skill_godfathers_cut.png",
             Category = SkillCategory.Offline,
             EffectType = SkillEffectType.Multiplier,
@@ -253,7 +253,7 @@ public static class SkillConfig
         {
             Id = "old_connections",
             Name = "Old Connections",
-            Description = "Start med bonus cash efter prestige",
+            Description = "Start with bonus cash after prestige",
             Icon = "skill_old_connections.png",
             Category = SkillCategory.Prestige,
             EffectType = SkillEffectType.FlatBonus,
@@ -263,7 +263,7 @@ public static class SkillConfig
         {
             Id = "reputation",
             Name = "Reputation",
-            Description = "Øger prestige bonus",
+            Description = "Increases prestige bonus",
             Icon = "skill_reputation.png",
             Category = SkillCategory.Prestige,
             EffectType = SkillEffectType.Multiplier,
@@ -273,7 +273,7 @@ public static class SkillConfig
         {
             Id = "fast_learner",
             Name = "Fast Learner",
-            Description = "Reducerer upgrade costs",
+            Description = "Reduces upgrade costs",
             Icon = "skill_fast_learner.png",
             Category = SkillCategory.Prestige,
             EffectType = SkillEffectType.Reduction,
@@ -283,7 +283,7 @@ public static class SkillConfig
         {
             Id = "early_bird",
             Name = "Early Bird",
-            Description = "Reducerer unlock costs",
+            Description = "Reduces unlock costs",
             Icon = "skill_early_bird.png",
             Category = SkillCategory.Prestige,
             EffectType = SkillEffectType.Reduction,
@@ -312,7 +312,7 @@ public static class SkillConfig
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. Count Verification
 - 6 Income skills
@@ -325,20 +325,20 @@ Forventet: 0 errors
 
 ## Acceptance Criteria
 
-- [ ] Alle 18 skills defineret
-- [ ] MilestoneThresholds array med 10 værdier
+- [ ] All 18 skills defined
+- [ ] MilestoneThresholds array with 10 values
 - [ ] MaxSkills = 5, MaxSkillLevel = 5
-- [ ] Alle effect values matcher spec
-- [ ] GetOperationTier helper metode
-- [ ] Build succeeds med 0 errors
+- [ ] All effect values match spec
+- [ ] GetOperationTier helper method
+- [ ] Build succeeds with 0 errors
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
-- [ ] **Balance**: Alle tal matcher SKILL_SYSTEM_SPECIFICATION.md
-- [ ] **Kategorisering**: Skills korrekt grupperet
-- [ ] **Naming**: Konsistente skill IDs (snake_case)
+- [ ] **Balance**: All numbers match SKILL_SYSTEM_SPECIFICATION.md
+- [ ] **Categorization**: Skills correctly grouped
+- [ ] **Naming**: Consistent skill IDs (snake_case)
 
 ---
 
@@ -349,5 +349,5 @@ Forventet: 0 errors
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-018)
+**Task Status**: BLOCKED (waiting for TASK-018)
 **Last Updated**: 2024-12-25

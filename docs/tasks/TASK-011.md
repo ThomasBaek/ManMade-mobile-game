@@ -3,53 +3,53 @@
 ## Metadata
 - **Phase**: 3 - Gameplay
 - **Dependencies**: TASK-010
-- **Estimated Time**: 1 time
+- **Estimated Time**: 1 hour
 - **Status**: BLOCKED
 - **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Verificer at hele game loop fungerer korrekt på emulator.
+Verify that the entire game loop works correctly on emulator.
 
-**Test Scenarler:**
+**Test Scenarios:**
 
-1. **Ny Spil Start**
+1. **New Game Start**
    - Cash: $0
    - Pickpocket: Level 1, $1/s
-   - Andre: Locked
+   - Others: Locked
 
-2. **Cash Generering**
-   - Cash stiger med ~$1/s
-   - Display opdateres smooth
+2. **Cash Generation**
+   - Cash increases by ~$1/s
+   - Display updates smoothly
 
-3. **Første Upgrade**
-   - Efter ~14 sek: $14 cash
-   - Kan købe Pickpocket Lvl 2 ($14)
-   - Income øges til $2/s
+3. **First Upgrade**
+   - After ~14 sec: $14 cash
+   - Can buy Pickpocket Lvl 2 ($14)
+   - Income increases to $2/s
 
-4. **Første Unlock**
-   - Efter ~50 cash: Kan købe Car Theft
-   - Income øges til $6/s
+4. **First Unlock**
+   - After ~50 cash: Can buy Car Theft
+   - Income increases to $6/s
 
-5. **Alle Operations**
-   - Verificer alle 5 kan unlocks
-   - Verificer upgrade costs stiger
+5. **All Operations**
+   - Verify all 5 can unlock
+   - Verify upgrade costs increase
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] App starter uden crash
-- [ ] Cash ticker opdaterer kontinuerligt
-- [ ] Kan købe upgrades
-- [ ] Kan unlocke nye operations
-- [ ] Knap farver ændrer sig baseret på affordability
-- [ ] Ingen UI lag eller stuttering
+- [ ] App starts without crash
+- [ ] Cash ticker updates continuously
+- [ ] Can buy upgrades
+- [ ] Can unlock new operations
+- [ ] Button colors change based on affordability
+- [ ] No UI lag or stuttering
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-010)
+**Task Status**: BLOCKED (waiting for TASK-010)
 **Last Updated**: 2024-12-25

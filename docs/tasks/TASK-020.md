@@ -10,36 +10,36 @@
 
 ---
 
-## Formål
+## Purpose
 
-Implementer beregningslogik for alle skill effects.
+Implement calculation logic for all skill effects.
 
-**Hvorfor dette er vigtigt:**
-- Centraliseret beregning af alle skill multipliers
-- Korrekt formel for hver effect type
-- Genbrugeligt på tværs af GameEngine
+**Why this is important:**
+- Centralized calculation of all skill multipliers
+- Correct formula for each effect type
+- Reusable across GameEngine
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### SkillCalculator.cs
-**Placering**: `Services/SkillCalculator.cs`
+**Location**: `Services/SkillCalculator.cs`
 
-Beregner:
+Calculates:
 - Multiplier: `1.0 + (level × effectPerLevel / 100)`
 - Reduction: `1.0 - (level × effectPerLevel / 100)`
 - FlatBonus: `level × effectPerLevel`
-- Chance: `level × effectPerLevel` (som procent)
-- Duration: `level × effectPerLevel` (som timer)
+- Chance: `level × effectPerLevel` (as percent)
+- Duration: `level × effectPerLevel` (as hours)
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret SkillCalculator.cs
+### Step 1: Create SkillCalculator.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Services/SkillCalculator.cs`
+**Path**: `src/MadeMan.IdleEmpire/Services/SkillCalculator.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.Models;
@@ -49,7 +49,7 @@ namespace MadeMan.IdleEmpire.Services;
 public static class SkillCalculator
 {
     /// <summary>
-    /// Beregn multiplier for en skill (1.0 + bonus)
+    /// Calculate multiplier for a skill (1.0 + bonus)
     /// </summary>
     public static double GetMultiplier(SkillDefinition skill, int level)
     {
@@ -58,7 +58,7 @@ public static class SkillCalculator
     }
 
     /// <summary>
-    /// Beregn reduction for en skill (1.0 - reduction)
+    /// Calculate reduction for a skill (1.0 - reduction)
     /// </summary>
     public static double GetReduction(SkillDefinition skill, int level)
     {
@@ -67,7 +67,7 @@ public static class SkillCalculator
     }
 
     /// <summary>
-    /// Beregn flat bonus for en skill
+    /// Calculate flat bonus for a skill
     /// </summary>
     public static double GetFlatBonus(SkillDefinition skill, int level)
     {
@@ -76,7 +76,7 @@ public static class SkillCalculator
     }
 
     /// <summary>
-    /// Beregn chance procent for en skill (0-100)
+    /// Calculate chance percent for a skill (0-100)
     /// </summary>
     public static double GetChancePercent(SkillDefinition skill, int level)
     {
@@ -85,7 +85,7 @@ public static class SkillCalculator
     }
 
     /// <summary>
-    /// Beregn duration bonus i timer
+    /// Calculate duration bonus in hours
     /// </summary>
     public static double GetDurationHours(SkillDefinition skill, int level)
     {
@@ -94,7 +94,7 @@ public static class SkillCalculator
     }
 
     /// <summary>
-    /// Beregn Compound Interest multiplier baseret på session tid
+    /// Calculate Compound Interest multiplier based on session time
     /// </summary>
     public static double GetCompoundInterestMultiplier(int skillLevel, DateTime sessionStart)
     {
@@ -143,22 +143,22 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 
 ## Acceptance Criteria
 
-- [ ] GetMultiplier beregner korrekt
-- [ ] GetReduction beregner korrekt
-- [ ] GetFlatBonus beregner korrekt
-- [ ] GetChancePercent beregner korrekt
-- [ ] GetDurationHours beregner korrekt
-- [ ] GetCompoundInterestMultiplier med session tid og max 6 intervals
-- [ ] RollLuckyBreak med Random
-- [ ] Build succeeds med 0 errors
+- [ ] GetMultiplier calculates correctly
+- [ ] GetReduction calculates correctly
+- [ ] GetFlatBonus calculates correctly
+- [ ] GetChancePercent calculates correctly
+- [ ] GetDurationHours calculates correctly
+- [ ] GetCompoundInterestMultiplier with session time and max 6 intervals
+- [ ] RollLuckyBreak with Random
+- [ ] Build succeeds with 0 errors
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
-- [ ] **Pure functions**: Ingen side effects
+- [ ] **Pure functions**: No side effects
 - [ ] **Guard clauses**: Level <= 0 checks
-- [ ] **Static class**: Ingen state, kun beregninger
+- [ ] **Static class**: No state, only calculations
 
 ---
 
@@ -169,5 +169,5 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-019)
+**Task Status**: BLOCKED (waiting for TASK-019)
 **Last Updated**: 2024-12-25

@@ -4,52 +4,52 @@
 - **Phase**: 2 - UI
 - **Dependencies**: TASK-005
 - **Estimated Time**: 30 min
-- **Status**: BLOCKED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 405-418)
+- **Status**: COMPLETED
+- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (line 405-418)
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Opdater Colors.xaml med game-specific farver og opret Theme.xaml.
+Update Colors.xaml with game-specific colors and create Theme.xaml.
 
-**Hvorfor dette er vigtigt:**
-- Konsistent visuelt udtryk
-- Mørk mafia-æstetik
-- Nemt at ændre farver ét sted
+**Why this is important:**
+- Consistent visual expression
+- Dark mafia aesthetic
+- Easy to change colors in one place
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
+### Potential Issues
 1. **StaticResource Not Found**:
-   - Edge case: Typo i resource key
+   - Edge case: Typo in resource key
    - Impact: Runtime exception
 
-### Mitigering
-- Brug copy-paste for resource keys
-- Test alle farver i UI
+### Mitigation
+- Use copy-paste for resource keys
+- Test all colors in UI
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
-### 1. Opdater Colors.xaml
-**Placering**: `Resources/Styles/Colors.xaml`
-- Erstat default MAUI farver med game palette
+### 1. Update Colors.xaml
+**Location**: `Resources/Styles/Colors.xaml`
+- Replace default MAUI colors with game palette
 
-### 2. Opret Theme.xaml (valgfrit)
-Kan inkluderes i Colors.xaml for simplicitet
+### 2. Create Theme.xaml (optional)
+Can be included in Colors.xaml for simplicity
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opdater Colors.xaml
+### Step 1: Update Colors.xaml
 
-**Sti**: `src/MadeMan.IdleEmpire/Resources/Styles/Colors.xaml`
+**Path**: `src/MadeMan.IdleEmpire/Resources/Styles/Colors.xaml`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -109,34 +109,34 @@ Kan inkluderes i Colors.xaml for simplicitet
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
-### 2. Visual Test (i TASK-009)
-- Background vises som #1A1A2E
-- Primary vises som #E94560
+### 2. Visual Test (in TASK-009)
+- Background displays as #1A1A2E
+- Primary displays as #E94560
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] Colors.xaml opdateret med game farver
-- [ ] Alle 11 game-specific farver defineret
-- [ ] Brushes for hovedfarver
-- [ ] Build succeeds med 0 errors
+- [x] Colors.xaml updated with game colors
+- [x] All 11 game-specific colors defined
+- [x] Brushes for main colors
+- [x] Build succeeds with 0 errors
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
-- [ ] **Navngivning**: Beskrivende color keys
-- [ ] **Konsistens**: Alle farver bruger hex format
+- [x] **Naming**: Descriptive color keys
+- [x] **Consistency**: All colors use hex format
 
 ---
 
 ## Color Reference
 
-| Key | Hex | Brug |
-|-----|-----|------|
+| Key | Hex | Usage |
+|-----|-----|-------|
 | Background | #1A1A2E | Page background |
 | Surface | #16213E | Cards, panels |
 | SurfaceLight | #1F2B47 | Elevated elements |

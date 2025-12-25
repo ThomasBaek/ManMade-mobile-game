@@ -10,48 +10,48 @@
 
 ---
 
-## Formål
+## Purpose
 
-Verificer at prestige system fungerer korrekt.
+Verify that the prestige system works correctly.
 
-**Test Scenarler:**
+**Test Scenarios:**
 
 1. **Prestige Panel Visibility**
-   - Ikke synlig ved start
-   - Synlig når TotalEarned >= $10,000
+   - Not visible at start
+   - Visible when TotalEarned >= $10,000
 
 2. **Prestige Execution**
-   - Cash reset til $0
-   - TotalEarned reset til $0
+   - Cash reset to $0
+   - TotalEarned reset to $0
    - PrestigeCount +1
    - PrestigeBonus +0.25
 
 3. **Post-Prestige State**
-   - Kun Pickpocket unlocked
+   - Only Pickpocket unlocked
    - Income = BaseIncome * 1.25
-   - Andre operations locked igen
+   - Other operations locked again
 
 4. **Multiple Prestiges**
    - 2nd prestige: PrestigeBonus = 1.50
-   - Income scales korrekt
+   - Income scales correctly
 
 ---
 
 ## Quick Test Method
 
-For hurtigere test, kan GameConfig.PrestigeThreshold midlertidigt sættes til 100.
+For faster testing, GameConfig.PrestigeThreshold can temporarily be set to 100.
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] Prestige panel vises ved threshold
-- [ ] Prestige resetter state korrekt
-- [ ] PrestigeBonus øges
-- [ ] Income scales med bonus
-- [ ] UI opdateres efter prestige
+- [ ] Prestige panel shows at threshold
+- [ ] Prestige resets state correctly
+- [ ] PrestigeBonus increases
+- [ ] Income scales with bonus
+- [ ] UI updates after prestige
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-011)
+**Task Status**: BLOCKED (waiting for TASK-011)
 **Last Updated**: 2024-12-25

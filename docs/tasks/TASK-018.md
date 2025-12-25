@@ -10,64 +10,64 @@
 
 ---
 
-## Formål
+## Purpose
 
-Opret data models for skill systemet og udvid GameState.
+Create data models for the skill system and extend GameState.
 
-**Hvorfor dette er vigtigt:**
-- Skills er fundamentet for hele skill systemet
-- GameState skal kunne holde skill data
-- Korrekte models sikrer nem serialisering
+**Why this is important:**
+- Skills are the foundation for the entire skill system
+- GameState needs to be able to hold skill data
+- Correct models ensure easy serialization
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
+### Potential Issues
 1. **Serialization**:
-   - Edge case: Nested objekter i JSON
-   - Impact: Save/load fejler
+   - Edge case: Nested objects in JSON
+   - Impact: Save/load errors
 
-### Mitigering
-- Brug simple typer
-- Test serialisering tidligt
+### Mitigation
+- Use simple types
+- Test serialization early
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### 1. Skill.cs
-**Placering**: `Models/Skill.cs`
+**Location**: `Models/Skill.cs`
 
-Indeholder:
+Contains:
 - `SkillDefinition` - Static skill data (id, name, effect, etc.)
 - `SkillState` - Player's skill instance (id, level)
 
-### 2. GameState.cs (udvid)
-**Ændringer:**
-- Tilføj `List<SkillState> Skills`
-- Tilføj `int MilestoneCount`
-- Tilføj `DateTime SessionStartUtc`
+### 2. GameState.cs (extend)
+**Changes:**
+- Add `List<SkillState> Skills`
+- Add `int MilestoneCount`
+- Add `DateTime SessionStartUtc`
 
 ---
 
 ## Dependencies Check
 
-**Krævet Før Start**:
-- [x] TASK-002 completed (Models eksisterer)
+**Required Before Start**:
+- [x] TASK-002 completed (Models exist)
 
-**Antagelser**:
-- System.Text.Json bruges til serialisering
+**Assumptions**:
+- System.Text.Json is used for serialization
 
-**Blockers**: Ingen
+**Blockers**: None
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret Skill.cs
+### Step 1: Create Skill.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Models/Skill.cs`
+**Path**: `src/MadeMan.IdleEmpire/Models/Skill.cs`
 
 ```csharp
 namespace MadeMan.IdleEmpire.Models;
@@ -82,11 +82,11 @@ public enum SkillCategory
 
 public enum SkillEffectType
 {
-    Multiplier,      // Multiplicer værdi (1.0 + bonus)
-    Reduction,       // Reducer værdi (1.0 - bonus)
-    FlatBonus,       // Addér flat værdi
-    Chance,          // Procentvis chance
-    Duration         // Tid i timer/minutter
+    Multiplier,      // Multiply value (1.0 + bonus)
+    Reduction,       // Reduce value (1.0 - bonus)
+    FlatBonus,       // Add flat value
+    Chance,          // Percentage chance
+    Duration         // Time in hours/minutes
 }
 
 public class SkillDefinition
@@ -116,11 +116,11 @@ public class SkillState
 }
 ```
 
-### Step 2: Udvid GameState.cs
+### Step 2: Extend GameState.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Models/GameState.cs`
+**Path**: `src/MadeMan.IdleEmpire/Models/GameState.cs`
 
-Tilføj felter:
+Add fields:
 
 ```csharp
 // Skills
@@ -139,48 +139,48 @@ public DateTime SessionStartUtc { get; set; } = DateTime.UtcNow;
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. Serialization Test (conceptual)
-- GameState med skills kan serialiseres til JSON
-- JSON kan deserialiseres tilbage til GameState
+- GameState with skills can be serialized to JSON
+- JSON can be deserialized back to GameState
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] SkillDefinition class oprettet med alle properties
-- [ ] SkillState class oprettet
-- [ ] SkillCategory enum oprettet
-- [ ] SkillEffectType enum oprettet
-- [ ] GameState udvidet med Skills, MilestoneCount, SessionStartUtc
-- [ ] Build succeeds med 0 errors
+- [ ] SkillDefinition class created with all properties
+- [ ] SkillState class created
+- [ ] SkillCategory enum created
+- [ ] SkillEffectType enum created
+- [ ] GameState extended with Skills, MilestoneCount, SessionStartUtc
+- [ ] Build succeeds with 0 errors
 
 ---
 
-## Kode Evaluering
+## Code Evaluation
 
-### Simplifikations-tjek
-- **Simple typer**: Alle properties er primitives eller simple collections
-- **Ingen logik**: Models er pure data containers
-- **Enum categories**: Nemt at gruppere og filtrere
+### Simplification Check
+- **Simple types**: All properties are primitives or simple collections
+- **No logic**: Models are pure data containers
+- **Enum categories**: Easy to group and filter
 
-### Alternativer overvejet
+### Alternatives Considered
 
-**Alternativ: Inheritance for skill types**
+**Alternative: Inheritance for skill types**
 ```csharp
 public abstract class SkillDefinition { }
 public class IncomeSkill : SkillDefinition { }
 ```
-**Hvorfor fravalgt**: Over-engineering, alle skills har samme struktur
+**Why rejected**: Over-engineering, all skills have the same structure
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
-- [ ] **KISS**: Simpleste data struktur
-- [ ] **Serializable**: Alle typer JSON-venlige
-- [ ] **Nullable**: TargetOperationId og TargetTier er nullable for fleksibilitet
+- [ ] **KISS**: Simplest data structure
+- [ ] **Serializable**: All types are JSON-friendly
+- [ ] **Nullable**: TargetOperationId and TargetTier are nullable for flexibility
 
 ---
 
@@ -193,11 +193,11 @@ public class IncomeSkill : SkillDefinition { }
 
 ## Notes
 
-- SkillDefinition er immutable (defineres i SkillConfig)
-- SkillState er mutable (spillerens progression)
-- SessionStartUtc resettes ved app start og prestige
+- SkillDefinition is immutable (defined in SkillConfig)
+- SkillState is mutable (player's progression)
+- SessionStartUtc resets on app start and prestige
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-006 completion for workflow)
+**Task Status**: BLOCKED (waiting for TASK-006 completion for workflow)
 **Last Updated**: 2024-12-25

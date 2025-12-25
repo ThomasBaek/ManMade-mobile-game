@@ -4,57 +4,57 @@
 - **Phase**: 2 - UI
 - **Dependencies**: TASK-006
 - **Estimated Time**: 45 min
-- **Status**: BLOCKED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 714-783)
+- **Status**: COMPLETED
+- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (line 714-783)
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Implementer OperationViewModel - ViewModel for hver enkelt operation i UI.
+Implement OperationViewModel - ViewModel for each individual operation in UI.
 
-**Hvorfor dette er vigtigt:**
-- Separerer presentation fra game logic
-- Håndterer display formatting
-- Knap states og farver
+**Why this is important:**
+- Separates presentation from game logic
+- Handles display formatting
+- Button states and colors
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
+### Potential Issues
 1. **Stale Data**:
-   - Edge case: ViewModel ikke opdateret efter state change
-   - Impact: UI viser forkert data
+   - Edge case: ViewModel not updated after state change
+   - Impact: UI shows incorrect data
 
-### Mitigering
-- Refresh() metode kaldes fra MainViewModel
-- ObservableProperty for reaktiv UI
+### Mitigation
+- Refresh() method called from MainViewModel
+- ObservableProperty for reactive UI
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### OperationViewModel.cs
-**Placering**: `ViewModels/OperationViewModel.cs`
+**Location**: `ViewModels/OperationViewModel.cs`
 
 **Properties:**
-- Name, Icon (fra Operation)
-- LevelDisplay, IncomeDisplay (formateret)
+- Name, Icon (from Operation)
+- LevelDisplay, IncomeDisplay (formatted)
 - ButtonText, ButtonColor (state-dependent)
 - IsUnlocked (binding helper)
 
 **Commands:**
-- TapCommand - Unlock eller upgrade
+- TapCommand - Unlock or upgrade
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret OperationViewModel.cs
+### Step 1: Create OperationViewModel.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/ViewModels/OperationViewModel.cs`
+**Path**: `src/MadeMan.IdleEmpire/ViewModels/OperationViewModel.cs`
 
 ```csharp
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -141,7 +141,7 @@ public partial class OperationViewModel : ObservableObject
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. Conceptual Test
 - Locked operation: LevelDisplay = "LOCKED"
@@ -152,33 +152,34 @@ Forventet: 0 errors
 
 ## Acceptance Criteria
 
-- [ ] OperationViewModel.cs oprettet
-- [ ] [ObservableProperty] på alle bindable properties
-- [ ] [RelayCommand] på Tap
-- [ ] Refresh() opdaterer alle properties
-- [ ] Build succeeds med 0 errors
+- [x] OperationViewModel.cs created
+- [x] [ObservableProperty] on all bindable properties
+- [x] [RelayCommand] on Tap
+- [x] Refresh() updates all properties
+- [x] Build succeeds with 0 errors
 
 ---
 
-## Kode Evaluering
+## Code Evaluation
 
-### Simplifikations-tjek
-- **Ingen computed bindings**: Alt opdateres via Refresh()
+### Simplification Check
+- **No computed bindings**: Everything updates via Refresh()
 - **Simple color logic**: Hardcoded hex values
-- **Direkte engine access**: Ingen abstraktion lag
+- **Direct engine access**: No abstraction layer
 
-### Kendte begrænsninger
-- Farver er hardcoded (ikke fra resources)
-- Acceptabelt for MVP
+### Known Limitations
+- Colors are hardcoded (not from resources)
+- Acceptable for MVP
 
 ---
 
 ## Design Files Reference
 
-- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 714-783)
+- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (line 714-783)
 - **Related Tasks**: TASK-006, TASK-008
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-006)
+**Task Status**: COMPLETED
 **Last Updated**: 2024-12-25
+**Commit**: 01bd4f0

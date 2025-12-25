@@ -3,49 +3,49 @@
 ## Metadata
 - **Phase**: 5 - Polish
 - **Dependencies**: TASK-014
-- **Estimated Time**: 1 time
+- **Estimated Time**: 1 hour
 - **Status**: BLOCKED
 - **Design Reference**: N/A
-- **Requires Design Input**: YES (feedback baseret)
+- **Requires Design Input**: YES (feedback based)
 
 ---
 
-## Formål
+## Purpose
 
-Polér UI baseret på test feedback.
+Polish UI based on test feedback.
 
-**Potentielle Forbedringer:**
+**Potential Improvements:**
 
 1. **Visual Polish**
-   - Spacing justeringer
-   - Font størrelse tweaks
+   - Spacing adjustments
+   - Font size tweaks
    - Shadow/elevation
 
-2. **UX Forbedringer**
+2. **UX Improvements**
    - Loading state
    - Tap feedback
    - Scroll behavior
 
 3. **Edge Cases**
-   - Lange tal formatting
-   - Små skærme
+   - Long number formatting
+   - Small screens
    - Landscape mode (disable?)
 
 ---
 
 ## Implementation
 
-Afhænger af test feedback fra TASK-011 til TASK-014.
+Depends on test feedback from TASK-011 to TASK-014.
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] Identificerede UI issues fixet
+- [ ] Identified UI issues fixed
 - [ ] Smooth performance
-- [ ] Ingen visual glitches
+- [ ] No visual glitches
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-014)
+**Task Status**: BLOCKED (waiting for TASK-014)
 **Last Updated**: 2024-12-25

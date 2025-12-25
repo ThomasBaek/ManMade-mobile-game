@@ -1,80 +1,80 @@
 # CLAUDE.md - Made Man: Idle Empire
 
-## Projekt Oversigt
-Dette er et **idle/incremental mobile game** bygget med .NET MAUI.
-Spilleren bygger et kriminelt imperium i 1930'ernes New Porto.
+## Project Overview
+This is an **idle/incremental mobile game** built with .NET MAUI.
+The player builds a criminal empire in 1930s New Porto.
 
-**Genre:** Idle / Incremental Game (Cookie Clicker-stil)
-**Tema:** 1930'er Mafia / Noir
+**Genre:** Idle / Incremental Game (Cookie Clicker-style)
+**Theme:** 1930s Mafia / Noir
 **Inspiration:** Omerta (browser game), Adventure Capitalist
 
 ## Tech Stack
-| Komponent | Teknologi |
-|-----------|-----------|
+| Component | Technology |
+|-----------|------------|
 | Framework | .NET 10 MAUI |
-| Sprog | C# |
+| Language | C# |
 | UI | XAML |
-| Pattern | MVVM med CommunityToolkit.Mvvm |
+| Pattern | MVVM with CommunityToolkit.Mvvm |
 | Storage | Preferences API (JSON) |
 | Target | Android 8.0+ (API 26) |
 
-## Projekt Struktur
+## Project Structure
 ```
 MadeMan.IdleEmpire/
 ├── Models/
-│   ├── GameState.cs        # Spillets tilstand (cash, prestige, operations)
+│   ├── GameState.cs        # Game state (cash, prestige, operations)
 │   ├── Operation.cs        # Unified crime/business model
-│   └── GameConfig.cs       # Alle balance-konstanter
+│   └── GameConfig.cs       # All balance constants
 ├── ViewModels/
-│   ├── MainViewModel.cs    # Hoved ViewModel med game loop
-│   └── OperationViewModel.cs # ViewModel for hver operation
+│   ├── MainViewModel.cs    # Main ViewModel with game loop
+│   └── OperationViewModel.cs # ViewModel for each operation
 ├── Views/
-│   └── MainPage.xaml       # ENESTE side - alt gameplay
+│   └── MainPage.xaml       # ONLY page - all gameplay
 ├── Services/
 │   ├── IGameEngine.cs      # Interface for game logic
 │   ├── GameEngine.cs       # Core tick logic, unlock, upgrade
-│   └── SaveManager.cs      # Gem/hent til Preferences
+│   └── SaveManager.cs      # Save/load to Preferences
 └── Resources/
     ├── Styles/
-    │   └── Theme.xaml      # Farver og styles
+    │   └── Theme.xaml      # Colors and styles
     └── Images/
-        └── *.png           # Ikoner
+        └── *.png           # Icons
 ```
 
-## Kode Konventioner
-- **Navngivning:** PascalCase for public, _camelCase for private fields
-- **Properties:** Brug [ObservableProperty] fra CommunityToolkit.Mvvm
-- **Commands:** Brug [RelayCommand] attribut
-- **DI:** Registrer alle services som Singleton i MauiProgram.cs
-- **Async:** Brug async/await for I/O operationer
+## Code Conventions
+- **Naming:** PascalCase for public, _camelCase for private fields
+- **Properties:** Use [ObservableProperty] from CommunityToolkit.Mvvm
+- **Commands:** Use [RelayCommand] attribute
+- **DI:** Register all services as Singleton in MauiProgram.cs
+- **Async:** Use async/await for I/O operations
 
 ## Core Gameplay Loop
 ```
-START → Cash genereres automatisk ($/sek)
-      → Brug cash til Upgrade eller Unlock
-      → Income stiger
-      → Ved $10,000 total: Prestige mulighed
-      → Reset med +25% permanent bonus
-      → Gentag hurtigere
+START → Cash generates automatically ($/sec)
+      → Use cash for Upgrade or Unlock
+      → Income increases
+      → At $10,000 total: Prestige option
+      → Reset with +25% permanent bonus
+      → Repeat faster
 ```
 
-## Vigtige Tal (Balance)
+## Key Numbers (Balance)
 | Operation | Base Income | Unlock Cost |
 |-----------|-------------|-------------|
-| Pickpocket | $1/s | GRATIS (starter) |
+| Pickpocket | $1/s | FREE (starter) |
 | Car Theft | $4/s | $50 |
 | Burglary | $15/s | $250 |
 | Speakeasy | $50/s | $1,000 |
 | Casino | $200/s | $5,000 |
 
-**Prestige:** Ved $10,000 total earned → +25% permanent multiplier
+**Prestige:** At $10,000 total earned → +25% permanent multiplier
 
-## Build Kommandoer
+## Build Commands
 ```bash
-# Build til Android
+# Build for Android
 dotnet build -f net10.0-android
 
-# Kør på emulator (emulator skal køre først)
+# Run on emulator (emulator must be running first)
 dotnet build -f net10.0-android -t:Run
 
 # Clean build
@@ -84,131 +84,131 @@ dotnet clean && dotnet build -f net10.0-android
 dotnet publish -f net10.0-android -c Release
 ```
 
-## Implementerings Rækkefølge
+## Implementation Order
 1. **Models** - GameState.cs, Operation.cs, GameConfig.cs
 2. **Services** - SaveManager.cs, IGameEngine.cs, GameEngine.cs
 3. **ViewModels** - OperationViewModel.cs, MainViewModel.cs
-4. **Resources** - Theme.xaml (farver)
-5. **Views** - MainPage.xaml (redesign fra scratch)
+4. **Resources** - Theme.xaml (colors)
+5. **Views** - MainPage.xaml (redesign from scratch)
 6. **DI Setup** - MauiProgram.cs
 7. **Lifecycle** - App.xaml.cs (save on sleep)
-8. **Test** - Kør på emulator
+8. **Test** - Run on emulator
 
 ## Status Checklist
-- [x] Projekt oprettet
-- [x] NuGet packages installeret (TASK-001) ✅
-- [x] Mappestruktur klar
-- [x] Models implementeret (TASK-002) ✅
-- [x] Services implementeret (TASK-003, TASK-004) ✅
-- [ ] DI & Lifecycle setup (TASK-005)
-- [ ] Theme/farver sat op (TASK-006)
-- [ ] ViewModels implementeret (TASK-007, TASK-008)
-- [ ] UI implementeret (TASK-009)
-- [ ] Ikoner tilføjet (TASK-010)
+- [x] Project created
+- [x] NuGet packages installed (TASK-001) ✅
+- [x] Directory structure ready
+- [x] Models implemented (TASK-002) ✅
+- [x] Services implemented (TASK-003, TASK-004) ✅
+- [x] DI & Lifecycle setup (TASK-005) ✅
+- [x] Theme/colors set up (TASK-006) ✅
+- [ ] ViewModels implemented (TASK-007, TASK-008)
+- [ ] UI implemented (TASK-009)
+- [ ] Icons added (TASK-010)
 - [ ] Game loop test (TASK-011)
 - [ ] Prestige test (TASK-012)
 - [ ] Save/Load test (TASK-013)
 - [ ] Offline earnings test (TASK-014)
 
-**Næste task:** TASK-005 (Setup DI & Lifecycle)
+**Next task:** TASK-007 (OperationViewModel)
 
-## Farve Palette
+## Color Palette
 ```
-Background:    #1A1A2E (mørk blå)
-Surface:       #16213E (lidt lysere)
-Primary:       #E94560 (rød accent)
-Gold:          #FFD700 (cash farve)
-Success:       #4ADE80 (grøn - kan købe)
-Locked:        #4A5568 (grå - kan ikke købe)
+Background:    #1A1A2E (dark blue)
+Surface:       #16213E (slightly lighter)
+Primary:       #E94560 (red accent)
+Gold:          #FFD700 (cash color)
+Success:       #4ADE80 (green - can afford)
+Locked:        #4A5568 (gray - can't afford)
 TextPrimary:   #FFFFFF
 TextSecondary: #8892A0
 ```
 
-## Fejlfinding
+## Troubleshooting
 
-### Build fejler
+### Build fails
 ```bash
 dotnet clean
 dotnet restore
 dotnet build -f net10.0-android
 ```
 
-### Emulator ikke fundet
+### Emulator not found
 ```bash
 # List devices
 adb devices
 
-# Hvis tom, start emulator fra Android Studio
-# eller: emulator -list-avds && emulator -avd <navn>
+# If empty, start emulator from Android Studio
+# or: emulator -list-avds && emulator -avd <name>
 ```
 
-### Hot Reload virker ikke
-Genstart appen helt: `dotnet build -f net8.0-android -t:Run`
+### Hot Reload not working
+Restart the app completely: `dotnet build -f net10.0-android -t:Run`
 
-## Design Dokumenter
-Se projektets andre markdown filer for:
-- **GAME_DESIGN_DOCUMENT.md** - Lore, regler, fremtidige features
-- **CLAUDE_CODE_IMPLEMENTATION_GUIDE.md** - Detaljeret kode spec
-- **MVP_Specification_MAUI.md** - Original teknisk spec
+## Design Documents
+See other markdown files in the project for:
+- **GAME_DESIGN_DOCUMENT.md** - Lore, rules, future features
+- **CLAUDE_CODE_IMPLEMENTATION_GUIDE.md** - Detailed code spec
+- **MVP_Specification_MAUI.md** - Original technical spec
 
 ---
 
 ## Task Workflow (Claude Code)
 
-### Kommandoer
+### Commands
 
-| Kommando | Beskrivelse |
-|----------|-------------|
-| `Start TASK-XXX` | Start specifik task |
-| `Godkend TASK-XXX` | Godkend og commit færdig task |
-| `Aendr TASK-XXX: [beskrivelse]` | Bed om ændringer |
-| `Status` | Få overblik over nuværende state |
-| `Naeste` | Hvad er næste task? |
+| Command | Description |
+|---------|-------------|
+| `Start TASK-XXX` | Start specific task |
+| `Approve TASK-XXX` | Approve and commit completed task |
+| `Change TASK-XXX: [description]` | Request changes |
+| `Status` | Get overview of current state |
+| `Next` | What's the next task? |
 
 ### Task Flow
 
-**1. Bruger siger:** `Start TASK-XXX`
+**1. User says:** `Start TASK-XXX`
 
-**2. Claude implementerer:**
-- Læser task specifikation
-- Implementerer koden
-- Stiller spørgsmål hvis nødvendigt
+**2. Claude implements:**
+- Reads task specification
+- Implements the code
+- Asks questions if necessary
 
-**3. Claude tester INDEN færdigmelding:**
-- Kører `dotnet build -f net10.0-android`
-- Verificerer 0 errors, 0 warnings
-- Code review mod task specifikation
-- Tjekker at alle acceptance criteria er opfyldt
+**3. Claude tests BEFORE completion:**
+- Runs `dotnet build -f net10.0-android`
+- Verifies 0 errors, 0 warnings
+- Code review against task specification
+- Checks that all acceptance criteria are met
 
-**4. Claude præsenterer for review (STOPPER HER - INGEN COMMIT):**
-- Hvad er implementeret (filer, metoder)
-- Test resultater (build output)
-- Code review mod spec
-- **Hvad bruger skal teste** (konkrete test instruktioner)
-- Venter på godkendelse
+**4. Claude presents for review (STOPS HERE - NO COMMIT):**
+- What is implemented (files, methods)
+- Test results (build output)
+- Code review against spec
+- **What user should test** (concrete test instructions)
+- Waits for approval
 
-**5. Bruger tester:**
-- Kører tests/build selv
-- Code review i IDE
-- Emulator test (hvis UI)
+**5. User tests:**
+- Runs tests/build themselves
+- Code review in IDE
+- Emulator test (if UI)
 
-**6. Bruger godkender:** `Godkend TASK-XXX`
+**6. User approves:** `Approve TASK-XXX`
 
-**7. FØRST NU committer Claude:**
-- Git commit med task ID
-- Opdaterer TASK-XXX.md (status: COMPLETED)
-- Opdaterer TASKS.md (næste task READY)
-- Opdaterer STATE.md
-- Melder næste task klar
+**7. ONLY NOW Claude commits:**
+- Git commit with task ID
+- Updates TASK-XXX.md (status: COMPLETED)
+- Updates TASKS.md (next task READY)
+- Updates STATE.md
+- Reports next task ready
 
-### Projekt Management Filer
+### Project Management Files
 ```
 docs/
-├── PLAN.md           # Arkitektur + roadmap
-├── TASKS.md          # Task oversigt med status
-├── STATE.md          # Nuværende projekt status
-├── NOTES.md          # Scratchpad til noter
-└── tasks/            # Individuelle task-filer
+├── PLAN.md           # Architecture + roadmap
+├── TASKS.md          # Task overview with status
+├── STATE.md          # Current project status
+├── NOTES.md          # Scratchpad for notes
+└── tasks/            # Individual task files
     ├── TASK-001.md
     ├── TASK-002.md
     └── ...
@@ -216,15 +216,15 @@ docs/
 
 ---
 
-## Code Principper
+## Code Principles
 
 ### KISS
-- Simpleste løsning der virker
-- Ingen over-engineering
+- Simplest solution that works
+- No over-engineering
 
 ### YAGNI
-- Kun det nødvendige NU
-- Ingen spekulative features
+- Only what's needed NOW
+- No speculative features
 
 ### SOLID
 - Single Responsibility
@@ -237,25 +237,25 @@ docs/
 
 ## Git Commit Convention
 ```
-[TASK-XXX]: Kort beskrivelse
+[TASK-XXX]: Short description
 
-- Detalje 1
-- Detalje 2
+- Detail 1
+- Detail 2
 ```
 
 ---
 
-## Kvalitetskrav Før Task Godkendelse
+## Quality Requirements Before Task Approval
 1. `dotnet build -f net10.0-android` succeeds
-2. Ingen nye warnings
-3. Manuel test i emulator (hvis UI)
-4. Alle acceptance criteria opfyldt
-5. Kode evaluering udfyldt i task fil
+2. No new warnings
+3. Manual test in emulator (if UI)
+4. All acceptance criteria met
+5. Code evaluation filled in task file
 
 ---
 
-## Kontakt / Notes
-- Primært mål: Fungerende MVP på Android
-- Sekundært: iOS support (senere)
-- Fokus: Simpelt men engagerende gameplay
-- Ingen server/backend i MVP
+## Contact / Notes
+- Primary goal: Working MVP on Android
+- Secondary: iOS support (later)
+- Focus: Simple but engaging gameplay
+- No server/backend in MVP

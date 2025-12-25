@@ -10,36 +10,36 @@
 
 ---
 
-## Formål
+## Purpose
 
-Implementer milestone trigger detection og skill selection pool logic.
+Implement milestone trigger detection and skill selection pool logic.
 
-**Hvorfor dette er vigtigt:**
-- Bestemmer hvornår spilleren får skill valg
-- Korrekt selection pool baseret på regler
-- Event til UI for at vise modal
+**Why this is important:**
+- Determines when player gets skill choices
+- Correct selection pool based on rules
+- Event to UI for showing modal
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What to Implement
 
 ### IMilestoneService.cs & MilestoneService.cs
-**Placering**: `Services/`
+**Location**: `Services/`
 
-Funktioner:
-- `CheckForMilestone()` - Check om ny milestone er nået
-- `GetNextMilestoneThreshold()` - Næste threshold
-- `GetMilestoneProgress()` - Progress mod næste (0-1)
-- `GetSelectionPool()` - Vælg 3 tilfældige skills
-- `OnMilestoneReached` - Event til UI
+Functions:
+- `CheckForMilestone()` - Check if new milestone is reached
+- `GetNextMilestoneThreshold()` - Next threshold
+- `GetMilestoneProgress()` - Progress towards next (0-1)
+- `GetSelectionPool()` - Select 3 random skills
+- `OnMilestoneReached` - Event to UI
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret IMilestoneService.cs
+### Step 1: Create IMilestoneService.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Services/IMilestoneService.cs`
+**Path**: `src/MadeMan.IdleEmpire/Services/IMilestoneService.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.Models;
@@ -58,9 +58,9 @@ public interface IMilestoneService
 }
 ```
 
-### Step 2: Opret MilestoneService.cs
+### Step 2: Create MilestoneService.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Services/MilestoneService.cs`
+**Path**: `src/MadeMan.IdleEmpire/Services/MilestoneService.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.Models;
@@ -180,25 +180,25 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 
 ## Acceptance Criteria
 
-- [ ] IMilestoneService interface oprettet
-- [ ] MilestoneService implementerer alle metoder
-- [ ] CheckForMilestone returnerer true/false korrekt
-- [ ] GetSelectionPool returnerer max 3 skills
-- [ ] Selection respekterer "5 skills = only upgrade" regel
-- [ ] OnMilestoneReached event fires korrekt
-- [ ] CompleteMilestone opdaterer state
-- [ ] Build succeeds med 0 errors
+- [ ] IMilestoneService interface created
+- [ ] MilestoneService implements all methods
+- [ ] CheckForMilestone returns true/false correctly
+- [ ] GetSelectionPool returns max 3 skills
+- [ ] Selection respects "5 skills = only upgrade" rule
+- [ ] OnMilestoneReached event fires correctly
+- [ ] CompleteMilestone updates state
+- [ ] Build succeeds with 0 errors
 
 ---
 
-## Edge Cases Håndteret
+## Edge Cases Handled
 
-- [ ] Færre end 3 skills tilgængelige → Vis færre
-- [ ] Ingen skills tilgængelige → Skip milestone
-- [ ] Spilleren har præcis 5 skills → Kun upgrades
-- [ ] MilestoneCount >= 10 → Ingen flere milestones
+- [ ] Fewer than 3 skills available → Show fewer
+- [ ] No skills available → Skip milestone
+- [ ] Player has exactly 5 skills → Only upgrades
+- [ ] MilestoneCount >= 10 → No more milestones
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-021)
+**Task Status**: BLOCKED (waiting for TASK-021)
 **Last Updated**: 2024-12-25

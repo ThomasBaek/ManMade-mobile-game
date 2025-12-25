@@ -5,78 +5,78 @@
 - **Dependencies**: TASK-001
 - **Estimated Time**: 45 min
 - **Status**: COMPLETED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 116-240)
+- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (lines 116-240)
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Implementer de tre core models: GameState, Operation, og GameConfig.
+Implement the three core models: GameState, Operation, and GameConfig.
 
-**Hvorfor dette er vigtigt:**
-- Models er datastrukturen for hele spillet
-- GameConfig indeholder alle balance-tal
-- Korrekte models er fundamentet for GameEngine
+**Why this is important:**
+- Models are the data structure for the entire game
+- GameConfig contains all balance numbers
+- Correct models are the foundation for GameEngine
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
+### Potential Problems
 1. **Serialization Issues**:
-   - Edge case: JSON serialization af nested objects
-   - Impact: Save/load fungerer ikke
+   - Edge case: JSON serialization of nested objects
+   - Impact: Save/load doesn't work
 
 2. **Calculation Errors**:
-   - Edge case: Math.Pow med negative tal
-   - Impact: Forkerte upgrade costs
+   - Edge case: Math.Pow with negative numbers
+   - Impact: Incorrect upgrade costs
 
-### Mitigering
-- Brug simple typer der serialiserer nemt
-- Tilføj guard clauses i beregninger
+### Mitigation
+- Use simple types that serialize easily
+- Add guard clauses in calculations
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What Needs to be Implemented
 
 ### 1. GameState.cs
-**Placering**: `Models/GameState.cs`
+**Location**: `Models/GameState.cs`
 - Core game state container
 - Cash, TotalEarned, PrestigeCount, PrestigeBonus
-- List af OperationState
+- List of OperationState
 
 ### 2. Operation.cs
-**Placering**: `Models/Operation.cs`
-- Definition af en crime/business
-- Income og cost beregninger
-- Unified model for alle operationer
+**Location**: `Models/Operation.cs`
+- Definition of a crime/business
+- Income and cost calculations
+- Unified model for all operations
 
 ### 3. GameConfig.cs
-**Placering**: `Models/GameConfig.cs`
-- Static klasse med alle konstanter
-- Alle 5 operations defineret
-- Timing og balance konstanter
+**Location**: `Models/GameConfig.cs`
+- Static class with all constants
+- All 5 operations defined
+- Timing and balance constants
 
 ---
 
 ## Dependencies Check
 
-**Krævet Før Start**:
-- [x] TASK-001 completed (CommunityToolkit.Mvvm installeret)
+**Required Before Start**:
+- [x] TASK-001 completed (CommunityToolkit.Mvvm installed)
 
-**Antagelser**:
-- JSON serialization bruger System.Text.Json
+**Assumptions**:
+- JSON serialization uses System.Text.Json
 
-**Blockers**: TASK-001 skal være færdig
+**Blockers**: TASK-001 must be complete
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret GameState.cs
+### Step 1: Create GameState.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Models/GameState.cs`
+**Path**: `src/MadeMan.IdleEmpire/Models/GameState.cs`
 
 ```csharp
 namespace MadeMan.IdleEmpire.Models;
@@ -105,9 +105,9 @@ public class OperationState
 }
 ```
 
-### Step 2: Opret Operation.cs
+### Step 2: Create Operation.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Models/Operation.cs`
+**Path**: `src/MadeMan.IdleEmpire/Models/Operation.cs`
 
 ```csharp
 namespace MadeMan.IdleEmpire.Models;
@@ -139,9 +139,9 @@ public class Operation
 }
 ```
 
-### Step 3: Opret GameConfig.cs
+### Step 3: Create GameConfig.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Models/GameConfig.cs`
+**Path**: `src/MadeMan.IdleEmpire/Models/GameConfig.cs`
 
 ```csharp
 namespace MadeMan.IdleEmpire.Models;
@@ -156,7 +156,7 @@ public static class GameConfig
             Id = "pickpocket",
             Name = "Pickpocketing",
             Icon = "icon_pickpocket.png",
-            Description = "Snup lommerne på turisterne",
+            Description = "Steal from tourists' pockets",
             BaseIncome = 1.0,
             UnlockCost = 0,
             UpgradeMultiplier = 1.4
@@ -166,7 +166,7 @@ public static class GameConfig
             Id = "cartheft",
             Name = "Car Theft",
             Icon = "icon_car.png",
-            Description = "Stjæl biler, sælg dele",
+            Description = "Steal cars, sell parts",
             BaseIncome = 4.0,
             UnlockCost = 50,
             UpgradeMultiplier = 1.5
@@ -176,7 +176,7 @@ public static class GameConfig
             Id = "burglary",
             Name = "Burglary",
             Icon = "icon_burglary.png",
-            Description = "Bryd ind i de riges hjem",
+            Description = "Break into the rich's homes",
             BaseIncome = 15.0,
             UnlockCost = 250,
             UpgradeMultiplier = 1.6
@@ -186,7 +186,7 @@ public static class GameConfig
             Id = "speakeasy",
             Name = "Speakeasy",
             Icon = "icon_speakeasy.png",
-            Description = "Din første illegale bar",
+            Description = "Your first illegal bar",
             BaseIncome = 50.0,
             UnlockCost = 1000,
             UpgradeMultiplier = 1.8
@@ -196,7 +196,7 @@ public static class GameConfig
             Id = "casino",
             Name = "Underground Casino",
             Icon = "icon_casino.png",
-            Description = "Huset vinder altid",
+            Description = "The house always wins",
             BaseIncome = 200.0,
             UnlockCost = 5000,
             UpgradeMultiplier = 2.0
@@ -225,69 +225,69 @@ public static class GameConfig
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. Manual Code Review
-- Verificer at alle properties har korrekte typer
-- Verificer at beregninger er korrekte
+- Verify all properties have correct types
+- Verify calculations are correct
 
 ---
 
 ## Acceptance Criteria
 
-- [x] GameState.cs oprettet med alle properties
-- [x] Operation.cs oprettet med GetUpgradeCost og GetIncome
-- [x] GameConfig.cs oprettet med alle 5 operations
-- [x] Build succeeds med 0 errors
-- [x] Ingen nye warnings introduceret
+- [x] GameState.cs created with all properties
+- [x] Operation.cs created with GetUpgradeCost and GetIncome
+- [x] GameConfig.cs created with all 5 operations
+- [x] Build succeeds with 0 errors
+- [x] No new warnings introduced
 
 ---
 
-## Kode Evaluering
+## Code Evaluation
 
-### Simplifikations-tjek
-- **Unified Operation model**: Ingen separate Crime/Business klasser
-- **Ingen inheritance**: Alle operations bruger samme klasse
-- **Simple beregninger**: Ingen kompleks logik
+### Simplification Check
+- **Unified Operation model**: No separate Crime/Business classes
+- **No inheritance**: All operations use the same class
+- **Simple calculations**: No complex logic
 
-### Alternativer overvejet
+### Alternatives Considered
 
-**Alternativ: Separate Crime og Business klasser**
+**Alternative: Separate Crime and Business classes**
 ```csharp
 public class Crime : Operation { }
 public class Business : Operation { }
 ```
-**Hvorfor fravalgt**: Over-engineering - ingen funktionel forskel i MVP
+**Why rejected**: Over-engineering - no functional difference in MVP
 
-### Kendte begrænsninger
-- Ingen validation af input værdier
-- Acceptabelt for MVP
+### Known Limitations
+- No validation of input values
+- Acceptable for MVP
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
-- [x] **KISS**: Er dette den simpleste løsning?
-- [x] **Læsbarhed**: Kan en anden udvikler forstå koden?
-- [x] **Navngivning**: Beskrivende og konsistente navne?
-- [x] **Funktioner**: Korte og fokuserede?
-- [x] **DRY**: Ingen duplikeret kode?
-- [x] **Error handling**: Fejl håndteret?
-- [x] **Edge cases**: Identificeret og håndteret?
+- [x] **KISS**: Is this the simplest solution?
+- [x] **Readability**: Can another developer understand the code?
+- [x] **Naming**: Descriptive and consistent names?
+- [x] **Functions**: Short and focused?
+- [x] **DRY**: No duplicated code?
+- [x] **Error handling**: Errors handled?
+- [x] **Edge cases**: Identified and handled?
 
 ---
 
 ## Design Files Reference
 
-- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 116-240)
+- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (lines 116-240)
 - **Related Tasks**: TASK-003, TASK-004
 
 ---
 
 ## Notes
 
-- OperationState er separat fra Operation for at holde config og state adskilt
-- GameConfig er static for nem adgang uden DI
+- OperationState is separate from Operation to keep config and state separate
+- GameConfig is static for easy access without DI
 
 ---
 

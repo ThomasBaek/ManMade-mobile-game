@@ -3,51 +3,51 @@
 ## Metadata
 - **Phase**: 2 - UI
 - **Dependencies**: TASK-008
-- **Estimated Time**: 1.5 time
+- **Estimated Time**: 1.5 hours
 - **Status**: BLOCKED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 453-584)
+- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (lines 453-584)
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Implementer MainPage.xaml - den eneste skærm i spillet.
+Implement MainPage.xaml - the only screen in the game.
 
-**Hvorfor dette er vigtigt:**
-- Alt gameplay sker her
-- Cash header altid synlig
-- Operations liste med upgrade knapper
-- Prestige panel når tilgængeligt
+**Why this is important:**
+- All gameplay happens here
+- Cash header always visible
+- Operations list with upgrade buttons
+- Prestige panel when available
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
+### Potential Problems
 1. **XAML Binding Errors**:
-   - Edge case: Forkert DataType
-   - Impact: UI viser ikke data
+   - Edge case: Incorrect DataType
+   - Impact: UI doesn't display data
 
 2. **Layout Issues**:
-   - Edge case: Forskellige skærmstørrelser
-   - Impact: UI ser forkert ud
+   - Edge case: Different screen sizes
+   - Impact: UI looks wrong
 
-### Mitigering
-- Brug x:DataType for compile-time checking
-- Test på forskellige emulator størrelser
+### Mitigation
+- Use x:DataType for compile-time checking
+- Test on different emulator sizes
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Flyt MainPage.xaml til Views folder
+### Step 1: Move MainPage.xaml to Views folder
 
-Flyt filen fra root til Views/ og opdater namespace.
+Move the file from root to Views/ and update namespace.
 
-### Step 2: Opdater MainPage.xaml
+### Step 2: Update MainPage.xaml
 
-**Sti**: `src/MadeMan.IdleEmpire/Views/MainPage.xaml`
+**Path**: `src/MadeMan.IdleEmpire/Views/MainPage.xaml`
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -187,9 +187,9 @@ Flyt filen fra root til Views/ og opdater namespace.
 </ContentPage>
 ```
 
-### Step 3: Opdater MainPage.xaml.cs
+### Step 3: Update MainPage.xaml.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Views/MainPage.xaml.cs`
+**Path**: `src/MadeMan.IdleEmpire/Views/MainPage.xaml.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.ViewModels;
@@ -221,9 +221,9 @@ public partial class MainPage : ContentPage
 }
 ```
 
-### Step 4: Opdater AppShell.xaml
+### Step 4: Update AppShell.xaml
 
-Opdater route til ny lokation:
+Update route to new location:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -242,31 +242,31 @@ Opdater route til ny lokation:
 </Shell>
 ```
 
-### Step 5: Registrer i MauiProgram.cs
+### Step 5: Register in MauiProgram.cs
 
-Tilføj:
+Add:
 ```csharp
 builder.Services.AddTransient<Views.MainPage>();
 ```
 
-### Step 6: Slet gamle MainPage filer fra root
+### Step 6: Delete old MainPage files from root
 
-Slet:
-- `MainPage.xaml` (i root)
-- `MainPage.xaml.cs` (i root)
+Delete:
+- `MainPage.xaml` (in root)
+- `MainPage.xaml.cs` (in root)
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] MainPage.xaml i Views folder
-- [ ] Cash header vises korrekt
-- [ ] Operations liste med alle 5 operations
-- [ ] Buttons viser priser
-- [ ] Prestige panel vises når tilgængeligt
-- [ ] Build succeeds med 0 errors
+- [ ] MainPage.xaml in Views folder
+- [ ] Cash header displays correctly
+- [ ] Operations list with all 5 operations
+- [ ] Buttons show prices
+- [ ] Prestige panel shows when available
+- [ ] Build succeeds with 0 errors
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-008)
+**Task Status**: BLOCKED (waiting for TASK-008)
 **Last Updated**: 2024-12-25

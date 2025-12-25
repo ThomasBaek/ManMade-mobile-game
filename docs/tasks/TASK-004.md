@@ -3,54 +3,54 @@
 ## Metadata
 - **Phase**: 1 - Foundation
 - **Dependencies**: TASK-003
-- **Estimated Time**: 1 time
+- **Estimated Time**: 1 hour
 - **Status**: COMPLETED
-- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 243-392)
+- **Design Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (lines 243-392)
 - **Requires Design Input**: NO
 
 ---
 
-## Formål
+## Purpose
 
-Implementer GameEngine service - hjertet af spillet der håndterer al game logic.
+Implement GameEngine service - the heart of the game that handles all game logic.
 
-**Hvorfor dette er vigtigt:**
-- Core gameplay loop lever her
-- Al income beregning sker her
-- Upgrade/unlock/prestige logik
+**Why this is important:**
+- Core gameplay loop lives here
+- All income calculation happens here
+- Upgrade/unlock/prestige logic
 
 ---
 
-## Risici
+## Risks
 
-### Potentielle Problemer
+### Potential Problems
 1. **State Management**:
-   - Edge case: Null references i State
+   - Edge case: Null references in State
    - Impact: NullReferenceException
 
 2. **Math Errors**:
    - Edge case: Division by zero, negative values
-   - Impact: Korrupt game state
+   - Impact: Corrupt game state
 
-### Mitigering
-- Null checks på alle state operationer
-- Guard clauses i beregninger
-- Unit tests (fremtidig)
+### Mitigation
+- Null checks on all state operations
+- Guard clauses in calculations
+- Unit tests (future)
 
 ---
 
-## Analyse - Hvad Skal Implementeres
+## Analysis - What Needs to be Implemented
 
 ### 1. IGameEngine.cs
-**Placering**: `Services/IGameEngine.cs`
+**Location**: `Services/IGameEngine.cs`
 - Interface for dependency injection
 
 ### 2. GameEngine.cs
-**Placering**: `Services/GameEngine.cs`
-- Initialize() - Load eller opret nyt spil
-- Tick(deltaSeconds) - Opdater cash
+**Location**: `Services/GameEngine.cs`
+- Initialize() - Load or create new game
+- Tick(deltaSeconds) - Update cash
 - CanUnlock/CanUpgrade - Affordability checks
-- UnlockOrUpgrade - Køb operation
+- UnlockOrUpgrade - Purchase operation
 - CanPrestige/DoPrestige - Prestige system
 - CalculateOfflineEarnings - Offline progression
 
@@ -58,23 +58,23 @@ Implementer GameEngine service - hjertet af spillet der håndterer al game logic
 
 ## Dependencies Check
 
-**Krævet Før Start**:
+**Required Before Start**:
 - [x] TASK-002 completed (Models)
 - [x] TASK-003 completed (SaveManager)
 
-**Antagelser**:
-- SaveManager virker korrekt
-- GameConfig er korrekt defineret
+**Assumptions**:
+- SaveManager works correctly
+- GameConfig is correctly defined
 
-**Blockers**: TASK-003 skal være færdig
+**Blockers**: TASK-003 must be complete
 
 ---
 
 ## Implementation Guide
 
-### Step 1: Opret IGameEngine.cs
+### Step 1: Create IGameEngine.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Services/IGameEngine.cs`
+**Path**: `src/MadeMan.IdleEmpire/Services/IGameEngine.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.Models;
@@ -96,9 +96,9 @@ public interface IGameEngine
 }
 ```
 
-### Step 2: Opret GameEngine.cs
+### Step 2: Create GameEngine.cs
 
-**Sti**: `src/MadeMan.IdleEmpire/Services/GameEngine.cs`
+**Path**: `src/MadeMan.IdleEmpire/Services/GameEngine.cs`
 
 ```csharp
 using MadeMan.IdleEmpire.Models;
@@ -263,70 +263,70 @@ public class GameEngine : IGameEngine
 ```bash
 dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 ```
-Forventet: 0 errors
+Expected: 0 errors
 
 ### 2. Logic Verification (conceptual)
-- Initialize med tom save -> Pickpocket level 1, andre level 0
+- Initialize with empty save -> Pickpocket level 1, others level 0
 - Tick(1.0) -> Cash += IncomePerSecond
-- CanUpgrade på locked operation -> false
-- DoPrestige -> State reset, PrestigeBonus øget
+- CanUpgrade on locked operation -> false
+- DoPrestige -> State reset, PrestigeBonus increased
 
 ---
 
 ## Acceptance Criteria
 
-- [x] IGameEngine.cs interface oprettet
-- [x] GameEngine.cs implementeret med alle metoder
-- [x] Initialize håndterer både load og new game
-- [x] Tick beregner income korrekt
-- [x] Unlock/Upgrade trækker korrekt cost
-- [x] Prestige resetter state og øger bonus
-- [x] Offline earnings beregnes korrekt
-- [x] Build succeeds med 0 errors
+- [x] IGameEngine.cs interface created
+- [x] GameEngine.cs implemented with all methods
+- [x] Initialize handles both load and new game
+- [x] Tick calculates income correctly
+- [x] Unlock/Upgrade deducts correct cost
+- [x] Prestige resets state and increases bonus
+- [x] Offline earnings calculated correctly
+- [x] Build succeeds with 0 errors
 
 ---
 
-## Kode Evaluering
+## Code Evaluation
 
-### Simplifikations-tjek
+### Simplification Check
 - **Single responsibility**: GameEngine = game logic only
-- **Null safety**: Alle lookups returnerer nullable
-- **Ingen events**: Simpel pull-model
+- **Null safety**: All lookups return nullable
+- **No events**: Simple pull-model
 
-### Alternativer overvejet
+### Alternatives Considered
 
-**Alternativ: Event-based state changes**
+**Alternative: Event-based state changes**
 ```csharp
 public event Action<double> OnCashChanged;
 ```
-**Hvorfor fravalgt**: Over-engineering, ViewModel kan polle state
+**Why rejected**: Over-engineering, ViewModel can poll state
 
-### Kendte begrænsninger
-- Ingen undo funktionalitet
-- Ingen transaction rollback
-- Acceptabelt for MVP
+### Known Limitations
+- No undo functionality
+- No transaction rollback
+- Acceptable for MVP
 
 ---
 
-## Kode Kvalitet Checklist
+## Code Quality Checklist
 
-- [x] **KISS**: Simpleste game logic implementation
-- [x] **Single Responsibility**: Kun game logic
-- [x] **Null Safety**: Alle nullable returns håndteret
+- [x] **KISS**: Simplest game logic implementation
+- [x] **Single Responsibility**: Only game logic
+- [x] **Null Safety**: All nullable returns handled
 - [x] **Edge Cases**: Level 0 check, empty operations
 
 ---
 
 ## Design Files Reference
 
-- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (linje 243-392)
+- **Spec Reference**: docs/CLAUDE_CODE_IMPLEMENTATION_GUIDE.md (lines 243-392)
 - **Related Tasks**: TASK-003, TASK-005
 
 ---
 
 ## Notes
 
-- GameEngine er Singleton (registreres i TASK-005)
+- GameEngine is Singleton (registered in TASK-005)
 - SaveManager injected via constructor
 
 ---

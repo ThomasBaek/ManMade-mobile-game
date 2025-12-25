@@ -10,14 +10,14 @@
 
 ---
 
-## Formål
+## Purpose
 
-Verificer at alle skill effects virker korrekt i gameplay.
+Verify that all skill effects work correctly in gameplay.
 
-**Hvorfor dette er vigtigt:**
-- Sikrer at skills faktisk påvirker gameplay
-- Fanger eventuelle beregningsfejl
-- Validerer brugeroplevelsen
+**Why this is important:**
+- Ensures skills actually affect gameplay
+- Catches any calculation errors
+- Validates user experience
 
 ---
 
@@ -30,9 +30,9 @@ Verificer at alle skill effects virker korrekt i gameplay.
 | Cash Flow (4%) | Add skill, check income | +4% per level |
 | Street Smarts (10%) | Upgrade Tier 1 op | +10% on Pickpocket/CarTheft/Burglary |
 | Business Acumen (12%) | Upgrade Tier 2 op | +12% on Speakeasy/Casino |
-| Lucky Break (4%) | Tjek for 2x procs | ~4% chance per level |
-| The Skim (5%) | Køb upgrade, tjek cashback | 5% af cost returneret |
-| Compound Interest (3%) | Vent 30 min, tjek | +3% per 5 min per level |
+| Lucky Break (4%) | Check for 2x procs | ~4% chance per level |
+| The Skim (5%) | Buy upgrade, check cashback | 5% of cost returned |
+| Compound Interest (3%) | Wait 30 min, check | +3% per 5 min per level |
 
 ### 2. Operations Skills
 
@@ -56,7 +56,7 @@ Verificer at alle skill effects virker korrekt i gameplay.
 
 | Skill | Test | Expected Result |
 |-------|------|-----------------|
-| Old Connections | Start cash efter prestige | +$100 per level |
+| Old Connections | Start cash after prestige | +$100 per level |
 | Reputation | Prestige bonus | +6% per level |
 | Fast Learner | Upgrade costs | -4% per level |
 | Early Bird | Unlock costs | -5% per level |
@@ -105,7 +105,7 @@ Verificer at alle skill effects virker korrekt i gameplay.
 
 ## Debugging Checklist
 
-Hvis noget ikke virker:
+If something doesn't work:
 
 - [ ] Skill registered in SkillConfig?
 - [ ] SkillService correctly calculates effect?
@@ -162,5 +162,5 @@ Hvis noget ikke virker:
 
 ---
 
-**Task Status**: BLOCKED (venter på TASK-026 og TASK-027)
+**Task Status**: BLOCKED (waiting for TASK-026 and TASK-027)
 **Last Updated**: 2024-12-25
