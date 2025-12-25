@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Current State
 
 ## Sidst Opdateret
-2024-12-25 (efter environment check)
+2024-12-25 (Skill System tasks tilføjet)
 
 ---
 
@@ -21,10 +21,11 @@
 | Styles.xaml | Eksisterer | Default styles |
 
 ### Mapper Status
-- `/Models/` - ✅ 3 filer oprettet
-- `/Services/` - ✅ 3 filer oprettet
+- `/Models/` - ✅ 3 filer oprettet (GameState, Operation, GameConfig)
+- `/Services/` - ✅ 3 filer oprettet (SaveManager, IGameEngine, GameEngine)
 - `/ViewModels/` - Tom
 - `/Views/` - Tom
+- `/docs/tasks/` - ✅ 17 task filer + 11 nye skill tasks
 
 ### Oprettede Filer (Game-specifik)
 | Fil | Oprettet i Task |
@@ -36,13 +37,27 @@
 | Services/IGameEngine.cs | TASK-004 ✅ |
 | Services/GameEngine.cs | TASK-004 ✅ |
 
-### Manglende Filer
+### Manglende Filer (Core)
 | Fil | Oprettes i Task |
 |-----|-----------------|
 | ViewModels/OperationViewModel.cs | TASK-007 |
 | ViewModels/MainViewModel.cs | TASK-008 |
 | Resources/Styles/Theme.xaml | TASK-006 |
 | Resources/Images/*.png | TASK-010 |
+
+### Manglende Filer (Skill System)
+| Fil | Oprettes i Task |
+|-----|-----------------|
+| Models/Skill.cs | TASK-018 |
+| Models/SkillConfig.cs | TASK-019 |
+| Services/SkillCalculator.cs | TASK-020 |
+| Services/ISkillService.cs | TASK-021 |
+| Services/SkillService.cs | TASK-021 |
+| Services/IMilestoneService.cs | TASK-022 |
+| Services/MilestoneService.cs | TASK-022 |
+| ViewModels/SkillViewModel.cs | TASK-025 |
+| Views/Components/SkillSelectionModal.xaml | TASK-026 |
+| Views/Components/SkillsPanel.xaml | TASK-027 |
 
 ### NuGet Packages Status
 | Package | Required | Installed |
@@ -95,7 +110,20 @@
 ---
 
 ## Nuværende Status
-**Phase 1 COMPLETED** - Foundation færdig, starter Phase 2 (UI)
+**Phase 1 COMPLETED** - Foundation færdig
+**Phase 3 PLANNED** - Skill System tasks tilføjet (TASK-018 til TASK-028)
+
+Næste: Phase 2 (UI) starter med TASK-006
+
+## Task Overview
+| Phase | Tasks | Status |
+|-------|-------|--------|
+| Phase 1: Foundation | TASK-001 til TASK-005 | ✅ COMPLETED |
+| Phase 2: UI | TASK-006 til TASK-010 | READY |
+| Phase 3: Skill System | TASK-018 til TASK-028 | PLANNED |
+| Phase 4: Gameplay | TASK-011, TASK-012 | BLOCKED |
+| Phase 5: Persistence | TASK-013, TASK-014 | BLOCKED |
+| Phase 6: Polish | TASK-015 til TASK-017 | BLOCKED |
 
 ## Aktiv Task
 TASK-006 (Implement Theme)
@@ -111,6 +139,7 @@ TASK-005 (Setup DI & Lifecycle) - 2024-12-25
 3. File-based workflow
 4. KISS/YAGNI/SOLID principper
 5. **Bruger .NET 10 (ikke .NET 8)** - da det er installeret og virker
+6. **Skill System integreret i MVP** - 18 skills, 10 milestones, max 5 aktive skills
 
 ## Antagelser
 - ✅ .NET SDK installeret (verificeret: 10.0.101)
@@ -121,9 +150,9 @@ TASK-005 (Setup DI & Lifecycle) - 2024-12-25
 Ingen
 
 ## Næste Skridt
-1. Start med `Start TASK-001`
-2. Installer CommunityToolkit.Mvvm
-3. Verificer build stadig virker
+1. Start TASK-006 (Implement Theme)
+2. Fortsæt med Phase 2 UI tasks
+3. TASK-018 kan startes parallelt (afhænger kun af TASK-002 som er færdig)
 
 ---
 
@@ -131,5 +160,6 @@ Ingen
 - **Build Status**: ✅ Success
 - **Errors**: 0
 - **Warnings**: 0
-- **Files Created**: 3 (Models: GameState.cs, Operation.cs, GameConfig.cs)
-- **Lines of Code**: ~90 (af game-specifikke)
+- **Files Created**: 6 (Models + Services)
+- **Task Files Created**: 28 (TASK-001 til TASK-028)
+- **Lines of Code**: ~90 (game-specifik kode)
