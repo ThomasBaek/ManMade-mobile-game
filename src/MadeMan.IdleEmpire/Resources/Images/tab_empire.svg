@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Empire/Home icon - Building -->
+    <path d="M12 3L4 9v12h16V9l-8-6z" fill="none" stroke="#D4AF37" stroke-width="2"/>
+    <rect x="10" y="14" width="4" height="7" fill="#D4AF37"/>
+    <rect x="7" y="11" width="2" height="2" fill="#D4AF37"/>
+    <rect x="15" y="11" width="2" height="2" fill="#D4AF37"/>
+</svg>

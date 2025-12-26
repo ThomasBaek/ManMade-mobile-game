@@ -5,10 +5,47 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:MadeMan.IdleEmpire.Views"
     Shell.FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarBackgroundColor="{StaticResource Surface}"
+    Shell.TabBarTitleColor="{StaticResource Gold}"
+    Shell.TabBarUnselectedColor="{StaticResource Smoke}"
+    Shell.TabBarForegroundColor="{StaticResource Gold}">
 
-    <ShellContent
-        ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <!-- Empire Tab (Main gameplay) -->
+        <ShellContent
+            Title="Empire"
+            Icon="tab_empire"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="Empire" />
+
+        <!-- Organized Crime Tab (Locked) -->
+        <ShellContent
+            Title="Crime"
+            Icon="tab_crime"
+            ContentTemplate="{DataTemplate views:OrgCrimePage}"
+            Route="OrgCrime" />
+
+        <!-- Casino Tab (Locked) -->
+        <ShellContent
+            Title="Casino"
+            Icon="tab_casino"
+            ContentTemplate="{DataTemplate views:CasinoPage}"
+            Route="Casino" />
+
+        <!-- Skills Tab (Locked) -->
+        <ShellContent
+            Title="Skills"
+            Icon="tab_skills"
+            ContentTemplate="{DataTemplate views:SkillsTabPage}"
+            Route="Skills" />
+
+        <!-- Settings Tab -->
+        <ShellContent
+            Title="Settings"
+            Icon="tab_settings"
+            ContentTemplate="{DataTemplate views:SettingsPage}"
+            Route="Settings" />
+    </TabBar>
 
 </Shell>

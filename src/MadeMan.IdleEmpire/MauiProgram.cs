@@ -34,9 +34,14 @@ public static class MauiProgram
 		// ViewModels (Singleton to prevent timer duplication and resource leaks)
 		builder.Services.AddSingleton<SkillViewModel>();
 		builder.Services.AddSingleton<MainViewModel>();
+		builder.Services.AddTransient<SettingsViewModel>();
 
 		// Pages
 		builder.Services.AddTransient<Views.MainPage>();
+		builder.Services.AddTransient<Views.OrgCrimePage>();
+		builder.Services.AddTransient<Views.CasinoPage>();
+		builder.Services.AddTransient<Views.SkillsTabPage>();
+		builder.Services.AddTransient<Views.SettingsPage>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

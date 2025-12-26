@@ -43,6 +43,12 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private double _prestigeProgress;
 
+    [ObservableProperty]
+    private string _prestigeThresholdDisplay = "/ $10K";
+
+    [ObservableProperty]
+    private Color _prestigeBadgeColor = Color.FromArgb("#252540");
+
     public ObservableCollection<OperationViewModel> Operations { get; } = new();
 
     public SkillViewModel SkillVM { get; }
@@ -116,6 +122,12 @@ public partial class MainViewModel : ObservableObject
         // Total earned + progress to prestige
         TotalEarnedDisplay = FormatCash(_engine.State.TotalEarned);
         PrestigeProgress = Math.Min(_engine.State.TotalEarned / GameConfig.PrestigeThreshold, 1.0);
+        PrestigeThresholdDisplay = $"/ {FormatCash(GameConfig.PrestigeThreshold)}";
+
+        // Prestige badge color (glows when available)
+        PrestigeBadgeColor = CanPrestige
+            ? Color.FromArgb("#8B0000")  // Primary/blood red when available
+            : Color.FromArgb("#252540"); // SurfaceLight when not
 
         if (CanPrestige)
         {
