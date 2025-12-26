@@ -3,42 +3,47 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!-- Made Man: Idle Empire Theme -->
+    <!-- Made Man: Idle Empire - Dystert Gangster Tema v1.1 -->
 
-    <!-- Background Colors -->
-    <Color x:Key="Background">#1A1A2E</Color>
-    <Color x:Key="Surface">#16213E</Color>
-    <Color x:Key="SurfaceLight">#1F2B47</Color>
+    <!-- Background Colors (Darker for atmosphere) -->
+    <Color x:Key="Background">#0D0D0D</Color>
+    <Color x:Key="Surface">#1A1A2E</Color>
+    <Color x:Key="SurfaceLight">#252540</Color>
+    <Color x:Key="Card">#252540</Color>
 
-    <!-- Primary/Accent Colors -->
-    <Color x:Key="Primary">#E94560</Color>
-    <Color x:Key="PrimaryDark">#C73E54</Color>
+    <!-- Primary/Accent Colors (Blood Red) -->
+    <Color x:Key="Primary">#8B0000</Color>
+    <Color x:Key="PrimaryDark">#5C0000</Color>
+    <Color x:Key="PrimaryLight">#A52A2A</Color>
 
-    <!-- Gold/Cash Colors -->
-    <Color x:Key="Gold">#FFD700</Color>
-    <Color x:Key="GoldDark">#B8960B</Color>
+    <!-- Gold/Cash Colors (Deeper, more elegant) -->
+    <Color x:Key="Gold">#D4AF37</Color>
+    <Color x:Key="GoldDark">#8B7500</Color>
+    <Color x:Key="GoldText">#FFD700</Color>
 
     <!-- Text Colors -->
     <Color x:Key="TextPrimary">#FFFFFF</Color>
-    <Color x:Key="TextSecondary">#8892A0</Color>
+    <Color x:Key="TextSecondary">#A0A0A0</Color>
 
     <!-- State Colors -->
     <Color x:Key="Success">#4ADE80</Color>
-    <Color x:Key="Locked">#4A5568</Color>
+    <Color x:Key="Locked">#4A4A4A</Color>
+    <Color x:Key="Smoke">#4A4A4A</Color>
+    <Color x:Key="Danger">#8B0000</Color>
 
     <!-- Legacy Colors (for MAUI compatibility) -->
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
-    <Color x:Key="OffBlack">#1A1A2E</Color>
+    <Color x:Key="OffBlack">#0D0D0D</Color>
 
     <!-- Text Colors for Dark Theme (MAUI Styles compatibility) -->
     <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
-    <Color x:Key="SecondaryDarkText">#8892A0</Color>
+    <Color x:Key="SecondaryDarkText">#A0A0A0</Color>
 
     <!-- Accent Colors (MAUI Styles compatibility) -->
-    <Color x:Key="Secondary">#16213E</Color>
-    <Color x:Key="Magenta">#E94560</Color>
-    <Color x:Key="MidnightBlue">#1A1A2E</Color>
+    <Color x:Key="Secondary">#1A1A2E</Color>
+    <Color x:Key="Magenta">#8B0000</Color>
+    <Color x:Key="MidnightBlue">#0D0D0D</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
     <Color x:Key="Gray300">#ACACAC</Color>
@@ -51,12 +56,18 @@
     <!-- Brushes -->
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}"/>
     <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource Surface}"/>
+    <SolidColorBrush x:Key="SurfaceLightBrush" Color="{StaticResource SurfaceLight}"/>
+    <SolidColorBrush x:Key="CardBrush" Color="{StaticResource Card}"/>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLight}"/>
     <SolidColorBrush x:Key="GoldBrush" Color="{StaticResource Gold}"/>
+    <SolidColorBrush x:Key="GoldTextBrush" Color="{StaticResource GoldText}"/>
     <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}"/>
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondary}"/>
     <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource Success}"/>
     <SolidColorBrush x:Key="LockedBrush" Color="{StaticResource Locked}"/>
+    <SolidColorBrush x:Key="SmokeBrush" Color="{StaticResource Smoke}"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource Danger}"/>
 
     <!-- Legacy Brushes (for MAUI compatibility) -->
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
