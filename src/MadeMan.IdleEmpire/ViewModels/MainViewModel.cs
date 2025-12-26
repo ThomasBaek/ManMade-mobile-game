@@ -13,6 +13,7 @@ public partial class MainViewModel : ObservableObject
     private IDispatcherTimer? _gameTimer;
     private IDispatcherTimer? _saveTimer;
     private DateTime _lastTick;
+    private bool _isGameLoopRunning;
 
     [ObservableProperty]
     private string _cashDisplay = "$0";
@@ -66,13 +67,31 @@ public partial class MainViewModel : ObservableObject
         BuildOperationViewModels();
         SkillVM.RefreshActiveSkills();
         SkillVM.UpdateProgress();
-        StartGameLoop();
-        StartAutoSave();
+
+        // Only start game loop once - keep it running across tab switches
+        if (!_isGameLoopRunning)
+        {
+            StartGameLoop();
+            StartAutoSave();
+            _isGameLoopRunning = true;
+        }
     }
 
     public void OnDisappearing()
     {
+        // Don't stop timers when switching tabs - game should keep running
+        // Only save the game state
+        _saveManager.Save(_engine.State);
+    }
+
+    /// <summary>
+    /// Called when the app is going to background or closing.
+    /// This is the only time we should stop the game loop.
+    /// </summary>
+    public void OnAppSleep()
+    {
         StopTimers();
+        _isGameLoopRunning = false;
         _saveManager.Save(_engine.State);
     }
 

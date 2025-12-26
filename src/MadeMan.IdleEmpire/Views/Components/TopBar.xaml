@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
+             x:Class="MadeMan.IdleEmpire.Views.Components.TopBar"
+             x:DataType="vm:MainViewModel">
+
+    <VerticalStackLayout Spacing="4">
+        <!-- === TOP BAR (Compact Cash/Income Display) === -->
+        <Frame BackgroundColor="{StaticResource Surface}"
+               CornerRadius="12"
+               Padding="12,8"
+               Margin="0,8,0,4"
+               BorderColor="Transparent">
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
+                <!-- Cash -->
+                <HorizontalStackLayout Spacing="4">
+                    <Label Text="💰"
+                           FontSize="16"
+                           VerticalOptions="Center"/>
+                    <Label Text="{Binding CashDisplay}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Gold}"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Income -->
+                <Frame Grid.Column="1"
+                       BackgroundColor="{StaticResource SurfaceLight}"
+                       CornerRadius="6"
+                       Padding="8,4"
+                       BorderColor="Transparent">
+                    <Label Text="{Binding IncomeDisplay}"
+                           FontSize="12"
+                           TextColor="{StaticResource Success}"/>
+                </Frame>
+
+                <!-- Expenses (placeholder) -->
+                <Label Grid.Column="2"
+                       Text="-$0/s"
+                       FontSize="12"
+                       TextColor="{StaticResource Smoke}"
+                       VerticalOptions="Center"/>
+
+                <!-- Prestige Badge -->
+                <Frame Grid.Column="3"
+                       BackgroundColor="{Binding PrestigeBadgeColor}"
+                       CornerRadius="6"
+                       Padding="8,4"
+                       BorderColor="Transparent"
+                       IsVisible="{Binding HasPrestiged}">
+                    <HorizontalStackLayout Spacing="4">
+                        <Label Text="⭐"
+                               FontSize="10"
+                               VerticalOptions="Center"/>
+                        <Label Text="{Binding PrestigeCount}"
+                               FontSize="12"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Gold}"
+                               VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </Frame>
+            </Grid>
+        </Frame>
+
+        <!-- === PRESTIGE PROGRESS === -->
+        <Frame BackgroundColor="{StaticResource Surface}"
+               CornerRadius="12"
+               Padding="12"
+               Margin="0,0,0,8"
+               BorderColor="Transparent">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <!-- Total Earned + Prestige Progress -->
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="PRESTIGE PROGRESS"
+                           FontSize="10"
+                           TextColor="{StaticResource TextSecondary}"/>
+                    <Grid HeightRequest="6">
+                        <Frame BackgroundColor="{StaticResource SurfaceLight}"
+                               CornerRadius="3"
+                               Padding="0"
+                               BorderColor="Transparent"/>
+                        <BoxView BackgroundColor="{StaticResource Primary}"
+                                 CornerRadius="3"
+                                 HorizontalOptions="Start"
+                                 WidthRequest="{Binding PrestigeProgress, Converter={StaticResource ProgressToWidth}}"/>
+                    </Grid>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                    <Label Text="{Binding TotalEarnedDisplay}"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}"
+                           HorizontalOptions="End"/>
+                    <Label Text="{Binding PrestigeThresholdDisplay}"
+                           FontSize="10"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="End"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+    </VerticalStackLayout>
+</ContentView>

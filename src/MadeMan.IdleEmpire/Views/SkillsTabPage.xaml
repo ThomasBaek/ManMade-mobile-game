@@ -1,47 +1,219 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
+             xmlns:models="clr-namespace:MadeMan.IdleEmpire.Models"
+             xmlns:components="clr-namespace:MadeMan.IdleEmpire.Views.Components"
              x:Class="MadeMan.IdleEmpire.Views.SkillsTabPage"
+             x:DataType="vm:MainViewModel"
              BackgroundColor="{StaticResource Background}"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout VerticalOptions="Center"
-                         HorizontalOptions="Center"
-                         Spacing="16"
-                         Padding="24">
+    <Grid Padding="16,0,16,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Label Text="🔒"
-               FontSize="64"
-               HorizontalOptions="Center"/>
+        <!-- === TOP BAR === -->
+        <components:TopBar Grid.Row="0"/>
 
-        <Label Text="Skills"
-               FontSize="28"
-               FontAttributes="Bold"
-               TextColor="{StaticResource TextPrimary}"
-               HorizontalOptions="Center"/>
+        <!-- === SKILLS CONTENT === -->
+        <Grid Grid.Row="1">
 
-        <Label Text="Unlock powerful abilities"
-               FontSize="14"
-               TextColor="{StaticResource TextSecondary}"
-               HorizontalOptions="Center"/>
+            <!-- LOCKED STATE (No skills yet) -->
+            <VerticalStackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="16"
+                                 Padding="24"
+                                 IsVisible="{Binding SkillVM.HasAnySkills, Converter={StaticResource InverseBoolConverter}}">
 
-        <Frame BackgroundColor="{StaticResource Surface}"
-               CornerRadius="8"
-               Padding="16"
-               Margin="0,16,0,0"
-               BorderColor="Transparent">
-            <VerticalStackLayout Spacing="8">
-                <Label Text="UNLOCK REQUIREMENT"
-                       FontSize="11"
-                       TextColor="{StaticResource Gold}"
+                <Label Text="🔒"
+                       FontSize="64"
                        HorizontalOptions="Center"/>
-                <Label Text="Reach Prestige Level 1"
-                       FontSize="16"
+
+                <Label Text="Skills"
+                       FontSize="28"
+                       FontAttributes="Bold"
                        TextColor="{StaticResource TextPrimary}"
                        HorizontalOptions="Center"/>
-            </VerticalStackLayout>
-        </Frame>
 
-    </VerticalStackLayout>
+                <Label Text="Unlock your first skill to access this tab"
+                       FontSize="14"
+                       TextColor="{StaticResource TextSecondary}"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"/>
+
+                <Frame BackgroundColor="{StaticResource Surface}"
+                       CornerRadius="12"
+                       Padding="16"
+                       Margin="0,16,0,0"
+                       BorderColor="Transparent"
+                       WidthRequest="280">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="NEXT MILESTONE"
+                               FontSize="11"
+                               TextColor="{StaticResource Gold}"
+                               HorizontalOptions="Center"/>
+
+                        <Label Text="{Binding SkillVM.NextMilestoneText}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"
+                               HorizontalOptions="Center"/>
+
+                        <!-- Progress Bar -->
+                        <Grid HeightRequest="10">
+                            <Frame BackgroundColor="{StaticResource Background}"
+                                   CornerRadius="5"
+                                   Padding="0"
+                                   BorderColor="Transparent"/>
+                            <BoxView BackgroundColor="{StaticResource Gold}"
+                                     CornerRadius="5"
+                                     HorizontalOptions="Start"
+                                     WidthRequest="{Binding SkillVM.MilestoneProgress, Converter={StaticResource ProgressToWidth}}"/>
+                        </Grid>
+
+                        <Label Text="Keep earning to unlock skills!"
+                               FontSize="12"
+                               TextColor="{StaticResource TextSecondary}"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+
+            <!-- UNLOCKED STATE (Has skills) -->
+            <ScrollView IsVisible="{Binding SkillVM.HasAnySkills}">
+                <VerticalStackLayout Spacing="16" Padding="0,8">
+
+                    <!-- Header -->
+                    <Frame BackgroundColor="{StaticResource Surface}"
+                           CornerRadius="12"
+                           Padding="16"
+                           BorderColor="Transparent">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout>
+                                <Label Text="⭐ YOUR SKILLS"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource Gold}"/>
+                                <Label FontSize="12"
+                                       TextColor="{StaticResource TextSecondary}">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} active skill(s)">
+                                            <Binding Path="SkillVM.ActiveSkillCount"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Skills List -->
+                    <VerticalStackLayout Spacing="12"
+                                         BindableLayout.ItemsSource="{Binding SkillVM.ActiveSkills}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:SkillDisplayModel">
+                                <Frame BackgroundColor="{StaticResource Surface}"
+                                       CornerRadius="12"
+                                       Padding="16"
+                                       BorderColor="Transparent">
+                                    <Grid ColumnDefinitions="50,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12">
+
+                                        <!-- Icon -->
+                                        <Frame Grid.RowSpan="3"
+                                               BackgroundColor="{StaticResource Background}"
+                                               CornerRadius="10"
+                                               Padding="0"
+                                               HeightRequest="50"
+                                               WidthRequest="50"
+                                               BorderColor="Transparent">
+                                            <Label Text="{Binding Icon}"
+                                                   FontSize="28"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Frame>
+
+                                        <!-- Name -->
+                                        <Label Grid.Column="1"
+                                               Text="{Binding Name}"
+                                               FontSize="16"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource TextPrimary}"/>
+
+                                        <!-- Effect Description -->
+                                        <Label Grid.Column="1" Grid.Row="1"
+                                               Text="{Binding EffectDescription}"
+                                               FontSize="13"
+                                               TextColor="{StaticResource Success}"/>
+
+                                        <!-- Level Progress -->
+                                        <Grid Grid.Column="1" Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                                            <Grid HeightRequest="6">
+                                                <Frame BackgroundColor="{StaticResource Background}"
+                                                       CornerRadius="3"
+                                                       Padding="0"
+                                                       BorderColor="Transparent"/>
+                                                <BoxView BackgroundColor="{StaticResource Gold}"
+                                                         CornerRadius="3"
+                                                         HorizontalOptions="Start"
+                                                         WidthRequest="{Binding LevelProgress, Converter={StaticResource ProgressToWidth}}"/>
+                                            </Grid>
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding LevelDisplay}"
+                                                   FontSize="11"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource Gold}"
+                                                   Margin="8,0,0,0"/>
+                                        </Grid>
+
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+
+                    <!-- Next Milestone Section -->
+                    <Frame BackgroundColor="{StaticResource Surface}"
+                           CornerRadius="12"
+                           Padding="16"
+                           BorderColor="{StaticResource Gold}"
+                           Margin="0,8,0,0">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="NEXT SKILL MILESTONE"
+                                   FontSize="11"
+                                   TextColor="{StaticResource Gold}"
+                                   HorizontalOptions="Center"/>
+
+                            <Label Text="{Binding SkillVM.NextMilestoneText}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   HorizontalOptions="Center"/>
+
+                            <!-- Progress Bar -->
+                            <Grid HeightRequest="8">
+                                <Frame BackgroundColor="{StaticResource Background}"
+                                       CornerRadius="4"
+                                       Padding="0"
+                                       BorderColor="Transparent"/>
+                                <BoxView BackgroundColor="{StaticResource Gold}"
+                                         CornerRadius="4"
+                                         HorizontalOptions="Start"
+                                         WidthRequest="{Binding SkillVM.MilestoneProgress, Converter={StaticResource ProgressToWidth}}"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+        </Grid>
+
+        <!-- === SKILL SELECTION MODAL (Overlay) === -->
+        <components:SkillSelectionModal Grid.RowSpan="2"/>
+
+    </Grid>
 
 </ContentPage>

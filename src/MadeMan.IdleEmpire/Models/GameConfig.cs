@@ -70,6 +70,6 @@ public static class GameConfig
     public const double OfflineEfficiency = 0.5;
 
     // === TIMING ===
-    public const int TicksPerSecond = 10;
+    public const int TicksPerSecond = 2;  // Reduced from 10 - smoother, less frantic
     public const int AutoSaveIntervalSeconds = 30;
 }

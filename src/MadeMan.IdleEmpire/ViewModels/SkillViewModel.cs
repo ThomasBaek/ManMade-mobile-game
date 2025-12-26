@@ -30,6 +30,9 @@ public partial class SkillViewModel : ObservableObject, IDisposable
     [ObservableProperty]
     private int _activeSkillCount;
 
+    [ObservableProperty]
+    private bool _hasAnySkills;
+
     public SkillViewModel(ISkillService skillService, IMilestoneService milestoneService)
     {
         _skillService = skillService;
@@ -89,6 +92,7 @@ public partial class SkillViewModel : ObservableObject, IDisposable
             }
         }
         ActiveSkillCount = ActiveSkills.Count;
+        HasAnySkills = ActiveSkillCount > 0;
     }
 
     public void UpdateProgress()

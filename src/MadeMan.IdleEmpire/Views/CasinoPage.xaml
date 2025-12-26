@@ -1,47 +1,62 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
+             xmlns:components="clr-namespace:MadeMan.IdleEmpire.Views.Components"
              x:Class="MadeMan.IdleEmpire.Views.CasinoPage"
+             x:DataType="vm:MainViewModel"
              BackgroundColor="{StaticResource Background}"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout VerticalOptions="Center"
-                         HorizontalOptions="Center"
-                         Spacing="16"
-                         Padding="24">
+    <Grid Padding="16,0,16,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Label Text="🔒"
-               FontSize="64"
-               HorizontalOptions="Center"/>
+        <!-- === TOP BAR === -->
+        <components:TopBar Grid.Row="0"/>
 
-        <Label Text="Casino"
-               FontSize="28"
-               FontAttributes="Bold"
-               TextColor="{StaticResource TextPrimary}"
-               HorizontalOptions="Center"/>
+        <!-- === LOCKED CONTENT === -->
+        <VerticalStackLayout Grid.Row="1"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Spacing="16"
+                             Padding="24">
 
-        <Label Text="Gamble your earnings for big wins"
-               FontSize="14"
-               TextColor="{StaticResource TextSecondary}"
-               HorizontalOptions="Center"/>
+            <Label Text="🔒"
+                   FontSize="64"
+                   HorizontalOptions="Center"/>
 
-        <Frame BackgroundColor="{StaticResource Surface}"
-               CornerRadius="8"
-               Padding="16"
-               Margin="0,16,0,0"
-               BorderColor="Transparent">
-            <VerticalStackLayout Spacing="8">
-                <Label Text="UNLOCK REQUIREMENT"
-                       FontSize="11"
-                       TextColor="{StaticResource Gold}"
-                       HorizontalOptions="Center"/>
-                <Label Text="Reach Prestige Level 1"
-                       FontSize="16"
-                       TextColor="{StaticResource TextPrimary}"
-                       HorizontalOptions="Center"/>
-            </VerticalStackLayout>
-        </Frame>
+            <Label Text="Casino"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource TextPrimary}"
+                   HorizontalOptions="Center"/>
 
-    </VerticalStackLayout>
+            <Label Text="Gamble your earnings for big wins"
+                   FontSize="14"
+                   TextColor="{StaticResource TextSecondary}"
+                   HorizontalOptions="Center"/>
+
+            <Frame BackgroundColor="{StaticResource Surface}"
+                   CornerRadius="8"
+                   Padding="16"
+                   Margin="0,16,0,0"
+                   BorderColor="Transparent">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="UNLOCK REQUIREMENT"
+                           FontSize="11"
+                           TextColor="{StaticResource Gold}"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Reach Prestige Level 1"
+                           FontSize="16"
+                           TextColor="{StaticResource TextPrimary}"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>

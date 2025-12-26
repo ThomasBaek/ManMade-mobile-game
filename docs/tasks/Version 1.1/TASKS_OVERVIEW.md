@@ -3,8 +3,8 @@
 ## Summary
 This document provides an overview of all UI/UX redesign tasks for Made Man: Idle Empire v1.1.
 
-**Total Tasks:** 12 (TASK-029 to TASK-040)
-**Estimated Total Time:** 14-20 hours
+**Total Tasks:** 14 (TASK-029 to TASK-042)
+**Estimated Total Time:** 17-24 hours
 
 ---
 
@@ -24,6 +24,8 @@ This document provides an overview of all UI/UX redesign tasks for Made Man: Idl
 | TASK-038 | Prestige Modal UX | TASK-029, 032 | 1-1.5h | READY |
 | TASK-039 | Titel System | TASK-029, 038 | 1.5-2h | READY |
 | TASK-040 | Reset Game Funktion | TASK-033 | 1-1.5h | READY |
+| TASK-041 | Global Top Bar | TASK-032 | 1-1.5h | READY |
+| TASK-042 | Skills Tab Redesign | TASK-041 | 2-3h | READY |
 
 ---
 
@@ -61,6 +63,12 @@ TASK-039: Titel System            <- Requires TASK-029, TASK-038
 TASK-040: Reset Funktion          <- Requires TASK-033
 ```
 
+### Wave 6: Skills & Global UI
+```
+TASK-041: Global Top Bar          <- Requires TASK-032
+TASK-042: Skills Tab Redesign     <- Requires TASK-041
+```
+
 ---
 
 ## Dependency Graph
@@ -78,8 +86,12 @@ TASK-029 (Tema)
     |         |         |
     |         |         +---> TASK-035 (Welcome Back)
     |         |         +---> TASK-038 (Prestige Modal)
+    |         |         |         |
+    |         |         |         +---> TASK-039 (Titel)
+    |         |         |
+    |         |         +---> TASK-041 (Global Top Bar)
     |         |                   |
-    |         |                   +---> TASK-039 (Titel)
+    |         |                   +---> TASK-042 (Skills Tab Redesign)
     |         |
     |         +---> TASK-033 (Settings)
     |                   |

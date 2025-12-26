@@ -1,9 +1,12 @@
+using MadeMan.IdleEmpire.ViewModels;
+
 namespace MadeMan.IdleEmpire.Views;
 
 public partial class OrgCrimePage : ContentPage
 {
-    public OrgCrimePage()
+    public OrgCrimePage(MainViewModel mainViewModel)
     {
         InitializeComponent();
+        BindingContext = mainViewModel;
     }
 }

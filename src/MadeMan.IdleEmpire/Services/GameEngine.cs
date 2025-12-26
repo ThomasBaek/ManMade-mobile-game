@@ -15,6 +15,7 @@ public class GameEngine : IGameEngine
     // Income cache for display (invalidated on state changes)
     private double _cachedBaseIncome;
     private bool _incomeCacheDirty = true;
+    private bool _isInitialized;
 
     public GameState State => _stateHolder.State;
 
@@ -90,8 +91,12 @@ public class GameEngine : IGameEngine
 
     public void Initialize()
     {
+        // Only initialize once - don't reload from disk on tab switches
+        if (_isInitialized) return;
+
         _stateHolder.State = _saveManager.Load() ?? CreateNewGame();
         CalculateOfflineEarnings();
+        _isInitialized = true;
     }
 
     private GameState CreateNewGame()
