@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Current Task
-**Bundle D**: TASK-025 to TASK-028 (Skill UI Components) - READY
+**Bundle F**: TASK-015 to TASK-017 (Polish) - READY
 
 ---
 
@@ -44,10 +44,10 @@
 | TASK-022 | Milestone Service | COMPLETED | TASK-021 | 30 min |
 | TASK-023 | Integrate Skills into GameEngine | COMPLETED | TASK-021, TASK-022 | 45 min |
 | TASK-024 | Update DI for Skills | COMPLETED | TASK-023 | 15 min |
-| TASK-025 | SkillViewModel | READY | TASK-024 | 30 min |
-| TASK-026 | Skill Selection Modal | BLOCKED | TASK-025 | 45 min |
-| TASK-027 | Skill Display Component | BLOCKED | TASK-025 | 30 min |
-| TASK-028 | Verify Skill Effects | BLOCKED | TASK-026, TASK-027 | 30 min |
+| TASK-025 | SkillViewModel | COMPLETED | TASK-024 | 30 min |
+| TASK-026 | Skill Selection Modal | COMPLETED | TASK-025 | 45 min |
+| TASK-027 | Skill Display Component | COMPLETED | TASK-025 | 30 min |
+| TASK-028 | Verify Skill Effects | COMPLETED | TASK-026, TASK-027 | 30 min |
 
 **Skill System Summary:**
 - 18 skills across 4 categories (Income, Operations, Offline, Prestige)
@@ -73,7 +73,7 @@
 
 | Task | Name | Status | Dependencies | Estimate |
 |------|------|--------|--------------|----------|
-| TASK-015 | UI Polish | BLOCKED | TASK-014 | 1 hour |
+| TASK-015 | UI Polish | READY | TASK-028 | 1 hour |
 | TASK-016 | Bug Fixes | BLOCKED | TASK-015 | Variable |
 | TASK-017 | Final Testing | BLOCKED | TASK-016 | 1 hour |
 
@@ -104,6 +104,10 @@
 | TASK-022 | Milestone Service | 2024-12-25 | 79e430e |
 | TASK-023 | Integrate Skills into GameEngine | 2024-12-26 | b4a026c |
 | TASK-024 | Update DI for Skills | 2024-12-26 | b4a026c |
+| TASK-025 | SkillViewModel | 2024-12-26 | 7927ff0 |
+| TASK-026 | Skill Selection Modal | 2024-12-26 | 7927ff0 |
+| TASK-027 | Skill Display Component | 2024-12-26 | 7927ff0 |
+| TASK-028 | Verify Skill Effects | 2024-12-26 | 7927ff0 |
 
 ---
 
