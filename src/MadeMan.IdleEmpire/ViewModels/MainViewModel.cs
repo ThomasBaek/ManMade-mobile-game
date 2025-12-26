@@ -157,8 +157,19 @@ public partial class MainViewModel : ObservableObject
             PrestigeButtonText = $"RESET FOR +{bonus:0}% BONUS";
         }
 
+        // Mark first locked operation as "next to unlock"
+        bool foundFirstLocked = false;
         foreach (var op in Operations)
         {
+            if (!op.IsUnlocked && !foundFirstLocked)
+            {
+                op.IsNextToUnlock = true;
+                foundFirstLocked = true;
+            }
+            else
+            {
+                op.IsNextToUnlock = false;
+            }
             op.Refresh();
         }
 

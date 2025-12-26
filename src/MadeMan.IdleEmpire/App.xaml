@@ -12,6 +12,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Converters -->
+            <converters:ProgressToWidthConverter x:Key="ProgressToWidthConverter"/>
             <converters:ProgressToWidthConverter x:Key="ProgressToWidth"/>
             <converters:ZeroToBoolConverter x:Key="ZeroToBool"/>
             <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>

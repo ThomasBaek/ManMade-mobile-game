@@ -39,6 +39,16 @@ public partial class OperationViewModel : ObservableObject
     [ObservableProperty]
     private bool _isUnlocked;
 
+    // Visibility support (TASK-036)
+    [ObservableProperty]
+    private bool _shouldShow = true;
+
+    [ObservableProperty]
+    private bool _isNextToUnlock;
+
+    [ObservableProperty]
+    private double _unlockProgress; // 0.0 - 1.0 for locked operations
+
     // Progress bar support
     [ObservableProperty]
     private double _progress; // 0.0 - 1.0
@@ -67,10 +77,18 @@ public partial class OperationViewModel : ObservableObject
         {
             LevelDisplay = "LOCKED";
             IncomeDisplay = string.Empty;
-            ButtonText = $"${_operation.UnlockCost:F0}";
+            ButtonText = $"${FormatNumber(_operation.UnlockCost)}";
             ButtonColor = _engine.CanUnlock(_operation.Id)
                 ? Color.FromArgb("#4ADE80")  // Success green
                 : Color.FromArgb("#4A5568"); // Locked gray
+
+            // Calculate unlock progress for visibility
+            UnlockProgress = _operation.UnlockCost > 0
+                ? Math.Min(1.0, _engine.State.Cash / _operation.UnlockCost)
+                : 1.0;
+
+            // Show if: 50%+ progress OR is next to unlock
+            ShouldShow = UnlockProgress >= 0.5 || IsNextToUnlock;
 
             // Reset progress display for locked operations
             Progress = 0;
@@ -79,6 +97,8 @@ public partial class OperationViewModel : ObservableObject
         }
         else
         {
+            ShouldShow = true; // Always show unlocked operations
+            UnlockProgress = 1.0;
             LevelDisplay = $"Lvl {state.Level}";
 
             // Calculate yield for this cycle

@@ -19,91 +19,103 @@
         <!-- === TOP BAR (Reusable Component) === -->
         <components:TopBar Grid.Row="0"/>
 
-        <!-- === OPERATIONS LIST === -->
+        <!-- === OPERATIONS LIST (Compact) === -->
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="12"
+            <VerticalStackLayout Spacing="8"
                                  BindableLayout.ItemsSource="{Binding Operations}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="vm:OperationViewModel">
                         <Frame BackgroundColor="{StaticResource Surface}"
-                               CornerRadius="12"
-                               Padding="16"
-                               BorderColor="Transparent">
+                               CornerRadius="8"
+                               Padding="10"
+                               BorderColor="Transparent"
+                               IsVisible="{Binding ShouldShow}">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding TapCommand}"/>
                             </Frame.GestureRecognizers>
 
-                            <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto">
+                            <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="10">
 
-                                <!-- Icon -->
-                                <Frame Grid.RowSpan="3"
-                                       BackgroundColor="{StaticResource SurfaceLight}"
-                                       CornerRadius="8"
+                                <!-- Icon (compact) -->
+                                <Frame BackgroundColor="{StaticResource SurfaceLight}"
+                                       CornerRadius="6"
                                        Padding="0"
-                                       HeightRequest="50"
-                                       WidthRequest="50"
-                                       BorderColor="Transparent"
-                                       VerticalOptions="Start">
+                                       HeightRequest="44"
+                                       WidthRequest="44"
+                                       BorderColor="Transparent">
                                     <Label Text="{Binding IconEmoji}"
-                                           FontSize="28"
+                                           FontSize="22"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center"/>
                                 </Frame>
 
-                                <!-- Name + Level -->
-                                <HorizontalStackLayout Grid.Column="1" Spacing="8" Margin="12,0,0,0">
-                                    <Label Text="{Binding Name}"
-                                           FontSize="16"
-                                           FontAttributes="Bold"
-                                           TextColor="{StaticResource TextPrimary}"/>
-                                    <Label Text="{Binding LevelDisplay}"
-                                           FontSize="14"
-                                           TextColor="{StaticResource TextSecondary}"/>
-                                </HorizontalStackLayout>
+                                <!-- Info Column -->
+                                <VerticalStackLayout Grid.Column="1"
+                                                     VerticalOptions="Center"
+                                                     Spacing="2">
 
-                                <!-- Progress Bar Row (only when unlocked) -->
-                                <Grid Grid.Column="1" Grid.Row="1"
-                                      ColumnDefinitions="*,Auto"
-                                      Margin="12,6,0,0"
-                                      IsVisible="{Binding IsUnlocked}">
-
-                                    <!-- Progress Bar -->
-                                    <ProgressBar Progress="{Binding Progress}"
-                                                 ProgressColor="{StaticResource Gold}"
-                                                 BackgroundColor="{StaticResource SurfaceLight}"
-                                                 HeightRequest="8"
-                                                 VerticalOptions="Center"/>
-
-                                    <!-- Yield + Time -->
-                                    <HorizontalStackLayout Grid.Column="1" Spacing="4" Margin="8,0,0,0">
-                                        <Label Text="{Binding YieldDisplay}"
-                                               FontSize="12"
+                                    <!-- Name + Level Row -->
+                                    <HorizontalStackLayout Spacing="6">
+                                        <Label Text="{Binding Name}"
+                                               FontSize="14"
                                                FontAttributes="Bold"
-                                               TextColor="{StaticResource Gold}"/>
-                                        <Label Text="{Binding TimeRemainingDisplay}"
+                                               TextColor="{StaticResource TextPrimary}"
+                                               LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding LevelDisplay}"
                                                FontSize="12"
                                                TextColor="{StaticResource TextSecondary}"/>
                                     </HorizontalStackLayout>
-                                </Grid>
 
-                                <!-- Effective Income (small text) -->
-                                <Label Grid.Column="1" Grid.Row="2"
-                                       Text="{Binding IncomeDisplay}"
-                                       FontSize="11"
-                                       TextColor="{StaticResource TextSecondary}"
-                                       IsVisible="{Binding IsUnlocked}"
-                                       Margin="12,2,0,0"/>
+                                    <!-- Progress Bar (unlocked: yield progress) -->
+                                    <Grid HeightRequest="6"
+                                          IsVisible="{Binding IsUnlocked}"
+                                          Margin="0,2,0,0">
+                                        <ProgressBar Progress="{Binding Progress}"
+                                                     ProgressColor="{StaticResource Gold}"
+                                                     BackgroundColor="{StaticResource SurfaceLight}"
+                                                     HeightRequest="6"/>
+                                    </Grid>
 
-                                <!-- Action Button -->
-                                <Button Grid.Column="2" Grid.RowSpan="3"
+                                    <!-- Progress Bar (locked: unlock progress) -->
+                                    <Grid HeightRequest="4"
+                                          IsVisible="{Binding IsUnlocked, Converter={StaticResource InverseBoolConverter}}"
+                                          Margin="0,2,0,0">
+                                        <BoxView BackgroundColor="{StaticResource SurfaceLight}"
+                                                 CornerRadius="2"/>
+                                        <BoxView BackgroundColor="{StaticResource Gold}"
+                                                 CornerRadius="2"
+                                                 HorizontalOptions="Start"
+                                                 WidthRequest="{Binding UnlockProgress, Converter={StaticResource ProgressToWidthConverter}}"/>
+                                    </Grid>
+
+                                    <!-- Income display (unlocked only) -->
+                                    <HorizontalStackLayout Spacing="6"
+                                                           IsVisible="{Binding IsUnlocked}">
+                                        <Label Text="{Binding YieldDisplay}"
+                                               FontSize="11"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Gold}"/>
+                                        <Label Text="{Binding TimeRemainingDisplay}"
+                                               FontSize="11"
+                                               TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="{Binding IncomeDisplay}"
+                                               FontSize="11"
+                                               TextColor="{StaticResource TextSecondary}"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+
+                                <!-- Action Button (compact) -->
+                                <Button Grid.Column="2"
                                         Text="{Binding ButtonText}"
                                         Command="{Binding TapCommand}"
                                         BackgroundColor="{Binding ButtonColor}"
                                         TextColor="White"
-                                        CornerRadius="8"
-                                        Padding="16,8"
-                                        FontSize="14"
+                                        CornerRadius="6"
+                                        Padding="12,0"
+                                        FontSize="12"
                                         FontAttributes="Bold"
+                                        HeightRequest="36"
+                                        MinimumWidthRequest="65"
                                         VerticalOptions="Center"/>
                             </Grid>
                         </Frame>
@@ -112,27 +124,35 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- === PRESTIGE PANEL === -->
+        <!-- === PRESTIGE PANEL (Compact) === -->
         <Frame Grid.Row="2"
                BackgroundColor="{StaticResource Primary}"
-               CornerRadius="16"
-               Padding="20"
-               Margin="0,16,0,0"
+               CornerRadius="10"
+               Padding="12"
+               Margin="0,8,0,0"
                IsVisible="{Binding CanPrestige}"
                BorderColor="Transparent">
-            <VerticalStackLayout Spacing="12">
-                <Label Text="PRESTIGE AVAILABLE"
-                       FontSize="16"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       HorizontalOptions="Center"/>
-                <Button Text="{Binding PrestigeButtonText}"
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                    <Label Text="PRESTIGE READY"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                    <Label Text="{Binding PrestigeButtonText}"
+                           FontSize="11"
+                           TextColor="White"
+                           Opacity="0.85"/>
+                </VerticalStackLayout>
+                <Button Grid.Column="1"
+                        Text="GO"
                         Command="{Binding PrestigeCommand}"
                         BackgroundColor="White"
                         TextColor="{StaticResource Primary}"
-                        CornerRadius="8"
-                        FontAttributes="Bold"/>
-            </VerticalStackLayout>
+                        CornerRadius="6"
+                        FontAttributes="Bold"
+                        HeightRequest="36"
+                        WidthRequest="60"/>
+            </Grid>
         </Frame>
 
         <!-- === SKILL SELECTION MODAL (Overlay) === -->
