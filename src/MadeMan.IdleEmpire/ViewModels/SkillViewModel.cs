@@ -6,11 +6,14 @@ using System.Collections.ObjectModel;
 
 namespace MadeMan.IdleEmpire.ViewModels;
 
-public partial class SkillViewModel : ObservableObject, IDisposable
+/// <summary>
+/// SkillViewModel is a Singleton that lives for the app's lifetime.
+/// Event subscriptions are not memory leaks since both this and the service are Singletons.
+/// </summary>
+public partial class SkillViewModel : ObservableObject
 {
     private readonly ISkillService _skillService;
     private readonly IMilestoneService _milestoneService;
-    private bool _disposed;
 
     [ObservableProperty]
     private ObservableCollection<SkillDisplayModel> _activeSkills = new();
@@ -115,24 +118,5 @@ public partial class SkillViewModel : ObservableObject, IDisposable
             SkillCategory.Prestige => "⭐",
             _ => "📦"
         };
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (_disposed) return;
-
-        if (disposing)
-        {
-            // Unsubscribe from event to prevent memory leak
-            _milestoneService.OnMilestoneReached -= OnMilestoneReached;
-        }
-
-        _disposed = true;
     }
 }

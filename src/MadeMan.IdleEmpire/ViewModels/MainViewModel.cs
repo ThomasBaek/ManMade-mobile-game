@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MadeMan.IdleEmpire.Models;
 using MadeMan.IdleEmpire.Services;
+using MadeMan.IdleEmpire.Utilities;
 using static MadeMan.IdleEmpire.Models.TitleConfig;
 
 namespace MadeMan.IdleEmpire.ViewModels;
@@ -14,7 +15,17 @@ public partial class MainViewModel : ObservableObject
     private IDispatcherTimer? _gameTimer;
     private IDispatcherTimer? _saveTimer;
     private DateTime _lastTick;
+    private DateTime _lastDisplayUpdate;
     private bool _isGameLoopRunning;
+
+    // Display update throttling (4 updates per second for UI, game logic runs at full speed)
+    private const int DisplayUpdatesPerSecond = 4;
+    private static readonly TimeSpan DisplayUpdateInterval = TimeSpan.FromMilliseconds(1000.0 / DisplayUpdatesPerSecond);
+
+    // Cached display values to avoid unnecessary binding updates
+    private string _lastCashDisplay = "";
+    private string _lastIncomeDisplay = "";
+    private string _lastTotalEarnedDisplay = "";
 
     [ObservableProperty]
     private string _cashDisplay = "$0";
@@ -147,31 +158,57 @@ public partial class MainViewModel : ObservableObject
         var delta = (now - _lastTick).TotalSeconds;
         _lastTick = now;
 
+        // Game logic runs every tick (60fps)
         _engine.Tick(delta);
-        UpdateDisplay();
+
+        // UI updates are throttled to reduce CPU usage (4fps is enough for display)
+        if (now - _lastDisplayUpdate >= DisplayUpdateInterval)
+        {
+            _lastDisplayUpdate = now;
+            UpdateDisplay();
+        }
     }
 
     private void UpdateDisplay()
     {
-        CashDisplay = FormatCash(_engine.State.Cash);
-        IncomeDisplay = $"+{FormatCash(_engine.IncomePerSecond)}/s";
+        // Use caching to avoid unnecessary binding updates
+        var newCashDisplay = NumberFormatter.FormatCurrency(_engine.State.Cash);
+        if (newCashDisplay != _lastCashDisplay)
+        {
+            CashDisplay = newCashDisplay;
+            _lastCashDisplay = newCashDisplay;
+        }
+
+        var newIncomeDisplay = $"+{NumberFormatter.FormatCurrency(_engine.IncomePerSecond)}/s";
+        if (newIncomeDisplay != _lastIncomeDisplay)
+        {
+            IncomeDisplay = newIncomeDisplay;
+            _lastIncomeDisplay = newIncomeDisplay;
+        }
+
         CanPrestige = _engine.CanPrestige();
 
-        // Prestige stats
+        // Prestige stats (these change rarely, so no caching needed)
         PrestigeCount = _engine.State.PrestigeCount;
         HasPrestiged = PrestigeCount > 0;
         var bonusPercent = (_engine.State.PrestigeBonus - 1.0) * 100;
         PrestigeBonusDisplay = $"+{bonusPercent:0}%";
 
         // Total earned + progress to prestige
-        TotalEarnedDisplay = FormatCash(_engine.State.TotalEarned);
-        PrestigeProgress = Math.Min(_engine.State.TotalEarned / GameConfig.PrestigeThreshold, 1.0);
-        PrestigeThresholdDisplay = $"/ {FormatCash(GameConfig.PrestigeThreshold)}";
+        var newTotalEarned = NumberFormatter.FormatCurrency(_engine.State.TotalEarned);
+        if (newTotalEarned != _lastTotalEarnedDisplay)
+        {
+            TotalEarnedDisplay = newTotalEarned;
+            _lastTotalEarnedDisplay = newTotalEarned;
+        }
 
-        // Prestige badge color (glows when available)
+        PrestigeProgress = Math.Min(_engine.State.TotalEarned / GameConfig.PrestigeThreshold, 1.0);
+        PrestigeThresholdDisplay = $"/ {NumberFormatter.FormatCurrency(GameConfig.PrestigeThreshold)}";
+
+        // Prestige badge color - use resource colors
         PrestigeBadgeColor = CanPrestige
-            ? Color.FromArgb("#8B0000")  // Primary/blood red when available
-            : Color.FromArgb("#252540"); // SurfaceLight when not
+            ? GetResourceColor("Primary")
+            : GetResourceColor("SurfaceLight");
 
         if (CanPrestige)
         {
@@ -197,6 +234,15 @@ public partial class MainViewModel : ObservableObject
 
         // Update skill milestone progress
         SkillVM.UpdateProgress();
+    }
+
+    private static Color GetResourceColor(string key)
+    {
+        if (Application.Current?.Resources.TryGetValue(key, out var value) == true && value is Color color)
+        {
+            return color;
+        }
+        return Colors.Gray; // Fallback
     }
 
     [RelayCommand]
@@ -282,13 +328,5 @@ public partial class MainViewModel : ObservableObject
             _saveTimer.Stop();
             _saveTimer = null;
         }
-    }
-
-    private static string FormatCash(double value)
-    {
-        if (value >= 1_000_000_000) return $"${value / 1_000_000_000:F2}B";
-        if (value >= 1_000_000) return $"${value / 1_000_000:F2}M";
-        if (value >= 1_000) return $"${value / 1_000:F2}K";
-        return $"${value:F2}";
     }
 }

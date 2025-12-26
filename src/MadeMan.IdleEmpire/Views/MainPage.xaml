@@ -36,18 +36,19 @@
 
                             <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="10">
 
-                                <!-- Icon (compact) -->
-                                <Frame BackgroundColor="{StaticResource SurfaceLight}"
-                                       CornerRadius="6"
-                                       Padding="0"
-                                       HeightRequest="44"
-                                       WidthRequest="44"
-                                       BorderColor="Transparent">
+                                <!-- Icon (compact) - using Border instead of Frame for performance -->
+                                <Border BackgroundColor="{StaticResource SurfaceLight}"
+                                        StrokeThickness="0"
+                                        HeightRequest="44"
+                                        WidthRequest="44">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="6"/>
+                                    </Border.StrokeShape>
                                     <Label Text="{Binding IconEmoji}"
                                            FontSize="22"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center"/>
-                                </Frame>
+                                </Border>
 
                                 <!-- Info Column -->
                                 <VerticalStackLayout Grid.Column="1"
@@ -67,14 +68,12 @@
                                     </HorizontalStackLayout>
 
                                     <!-- Progress Bar (unlocked: yield progress) -->
-                                    <Grid HeightRequest="6"
-                                          IsVisible="{Binding IsUnlocked}"
-                                          Margin="0,2,0,0">
-                                        <ProgressBar Progress="{Binding Progress}"
-                                                     ProgressColor="{StaticResource Gold}"
-                                                     BackgroundColor="{StaticResource SurfaceLight}"
-                                                     HeightRequest="6"/>
-                                    </Grid>
+                                    <ProgressBar Progress="{Binding Progress}"
+                                                 ProgressColor="{StaticResource Gold}"
+                                                 BackgroundColor="{StaticResource SurfaceLight}"
+                                                 HeightRequest="6"
+                                                 Margin="0,2,0,0"
+                                                 IsVisible="{Binding IsUnlocked}"/>
 
                                     <!-- Progress Bar (locked: unlock progress) -->
                                     <Grid HeightRequest="4"

@@ -68,6 +68,7 @@ public partial class MainPage : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
+        _viewModel.PropertyChanged -= OnViewModelPropertyChanged; // Fix memory leak
         _viewModel.OnDisappearing();
     }
 

@@ -24,16 +24,32 @@ MadeMan.IdleEmpire/
 ├── Models/
 │   ├── GameState.cs        # Game state (cash, prestige, operations)
 │   ├── Operation.cs        # Unified crime/business model
-│   └── GameConfig.cs       # All balance constants
+│   ├── GameConfig.cs       # All balance constants
+│   ├── SkillConfig.cs      # Skill definitions & milestones
+│   └── TitleConfig.cs      # Title progression system
 ├── ViewModels/
 │   ├── MainViewModel.cs    # Main ViewModel with game loop
-│   └── OperationViewModel.cs # ViewModel for each operation
+│   ├── OperationViewModel.cs # ViewModel for each operation
+│   ├── SkillViewModel.cs   # Skill selection & display
+│   └── SettingsViewModel.cs # Settings & reset game
 ├── Views/
-│   └── MainPage.xaml       # ONLY page - all gameplay
+│   ├── MainPage.xaml       # Empire tab - operations
+│   ├── SkillsPage.xaml     # Skills tab
+│   ├── SettingsPage.xaml   # Settings tab
+│   └── Components/         # Reusable UI components
+│       ├── TopBar.xaml     # Global header (cash, income, prestige)
+│       ├── SkillSelectionModal.xaml
+│       ├── WelcomeBackModal.xaml
+│       ├── PrestigeModal.xaml
+│       └── TitleUnlockModal.xaml
 ├── Services/
 │   ├── IGameEngine.cs      # Interface for game logic
 │   ├── GameEngine.cs       # Core tick logic, unlock, upgrade
-│   └── SaveManager.cs      # Save/load to Preferences
+│   ├── SaveManager.cs      # Save/load to Preferences
+│   ├── SkillService.cs     # Skill state management
+│   └── MilestoneService.cs # Milestone triggers
+├── Utilities/
+│   └── NumberFormatter.cs  # Centralized number/currency formatting
 └── Resources/
     ├── Styles/
     │   └── Theme.xaml      # Colors and styles
@@ -47,6 +63,8 @@ MadeMan.IdleEmpire/
 - **Commands:** Use [RelayCommand] attribute
 - **DI:** Register all services as Singleton in MauiProgram.cs
 - **Async:** Use async/await for I/O operations
+- **Performance:** Use value caching to prevent unnecessary binding updates
+- **Formatting:** Use NumberFormatter utility for consistent display
 
 ## Core Gameplay Loop
 ```
@@ -82,47 +100,88 @@ dotnet clean && dotnet build -f net10.0-android
 
 # Publish APK
 dotnet publish -f net10.0-android -c Release
-```
 
-## Implementation Order
-1. **Models** - GameState.cs, Operation.cs, GameConfig.cs
-2. **Services** - SaveManager.cs, IGameEngine.cs, GameEngine.cs
-3. **ViewModels** - OperationViewModel.cs, MainViewModel.cs
-4. **Resources** - Theme.xaml (colors)
-5. **Views** - MainPage.xaml (redesign from scratch)
-6. **DI Setup** - MauiProgram.cs
-7. **Lifecycle** - App.xaml.cs (save on sleep)
-8. **Test** - Run on emulator
+# Deploy to physical device (avoid Fast Deployment issues)
+dotnet build -f net10.0-android -p:EmbedAssembliesIntoApk=true
+```
 
 ## Status Checklist
 - [x] Project created
-- [x] NuGet packages installed (TASK-001) ✅
+- [x] NuGet packages installed (TASK-001)
 - [x] Directory structure ready
-- [x] Models implemented (TASK-002) ✅
-- [x] Services implemented (TASK-003, TASK-004) ✅
-- [x] DI & Lifecycle setup (TASK-005) ✅
-- [x] Theme/colors set up (TASK-006) ✅
-- [x] OperationViewModel (TASK-007) ✅
-- [x] MainViewModel (TASK-008) ✅
-- [x] UI implemented (TASK-009) ✅
-- [x] Icons added (TASK-010) ✅
-- [x] Game loop test (TASK-011) ✅
-- [x] Prestige test (TASK-012) ✅
-- [x] Save/Load test (TASK-013) ✅
-- [x] Offline earnings test (TASK-014) ✅
+- [x] Models implemented (TASK-002)
+- [x] Services implemented (TASK-003, TASK-004)
+- [x] DI & Lifecycle setup (TASK-005)
+- [x] Theme/colors set up (TASK-006)
+- [x] OperationViewModel (TASK-007)
+- [x] MainViewModel (TASK-008)
+- [x] UI implemented (TASK-009)
+- [x] Icons added (TASK-010)
+- [x] Game loop test (TASK-011)
+- [x] Prestige test (TASK-012)
+- [x] Save/Load test (TASK-013)
+- [x] Offline earnings test (TASK-014)
+- [x] Skill System (Bundle B+C+D)
+- [x] Welcome Back Modal (Bundle C)
+- [x] Interval-Based Operations (Bundle G)
+- [x] Smart Visibility & Compact UI (Bundle H)
+- [x] Prestige Polish & Titles (Bundle I)
+- [x] Performance Optimization (Code Review)
 
-**MVP Core Complete!** Next: Skill System (Bundle B) or Polish (Phase 6)
+**MVP COMPLETE + POLISHED!**
 
 ## Color Palette
 ```
 Background:    #1A1A2E (dark blue)
 Surface:       #16213E (slightly lighter)
+SurfaceLight:  #252540 (for badges/progress)
 Primary:       #E94560 (red accent)
 Gold:          #FFD700 (cash color)
 Success:       #4ADE80 (green - can afford)
-Locked:        #4A5568 (gray - can't afford)
+Smoke:         #4A5568 (gray - can't afford)
 TextPrimary:   #FFFFFF
 TextSecondary: #8892A0
+```
+
+## Performance Patterns
+
+### UI Update Throttling
+Game logic runs at 60fps, but UI updates are throttled to 4fps to reduce CPU usage:
+```csharp
+private const int DisplayUpdatesPerSecond = 4;
+private static readonly TimeSpan DisplayUpdateInterval = TimeSpan.FromMilliseconds(1000.0 / DisplayUpdatesPerSecond);
+```
+
+### Value Caching
+Only update bindings when values actually change:
+```csharp
+private string _lastCashDisplay = "";
+var newCashDisplay = NumberFormatter.FormatCurrency(value);
+if (newCashDisplay != _lastCashDisplay)
+{
+    CashDisplay = newCashDisplay;
+    _lastCashDisplay = newCashDisplay;
+}
+```
+
+### Resource Colors
+Use theme colors instead of hardcoded values:
+```csharp
+private static Color GetResourceColor(string key)
+{
+    if (Application.Current?.Resources.TryGetValue(key, out var value) == true && value is Color color)
+        return color;
+    return Colors.Gray;
+}
+```
+
+### Event Handler Cleanup
+Always unsubscribe event handlers to prevent memory leaks:
+```csharp
+protected override void OnDisappearing()
+{
+    _viewModel.PropertyChanged -= OnViewModelPropertyChanged;
+}
 ```
 
 ## Troubleshooting
@@ -146,11 +205,18 @@ adb devices
 ### Hot Reload not working
 Restart the app completely: `dotnet build -f net10.0-android -t:Run`
 
+### App crashes on physical device (Fast Deployment)
+Use embedded assemblies:
+```bash
+dotnet build -f net10.0-android -p:EmbedAssembliesIntoApk=true
+```
+
 ## Design Documents
 See other markdown files in the project for:
 - **GAME_DESIGN_DOCUMENT.md** - Lore, rules, future features
 - **CLAUDE_CODE_IMPLEMENTATION_GUIDE.md** - Detailed code spec
 - **MVP_Specification_MAUI.md** - Original technical spec
+- **EXPANSION_ROADMAP_MadeMan_v2.md** - Future features roadmap
 
 ---
 
