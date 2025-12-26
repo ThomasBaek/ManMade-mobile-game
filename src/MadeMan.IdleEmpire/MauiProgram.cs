@@ -17,9 +17,24 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		// Services
+		// Core Services
 		builder.Services.AddSingleton<SaveManager>();
+
+		// Game Engine (uses IServiceProvider for lazy skill service resolution)
 		builder.Services.AddSingleton<IGameEngine, GameEngine>();
+
+		// Skill Services (registered AFTER GameEngine, get state from engine)
+		builder.Services.AddSingleton<ISkillService>(sp =>
+		{
+			var engine = sp.GetRequiredService<IGameEngine>();
+			return new SkillService(() => engine.State);
+		});
+		builder.Services.AddSingleton<IMilestoneService>(sp =>
+		{
+			var engine = sp.GetRequiredService<IGameEngine>();
+			var skillService = sp.GetRequiredService<ISkillService>();
+			return new MilestoneService(() => engine.State, skillService);
+		});
 
 		// ViewModels
 		builder.Services.AddTransient<MainViewModel>();
