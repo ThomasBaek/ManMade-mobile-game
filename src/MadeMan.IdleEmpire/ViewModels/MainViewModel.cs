@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MadeMan.IdleEmpire.Models;
 using MadeMan.IdleEmpire.Services;
+using static MadeMan.IdleEmpire.Models.TitleConfig;
 
 namespace MadeMan.IdleEmpire.ViewModels;
 
@@ -49,6 +50,27 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     private Color _prestigeBadgeColor = Color.FromArgb("#252540");
+
+    // Prestige Modal (TASK-038)
+    [ObservableProperty]
+    private bool _isPrestigeModalVisible;
+
+    // Prestige bonus display
+    public string CurrentPrestigeBonusDisplay => $"{_engine.State.PrestigeBonus:F2}x";
+    public string NextPrestigeBonusDisplay => $"{_engine.State.PrestigeBonus + GameConfig.PrestigeBonusPerReset:F2}x";
+
+    // Title System (TASK-039)
+    public string CurrentTitle => TitleConfig.GetTitle(_engine.State.PrestigeCount).Name;
+    public string CurrentTitleDescription => TitleConfig.GetTitle(_engine.State.PrestigeCount).Description;
+
+    [ObservableProperty]
+    private bool _showTitleUnlockPopup;
+
+    [ObservableProperty]
+    private string _unlockedTitleName = "";
+
+    [ObservableProperty]
+    private string _unlockedTitleDescription = "";
 
     public ObservableCollection<OperationViewModel> Operations { get; } = new();
 
@@ -178,13 +200,53 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void ShowPrestigeModal()
+    {
+        if (CanPrestige)
+        {
+            IsPrestigeModalVisible = true;
+        }
+    }
+
+    [RelayCommand]
+    private void DismissPrestigeModal()
+    {
+        IsPrestigeModalVisible = false;
+    }
+
+    [RelayCommand]
+    private void DismissTitlePopup()
+    {
+        ShowTitleUnlockPopup = false;
+    }
+
+    [RelayCommand]
     private void Prestige()
     {
         if (!_engine.CanPrestige()) return;
 
+        // Remember current title before prestige
+        var oldTitle = TitleConfig.GetTitle(_engine.State.PrestigeCount);
+
         _engine.DoPrestige();
+        IsPrestigeModalVisible = false;
         BuildOperationViewModels();
         SkillVM.RefreshActiveSkills(); // Skills reset on prestige
+
+        // Check for new title
+        var newTitle = TitleConfig.GetTitle(_engine.State.PrestigeCount);
+        if (newTitle != oldTitle)
+        {
+            UnlockedTitleName = newTitle.Name;
+            UnlockedTitleDescription = newTitle.Description;
+            ShowTitleUnlockPopup = true;
+        }
+
+        // Update all properties including title
+        OnPropertyChanged(nameof(CurrentTitle));
+        OnPropertyChanged(nameof(CurrentTitleDescription));
+        OnPropertyChanged(nameof(CurrentPrestigeBonusDisplay));
+        OnPropertyChanged(nameof(NextPrestigeBonusDisplay));
         UpdateDisplay();
     }
 

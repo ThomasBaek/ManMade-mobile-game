@@ -124,42 +124,17 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- === PRESTIGE PANEL (Compact) === -->
-        <Frame Grid.Row="2"
-               BackgroundColor="{StaticResource Primary}"
-               CornerRadius="10"
-               Padding="12"
-               Margin="0,8,0,0"
-               IsVisible="{Binding CanPrestige}"
-               BorderColor="Transparent">
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                <VerticalStackLayout VerticalOptions="Center" Spacing="2">
-                    <Label Text="PRESTIGE READY"
-                           FontSize="13"
-                           FontAttributes="Bold"
-                           TextColor="White"/>
-                    <Label Text="{Binding PrestigeButtonText}"
-                           FontSize="11"
-                           TextColor="White"
-                           Opacity="0.85"/>
-                </VerticalStackLayout>
-                <Button Grid.Column="1"
-                        Text="GO"
-                        Command="{Binding PrestigeCommand}"
-                        BackgroundColor="White"
-                        TextColor="{StaticResource Primary}"
-                        CornerRadius="6"
-                        FontAttributes="Bold"
-                        HeightRequest="36"
-                        WidthRequest="60"/>
-            </Grid>
-        </Frame>
-
         <!-- === SKILL SELECTION MODAL (Overlay) === -->
         <components:SkillSelectionModal Grid.RowSpan="3"/>
 
-        <!-- === WELCOME BACK MODAL (Overlay - on top) === -->
+        <!-- === WELCOME BACK MODAL (Overlay) === -->
         <components:WelcomeBackModal x:Name="WelcomeBackModal" Grid.RowSpan="3"/>
+
+        <!-- === PRESTIGE MODAL (Overlay) === -->
+        <components:PrestigeModal x:Name="PrestigeModal" Grid.RowSpan="3"/>
+
+        <!-- === TITLE UNLOCK MODAL (Overlay - on top) === -->
+        <components:TitleUnlockModal Grid.RowSpan="3"/>
 
     </Grid>
 </ContentPage>

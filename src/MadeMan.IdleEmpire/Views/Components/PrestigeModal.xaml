@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
+             x:Class="MadeMan.IdleEmpire.Views.Components.PrestigeModal"
+             x:DataType="vm:MainViewModel"
+             IsVisible="{Binding IsPrestigeModalVisible}">
+
+    <!-- Dark overlay -->
+    <Grid BackgroundColor="#CC000000">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding DismissPrestigeModalCommand}"/>
+        </Grid.GestureRecognizers>
+
+        <!-- Modal Card -->
+        <Frame BackgroundColor="{StaticResource Surface}"
+               CornerRadius="20"
+               Padding="0"
+               Margin="24"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               MaximumWidthRequest="350"
+               BorderColor="Transparent">
+
+            <Grid RowDefinitions="Auto,*">
+
+                <!-- Header with close button -->
+                <Grid BackgroundColor="{StaticResource Primary}"
+                      Padding="16">
+                    <Label Text="PRESTIGE AVAILABLE"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+
+                    <!-- Close button -->
+                    <Button Text="X"
+                            Command="{Binding DismissPrestigeModalCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            WidthRequest="40"
+                            HeightRequest="40"/>
+                </Grid>
+
+                <!-- Content -->
+                <VerticalStackLayout Grid.Row="1"
+                                     Padding="24"
+                                     Spacing="16">
+
+                    <!-- Star icon -->
+                    <Label Text="⭐"
+                           FontSize="48"
+                           HorizontalOptions="Center"/>
+
+                    <!-- Description -->
+                    <Label Text="Reset your empire for a permanent bonus!"
+                           FontSize="14"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+
+                    <!-- Bonus comparison -->
+                    <Frame BackgroundColor="{StaticResource SurfaceLight}"
+                           CornerRadius="8"
+                           Padding="16"
+                           BorderColor="Transparent">
+                        <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
+                            <VerticalStackLayout>
+                                <Label Text="Current"
+                                       FontSize="11"
+                                       TextColor="{StaticResource TextSecondary}"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="{Binding CurrentPrestigeBonusDisplay}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="1"
+                                   Text="→"
+                                   FontSize="24"
+                                   TextColor="{StaticResource Gold}"
+                                   VerticalOptions="Center"/>
+
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label Text="After"
+                                       FontSize="11"
+                                       TextColor="{StaticResource TextSecondary}"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="{Binding NextPrestigeBonusDisplay}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource Gold}"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Warning -->
+                    <Label Text="This will reset all operations and cash!"
+                           FontSize="11"
+                           TextColor="{StaticResource Primary}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+
+                    <!-- Prestige button -->
+                    <Button Text="PRESTIGE NOW"
+                            Command="{Binding PrestigeCommand}"
+                            BackgroundColor="{StaticResource Gold}"
+                            TextColor="{StaticResource Background}"
+                            FontAttributes="Bold"
+                            CornerRadius="8"
+                            HeightRequest="50"/>
+
+                    <!-- Later button -->
+                    <Button Text="Maybe Later"
+                            Command="{Binding DismissPrestigeModalCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource TextSecondary}"
+                            FontSize="14"/>
+
+                </VerticalStackLayout>
+
+            </Grid>
+
+        </Frame>
+    </Grid>
+
+</ContentView>

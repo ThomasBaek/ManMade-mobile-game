@@ -43,16 +43,23 @@
                        TextColor="{StaticResource Smoke}"
                        VerticalOptions="Center"/>
 
-                <!-- Prestige Badge -->
+                <!-- Prestige Badge (clickable) -->
                 <Frame Grid.Column="3"
                        BackgroundColor="{Binding PrestigeBadgeColor}"
                        CornerRadius="6"
                        Padding="8,4"
-                       BorderColor="Transparent"
-                       IsVisible="{Binding HasPrestiged}">
+                       BorderColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShowPrestigeModalCommand}"/>
+                    </Frame.GestureRecognizers>
                     <HorizontalStackLayout Spacing="4">
                         <Label Text="⭐"
                                FontSize="10"
+                               VerticalOptions="Center"
+                               IsVisible="{Binding CanPrestige}"/>
+                        <Label Text="P:"
+                               FontSize="10"
+                               TextColor="{StaticResource TextSecondary}"
                                VerticalOptions="Center"/>
                         <Label Text="{Binding PrestigeCount}"
                                FontSize="12"
@@ -64,40 +71,63 @@
             </Grid>
         </Frame>
 
-        <!-- === PRESTIGE PROGRESS === -->
+        <!-- === TITLE + PRESTIGE PROGRESS === -->
         <Frame BackgroundColor="{StaticResource Surface}"
                CornerRadius="12"
                Padding="12"
                Margin="0,0,0,8"
                BorderColor="Transparent">
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                <!-- Total Earned + Prestige Progress -->
-                <VerticalStackLayout Spacing="4">
-                    <Label Text="PRESTIGE PROGRESS"
-                           FontSize="10"
-                           TextColor="{StaticResource TextSecondary}"/>
-                    <Grid HeightRequest="6">
-                        <Frame BackgroundColor="{StaticResource SurfaceLight}"
-                               CornerRadius="3"
-                               Padding="0"
-                               BorderColor="Transparent"/>
-                        <BoxView BackgroundColor="{StaticResource Primary}"
-                                 CornerRadius="3"
-                                 HorizontalOptions="Start"
-                                 WidthRequest="{Binding PrestigeProgress, Converter={StaticResource ProgressToWidth}}"/>
-                    </Grid>
-                </VerticalStackLayout>
-                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                    <Label Text="{Binding TotalEarnedDisplay}"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           TextColor="{StaticResource TextPrimary}"
-                           HorizontalOptions="End"/>
-                    <Label Text="{Binding PrestigeThresholdDisplay}"
+            <Grid RowDefinitions="Auto,Auto" RowSpacing="8">
+                <!-- Title Row -->
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <HorizontalStackLayout Spacing="4">
+                        <Label Text="🎩"
+                               FontSize="14"
+                               VerticalOptions="Center"/>
+                        <Label Text="{Binding CurrentTitle}"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Gold}"
+                               VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    <Label Grid.Column="2"
+                           Text="{Binding CurrentTitleDescription}"
                            FontSize="10"
                            TextColor="{StaticResource TextSecondary}"
-                           HorizontalOptions="End"/>
-                </VerticalStackLayout>
+                           VerticalOptions="Center"
+                           LineBreakMode="TailTruncation"
+                           MaximumWidthRequest="160"/>
+                </Grid>
+
+                <!-- Prestige Progress Row -->
+                <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="PRESTIGE PROGRESS"
+                               FontSize="10"
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Grid HeightRequest="6">
+                            <Frame BackgroundColor="{StaticResource SurfaceLight}"
+                                   CornerRadius="3"
+                                   Padding="0"
+                                   BorderColor="Transparent"/>
+                            <BoxView BackgroundColor="{StaticResource Primary}"
+                                     CornerRadius="3"
+                                     HorizontalOptions="Start"
+                                     WidthRequest="{Binding PrestigeProgress, Converter={StaticResource ProgressToWidth}}"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="{Binding TotalEarnedDisplay}"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"
+                               HorizontalOptions="End"/>
+                        <Label Text="{Binding PrestigeThresholdDisplay}"
+                               FontSize="10"
+                               TextColor="{StaticResource TextSecondary}"
+                               HorizontalOptions="End"/>
+                    </VerticalStackLayout>
+                </Grid>
             </Grid>
         </Frame>
     </VerticalStackLayout>
