@@ -47,5 +47,14 @@ Depends on test feedback from TASK-011 to TASK-014.
 
 ---
 
-**Task Status**: BLOCKED (waiting for TASK-014)
-**Last Updated**: 2024-12-25
+**Task Status**: COMPLETED
+**Last Updated**: 2024-12-26
+**Commit**: fd84671
+
+## Implemented Polish Items
+1. Prestige Stats in header (count + bonus badge)
+2. Skill Level in Modal (NEW vs Lv X → Y)
+3. Safe Area Padding (5-row grid layout)
+4. Portrait Lock (Android)
+5. Total Earned Display (progress bar)
+6. Skill Effect Preview (current → next)

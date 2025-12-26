@@ -73,8 +73,8 @@
 
 | Task | Name | Status | Dependencies | Estimate |
 |------|------|--------|--------------|----------|
-| TASK-015 | UI Polish | READY | TASK-028 | 1 hour |
-| TASK-016 | Bug Fixes | BLOCKED | TASK-015 | Variable |
+| TASK-015 | UI Polish | COMPLETED | TASK-028 | 1 hour |
+| TASK-016 | Bug Fixes | READY | TASK-015 | Variable |
 | TASK-017 | Final Testing | BLOCKED | TASK-016 | 1 hour |
 
 ---
@@ -108,6 +108,7 @@
 | TASK-026 | Skill Selection Modal | 2024-12-26 | 7927ff0 |
 | TASK-027 | Skill Display Component | 2024-12-26 | 7927ff0 |
 | TASK-028 | Verify Skill Effects | 2024-12-26 | 7927ff0 |
+| TASK-015 | UI Polish | 2024-12-26 | fd84671 |
 
 ---
 

@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Current State
 
 ## Last Updated
-2024-12-26 (Bundle D completed - Skill System COMPLETE)
+2024-12-26 (TASK-015 UI Polish completed)
 
 ---
 
@@ -131,10 +131,10 @@ Next: Bundle F (TASK-015 to TASK-017) - Polish
 | Phase 6: Polish | TASK-015 to TASK-017 | READY |
 
 ## Active Task
-Bundle F: TASK-015 to TASK-017 (Polish) - READY
+TASK-016 (Bug Fixes) + TASK-017 (Final Testing) - READY
 
 ## Last Completed Task
-Bundle D: TASK-025 to TASK-028 (Skill UI Components) - 2024-12-26
+TASK-015: UI Polish - 2024-12-26
 
 ---
 
