@@ -36,7 +36,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainViewModel>();
 		builder.Services.AddTransient<SettingsViewModel>();
 
-		// Pages
+		// Pages (Transient - Shell creates them via ContentTemplate)
 		builder.Services.AddTransient<Views.MainPage>();
 		builder.Services.AddTransient<Views.OrgCrimePage>();
 		builder.Services.AddTransient<Views.CasinoPage>();

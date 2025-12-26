@@ -112,5 +112,8 @@
         <!-- === SKILL SELECTION MODAL (Overlay) === -->
         <components:SkillSelectionModal Grid.RowSpan="3"/>
 
+        <!-- === WELCOME BACK MODAL (Overlay - on top) === -->
+        <components:WelcomeBackModal x:Name="WelcomeBackModal" Grid.RowSpan="3"/>
+
     </Grid>
 </ContentPage>

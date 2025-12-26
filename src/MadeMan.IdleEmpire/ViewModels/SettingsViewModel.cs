@@ -12,6 +12,7 @@ public partial class SettingsViewModel : ObservableObject
 
     private readonly SaveManager _saveManager;
     private readonly IGameEngine _gameEngine;
+    private readonly IServiceProvider _serviceProvider;
 
     public string Version => "1.1.0";
 
@@ -24,10 +25,11 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     private bool _notificationsEnabled;
 
-    public SettingsViewModel(SaveManager saveManager, IGameEngine gameEngine)
+    public SettingsViewModel(SaveManager saveManager, IGameEngine gameEngine, IServiceProvider serviceProvider)
     {
         _saveManager = saveManager;
         _gameEngine = gameEngine;
+        _serviceProvider = serviceProvider;
 
         // Load settings from Preferences
         SoundEnabled = Preferences.Default.Get(SoundKey, true);
@@ -119,11 +121,9 @@ public partial class SettingsViewModel : ObservableObject
                     "OK");
             }
 
-            // Restart app using Window
-            if (Application.Current?.Windows.Count > 0)
-            {
-                Application.Current.Windows[0].Page = new AppShell();
-            }
+            // Quit app - user needs to restart manually
+            // (Can't create new AppShell without full app restart for DI)
+            Application.Current?.Quit();
         }
         catch (Exception ex)
         {

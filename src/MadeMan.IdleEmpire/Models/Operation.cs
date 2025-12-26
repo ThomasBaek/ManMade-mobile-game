@@ -10,13 +10,16 @@ public class Operation
     // Economics
     public double BaseIncome { get; set; }
     public double UnlockCost { get; set; }
+    public double BaseUpgradeCost { get; set; }  // For free operations that still have upgrade costs
     public double UpgradeMultiplier { get; set; } = 1.5;
 
     // Calculated
     public double GetUpgradeCost(int currentLevel)
     {
         if (currentLevel <= 0) return UnlockCost;
-        return UnlockCost * Math.Pow(UpgradeMultiplier, currentLevel);
+        // Use BaseUpgradeCost if set, otherwise fall back to UnlockCost
+        var baseCost = BaseUpgradeCost > 0 ? BaseUpgradeCost : UnlockCost;
+        return baseCost * Math.Pow(UpgradeMultiplier, currentLevel);
     }
 
     public double GetIncome(int level, double prestigeBonus)

@@ -17,6 +17,11 @@ public class GameEngine : IGameEngine
     private bool _incomeCacheDirty = true;
     private bool _isInitialized;
 
+    // Offline earnings info (for Welcome Back modal)
+    public double LastOfflineEarnings { get; private set; }
+    public TimeSpan LastOfflineTime { get; private set; }
+    public double LastOfflineEfficiency { get; private set; }
+
     public GameState State => _stateHolder.State;
 
     public double IncomePerSecond
@@ -246,16 +251,18 @@ public class GameEngine : IGameEngine
     private void CalculateOfflineEarnings()
     {
         var offlineTime = DateTime.UtcNow - State.LastPlayedUtc;
+        LastOfflineTime = offlineTime;
 
         // Max hours with skill bonus (Extended Shift)
         var maxHours = GameConfig.MaxOfflineHours + _skillService.GetOfflineMaxHoursBonus();
         var hours = Math.Min(offlineTime.TotalHours, maxHours);
 
-        if (hours > 0.01)
+        if (hours > 0.01) // More than ~36 seconds
         {
             // Base efficiency + skill bonus (Night Owl)
             var efficiency = GameConfig.OfflineEfficiency + _skillService.GetOfflineEfficiencyBonus();
             efficiency = Math.Min(efficiency, 1.0); // Cap at 100%
+            LastOfflineEfficiency = efficiency;
 
             // Calculate base offline income (use base income without skill effects to avoid double-dipping)
             double baseIncomePerSecond = 0;
@@ -273,11 +280,25 @@ public class GameEngine : IGameEngine
             // Apply offline earnings multiplier (Godfather's Cut)
             earnings *= _skillService.GetOfflineEarningsMultiplier();
 
+            LastOfflineEarnings = earnings;
             State.Cash += earnings;
             State.TotalEarned += earnings;
         }
+        else
+        {
+            LastOfflineEarnings = 0;
+            LastOfflineEfficiency = 0;
+        }
 
         State.LastPlayedUtc = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Clear offline earnings display so modal doesn't show again on tab switch
+    /// </summary>
+    public void ClearOfflineEarningsDisplay()
+    {
+        LastOfflineEarnings = 0;
     }
 
     private Operation? GetOperation(string id)

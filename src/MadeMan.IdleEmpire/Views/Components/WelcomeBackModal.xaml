@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MadeMan.IdleEmpire.Views.Components.WelcomeBackModal"
+             x:Name="thisModal">
+
+    <!-- Dark overlay -->
+    <Grid BackgroundColor="#CC000000"
+          IsVisible="{Binding IsModalVisible, Source={x:Reference thisModal}}">
+
+        <!-- Modal Card -->
+        <Frame BackgroundColor="{StaticResource Surface}"
+               CornerRadius="20"
+               Padding="24"
+               Margin="24"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               MaximumWidthRequest="400"
+               BorderColor="Transparent">
+
+            <VerticalStackLayout Spacing="16">
+
+                <!-- Header -->
+                <Label Text="VELKOMMEN TILBAGE"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Gold}"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="BOSS"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextPrimary}"
+                       HorizontalOptions="Center"
+                       Margin="0,-8,0,0"/>
+
+                <!-- Time Away -->
+                <Label x:Name="TimeAwayLabel"
+                       FontSize="14"
+                       TextColor="{StaticResource TextSecondary}"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="har dit imperium tjent:"
+                       FontSize="14"
+                       TextColor="{StaticResource TextSecondary}"
+                       HorizontalOptions="Center"/>
+
+                <!-- Earnings Amount -->
+                <Label x:Name="EarningsLabel"
+                       FontSize="36"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Gold}"
+                       HorizontalOptions="Center"/>
+
+                <BoxView HeightRequest="1"
+                         BackgroundColor="{StaticResource Gold}"
+                         Opacity="0.3"
+                         Margin="20,0"/>
+
+                <!-- Stats -->
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="8">
+                    <Label Text="Tid væk:"
+                           FontSize="12"
+                           TextColor="{StaticResource TextSecondary}"/>
+                    <Label x:Name="TimeStatLabel"
+                           Grid.Column="1"
+                           FontSize="12"
+                           TextColor="{StaticResource TextPrimary}"
+                           HorizontalOptions="End"/>
+
+                    <Label Grid.Row="1"
+                           Text="Efficiency:"
+                           FontSize="12"
+                           TextColor="{StaticResource TextSecondary}"/>
+                    <Label x:Name="EfficiencyLabel"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           FontSize="12"
+                           TextColor="{StaticResource TextPrimary}"
+                           HorizontalOptions="End"/>
+                </Grid>
+
+                <!-- Collect Button -->
+                <Button Text="INDSAML ALT"
+                        BackgroundColor="{StaticResource Gold}"
+                        TextColor="{StaticResource Background}"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        Margin="0,8,0,0"
+                        Clicked="OnCollectClicked"/>
+
+            </VerticalStackLayout>
+
+        </Frame>
+    </Grid>
+
+</ContentView>

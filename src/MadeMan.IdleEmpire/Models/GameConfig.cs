@@ -12,7 +12,8 @@ public static class GameConfig
             Icon = "icon_pickpocket.png",
             Description = "Lift wallets from unsuspecting tourists",
             BaseIncome = 1.0,
-            UnlockCost = 0,
+            UnlockCost = 0,  // FREE starter operation
+            BaseUpgradeCost = 5,  // Upgrades start at $5
             UpgradeMultiplier = 1.4
         },
         new Operation

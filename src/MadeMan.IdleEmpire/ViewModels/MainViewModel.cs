@@ -54,6 +54,9 @@ public partial class MainViewModel : ObservableObject
 
     public SkillViewModel SkillVM { get; }
 
+    // Expose game engine for Welcome Back modal
+    public IGameEngine GameEngine => _engine;
+
     public MainViewModel(IGameEngine engine, SaveManager saveManager, SkillViewModel skillVM)
     {
         _engine = engine;

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MadeMan.IdleEmpire.Views.SplashPage"
+             BackgroundColor="{StaticResource Background}"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Logo/Title Section -->
+        <VerticalStackLayout Grid.Row="1"
+                             HorizontalOptions="Center"
+                             Spacing="8">
+
+            <!-- Fedora Icon -->
+            <Label Text="🎩"
+                   FontSize="72"
+                   HorizontalOptions="Center"/>
+
+            <!-- Main Title -->
+            <Label Text="MADE MAN"
+                   FontSize="48"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Gold}"
+                   HorizontalOptions="Center"/>
+
+            <!-- Divider -->
+            <BoxView WidthRequest="200"
+                     HeightRequest="2"
+                     BackgroundColor="{StaticResource Gold}"
+                     HorizontalOptions="Center"
+                     Margin="0,8"/>
+
+            <!-- Subtitle -->
+            <Label Text="IDLE EMPIRE"
+                   FontSize="24"
+                   TextColor="{StaticResource TextSecondary}"
+                   HorizontalOptions="Center"
+                   CharacterSpacing="4"/>
+
+        </VerticalStackLayout>
+
+        <!-- Loading Indicator -->
+        <VerticalStackLayout Grid.Row="2"
+                             HorizontalOptions="Center"
+                             Margin="0,40,0,0">
+
+            <ActivityIndicator IsRunning="True"
+                               Color="{StaticResource Gold}"
+                               WidthRequest="40"
+                               HeightRequest="40"/>
+
+            <Label Text="Loading..."
+                   FontSize="14"
+                   TextColor="{StaticResource TextSecondary}"
+                   HorizontalOptions="Center"
+                   Margin="0,8,0,0"/>
+
+        </VerticalStackLayout>
+
+        <!-- Skyline Silhouette -->
+        <VerticalStackLayout Grid.Row="4"
+                             VerticalOptions="End"
+                             Margin="0,0,0,20">
+
+            <!-- Simple cityscape using shapes -->
+            <Grid HeightRequest="60" HorizontalOptions="Fill">
+                <BoxView BackgroundColor="{StaticResource Surface}"
+                         HorizontalOptions="Start"
+                         WidthRequest="40"
+                         HeightRequest="60"
+                         Margin="20,0,0,0"/>
+                <BoxView BackgroundColor="{StaticResource Surface}"
+                         HorizontalOptions="Start"
+                         WidthRequest="30"
+                         HeightRequest="40"
+                         Margin="70,20,0,0"/>
+                <BoxView BackgroundColor="{StaticResource Surface}"
+                         HorizontalOptions="Center"
+                         WidthRequest="50"
+                         HeightRequest="55"
+                         Margin="-60,5,0,0"/>
+                <BoxView BackgroundColor="{StaticResource Surface}"
+                         HorizontalOptions="Center"
+                         WidthRequest="35"
+                         HeightRequest="45"
+                         Margin="40,15,0,0"/>
+                <BoxView BackgroundColor="{StaticResource Surface}"
+                         HorizontalOptions="End"
+                         WidthRequest="45"
+                         HeightRequest="50"
+                         Margin="0,10,60,0"/>
+                <BoxView BackgroundColor="{StaticResource Surface}"
+                         HorizontalOptions="End"
+                         WidthRequest="30"
+                         HeightRequest="35"
+                         Margin="0,25,20,0"/>
+            </Grid>
+
+            <!-- Copyright -->
+            <Label Text="© 2024 Made Man Studios"
+                   FontSize="10"
+                   TextColor="{StaticResource Smoke}"
+                   HorizontalOptions="Center"
+                   Margin="0,8,0,0"/>
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>
