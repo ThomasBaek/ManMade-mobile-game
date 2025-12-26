@@ -7,6 +7,30 @@ public class SaveManager
 {
     private const string SaveKey = "gamestate_v1";
 
+    /// <summary>
+    /// Saves game state asynchronously to prevent UI blocking.
+    /// </summary>
+    public async Task SaveAsync(GameState state)
+    {
+        try
+        {
+            state.LastPlayedUtc = DateTime.UtcNow;
+            // Run serialization and storage off the UI thread
+            await Task.Run(() =>
+            {
+                var json = JsonSerializer.Serialize(state);
+                Preferences.Default.Set(SaveKey, json);
+            });
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Save failed: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Synchronous save for use in lifecycle events where async isn't practical.
+    /// </summary>
     public void Save(GameState state)
     {
         try

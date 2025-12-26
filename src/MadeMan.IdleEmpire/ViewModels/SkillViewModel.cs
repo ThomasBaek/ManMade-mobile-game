@@ -6,10 +6,11 @@ using System.Collections.ObjectModel;
 
 namespace MadeMan.IdleEmpire.ViewModels;
 
-public partial class SkillViewModel : ObservableObject
+public partial class SkillViewModel : ObservableObject, IDisposable
 {
     private readonly ISkillService _skillService;
     private readonly IMilestoneService _milestoneService;
+    private bool _disposed;
 
     [ObservableProperty]
     private ObservableCollection<SkillDisplayModel> _activeSkills = new();
@@ -111,50 +112,23 @@ public partial class SkillViewModel : ObservableObject
             _ => "📦"
         };
     }
-}
 
-public class SkillDisplayModel
-{
-    public string Id { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
-    public int Level { get; set; }
-    public int MaxLevel { get; set; }
-    public string Description { get; set; } = string.Empty;
-    public double EffectPerLevel { get; set; }
-    public string Icon { get; set; } = "⭐";
-    public string LevelDisplay => $"Lv {Level}/{MaxLevel}";
-    public bool IsMaxed => Level >= MaxLevel;
-}
-
-public class SkillChoiceModel
-{
-    public string Id { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
-    public double EffectPerLevel { get; set; }
-    public int CurrentLevel { get; set; }
-    public int MaxLevel { get; set; }
-    public string Icon { get; set; } = "⭐";
-    public SkillEffectType EffectType { get; set; }
-
-    // Display helpers
-    public bool IsNew => CurrentLevel == 0;
-    public string LevelTag => IsNew ? "NEW" : $"Lv {CurrentLevel} → {CurrentLevel + 1}";
-    public string CurrentEffectDisplay => FormatEffect(CurrentLevel);
-    public string NextEffectDisplay => FormatEffect(CurrentLevel + 1);
-
-    private string FormatEffect(int level)
+    public void Dispose()
     {
-        if (level == 0) return "-";
-        var total = EffectPerLevel * level;
-        return EffectType switch
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed) return;
+
+        if (disposing)
         {
-            SkillEffectType.Multiplier => $"+{total:F0}%",
-            SkillEffectType.Reduction => $"-{total:F0}%",
-            SkillEffectType.FlatBonus => $"+${total:F0}",
-            SkillEffectType.Duration => $"+{total:F0}h",
-            SkillEffectType.Chance => $"{total:F0}%",
-            _ => $"+{total:F0}"
-        };
+            // Unsubscribe from event to prevent memory leak
+            _milestoneService.OnMilestoneReached -= OnMilestoneReached;
+        }
+
+        _disposed = true;
     }
 }

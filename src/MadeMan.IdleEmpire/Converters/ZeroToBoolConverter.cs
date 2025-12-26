@@ -4,6 +4,8 @@ namespace MadeMan.IdleEmpire.Converters;
 
 public class ZeroToBoolConverter : IValueConverter
 {
+    private const double Epsilon = 0.0001;
+
     // Returns true if value is 0 (for "empty state" visibility)
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
@@ -13,7 +15,8 @@ public class ZeroToBoolConverter : IValueConverter
         }
         if (value is double doubleValue)
         {
-            return doubleValue == 0;
+            // Use epsilon comparison for floating-point precision
+            return Math.Abs(doubleValue) < Epsilon;
         }
         return true;
     }

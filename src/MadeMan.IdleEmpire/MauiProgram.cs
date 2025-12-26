@@ -20,25 +20,20 @@ public static class MauiProgram
 		// Core Services
 		builder.Services.AddSingleton<SaveManager>();
 
-		// Game Engine (uses IServiceProvider for lazy skill service resolution)
+		// State holder (breaks circular dependency - registered first)
+		builder.Services.AddSingleton<GameStateHolder>();
+		builder.Services.AddSingleton<IGameStateProvider>(sp => sp.GetRequiredService<GameStateHolder>());
+
+		// Skill Services (depend on IGameStateProvider)
+		builder.Services.AddSingleton<ISkillService, SkillService>();
+		builder.Services.AddSingleton<IMilestoneService, MilestoneService>();
+
+		// Game Engine (depends on GameStateHolder, SaveManager, and skill services)
 		builder.Services.AddSingleton<IGameEngine, GameEngine>();
 
-		// Skill Services (registered AFTER GameEngine, get state from engine)
-		builder.Services.AddSingleton<ISkillService>(sp =>
-		{
-			var engine = sp.GetRequiredService<IGameEngine>();
-			return new SkillService(() => engine.State);
-		});
-		builder.Services.AddSingleton<IMilestoneService>(sp =>
-		{
-			var engine = sp.GetRequiredService<IGameEngine>();
-			var skillService = sp.GetRequiredService<ISkillService>();
-			return new MilestoneService(() => engine.State, skillService);
-		});
-
-		// ViewModels
+		// ViewModels (Singleton to prevent timer duplication and resource leaks)
 		builder.Services.AddSingleton<SkillViewModel>();
-		builder.Services.AddTransient<MainViewModel>();
+		builder.Services.AddSingleton<MainViewModel>();
 
 		// Pages
 		builder.Services.AddTransient<Views.MainPage>();

@@ -4,9 +4,8 @@ namespace MadeMan.IdleEmpire.Services;
 
 public class MilestoneService : IMilestoneService
 {
-    private readonly Func<GameState> _getState;
+    private readonly IGameStateProvider _stateProvider;
     private readonly ISkillService _skillService;
-    private readonly Random _random = new();
 
     // Prevent re-triggering while modal is open
     private bool _pendingSelection;
@@ -14,13 +13,13 @@ public class MilestoneService : IMilestoneService
 
     public event Action<List<SkillDefinition>>? OnMilestoneReached;
 
-    public MilestoneService(Func<GameState> getState, ISkillService skillService)
+    public MilestoneService(IGameStateProvider stateProvider, ISkillService skillService)
     {
-        _getState = getState;
+        _stateProvider = stateProvider;
         _skillService = skillService;
     }
 
-    private GameState State => _getState();
+    private GameState State => _stateProvider.State;
 
     public bool CheckForMilestone()
     {
@@ -96,8 +95,8 @@ public class MilestoneService : IMilestoneService
             availableSkills.Add(skill);
         }
 
-        // Shuffle and take up to 3
-        var shuffled = availableSkills.OrderBy(_ => _random.Next()).ToList();
+        // Shuffle and take up to 3 (using thread-safe Random.Shared)
+        var shuffled = availableSkills.OrderBy(_ => Random.Shared.Next()).ToList();
         return shuffled.Take(SkillConfig.SkillChoicesPerMilestone).ToList();
     }
 

@@ -149,17 +149,32 @@ public partial class MainViewModel : ObservableObject
         if (_saveTimer != null)
         {
             _saveTimer.Interval = TimeSpan.FromSeconds(GameConfig.AutoSaveIntervalSeconds);
-            _saveTimer.Tick += (s, e) => _saveManager.Save(_engine.State);
+            _saveTimer.Tick += OnAutoSaveTick;
             _saveTimer.Start();
         }
     }
 
+    private async void OnAutoSaveTick(object? sender, EventArgs e)
+    {
+        await _saveManager.SaveAsync(_engine.State);
+    }
+
     private void StopTimers()
     {
-        _gameTimer?.Stop();
-        _saveTimer?.Stop();
-        _gameTimer = null;
-        _saveTimer = null;
+        // Unsubscribe event handlers before stopping to prevent memory leaks
+        if (_gameTimer != null)
+        {
+            _gameTimer.Tick -= OnGameTick;
+            _gameTimer.Stop();
+            _gameTimer = null;
+        }
+
+        if (_saveTimer != null)
+        {
+            _saveTimer.Tick -= OnAutoSaveTick;
+            _saveTimer.Stop();
+            _saveTimer = null;
+        }
     }
 
     private static string FormatCash(double value)

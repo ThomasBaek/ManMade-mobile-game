@@ -12,7 +12,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Converters -->
-            <converters:ProgressToWidthConverter x:Key="ProgressToWidth" MaxWidth="280"/>
+            <converters:ProgressToWidthConverter x:Key="ProgressToWidth"/>
             <converters:ZeroToBoolConverter x:Key="ZeroToBool"/>
         </ResourceDictionary>
     </Application.Resources>

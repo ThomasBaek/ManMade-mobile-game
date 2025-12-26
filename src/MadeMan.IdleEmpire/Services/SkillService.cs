@@ -4,14 +4,14 @@ namespace MadeMan.IdleEmpire.Services;
 
 public class SkillService : ISkillService
 {
-    private readonly Func<GameState> _getState;
+    private readonly IGameStateProvider _stateProvider;
 
-    public SkillService(Func<GameState> getState)
+    public SkillService(IGameStateProvider stateProvider)
     {
-        _getState = getState;
+        _stateProvider = stateProvider;
     }
 
-    private GameState State => _getState();
+    private GameState State => _stateProvider.State;
 
     // === STATE QUERIES ===
 
