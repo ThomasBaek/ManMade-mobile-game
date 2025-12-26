@@ -8,6 +8,10 @@ public class MilestoneService : IMilestoneService
     private readonly ISkillService _skillService;
     private readonly Random _random = new();
 
+    // Prevent re-triggering while modal is open
+    private bool _pendingSelection;
+    private List<SkillDefinition>? _cachedPool;
+
     public event Action<List<SkillDefinition>>? OnMilestoneReached;
 
     public MilestoneService(Func<GameState> getState, ISkillService skillService)
@@ -20,6 +24,10 @@ public class MilestoneService : IMilestoneService
 
     public bool CheckForMilestone()
     {
+        // Don't trigger again while waiting for selection
+        if (_pendingSelection)
+            return false;
+
         // Already at max milestones?
         if (State.MilestoneCount >= SkillConfig.MilestoneThresholds.Length)
             return false;
@@ -27,9 +35,11 @@ public class MilestoneService : IMilestoneService
         var nextThreshold = GetNextMilestoneThreshold();
         if (State.TotalEarned >= nextThreshold)
         {
-            var pool = GetSelectionPool();
+            var pool = GenerateSelectionPool();
             if (pool.Count > 0)
             {
+                _cachedPool = pool;
+                _pendingSelection = true;
                 OnMilestoneReached?.Invoke(pool);
                 return true;
             }
@@ -64,6 +74,12 @@ public class MilestoneService : IMilestoneService
 
     public List<SkillDefinition> GetSelectionPool()
     {
+        // Return cached pool if available (during pending selection)
+        return _cachedPool ?? new List<SkillDefinition>();
+    }
+
+    private List<SkillDefinition> GenerateSelectionPool()
+    {
         var availableSkills = new List<SkillDefinition>();
         var playerHasMaxSkills = _skillService.GetActiveSkillCount() >= SkillConfig.MaxSkills;
 
@@ -73,7 +89,7 @@ public class MilestoneService : IMilestoneService
             if (_skillService.IsSkillMaxed(skill.Id))
                 continue;
 
-            // If player has 5 skills, only show existing skills
+            // If player has 5 skills, only show existing skills (upgrades only)
             if (playerHasMaxSkills && !_skillService.HasSkill(skill.Id))
                 continue;
 
@@ -89,5 +105,16 @@ public class MilestoneService : IMilestoneService
     {
         _skillService.AddOrUpgradeSkill(selectedSkillId);
         State.MilestoneCount++;
+
+        // Clear pending state so next milestone can trigger
+        _pendingSelection = false;
+        _cachedPool = null;
+    }
+
+    public void Reset()
+    {
+        // Clear pending state (used on prestige)
+        _pendingSelection = false;
+        _cachedPool = null;
     }
 }

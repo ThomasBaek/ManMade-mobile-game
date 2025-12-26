@@ -28,16 +28,21 @@ public partial class MainViewModel : ObservableObject
 
     public ObservableCollection<OperationViewModel> Operations { get; } = new();
 
-    public MainViewModel(IGameEngine engine, SaveManager saveManager)
+    public SkillViewModel SkillVM { get; }
+
+    public MainViewModel(IGameEngine engine, SaveManager saveManager, SkillViewModel skillVM)
     {
         _engine = engine;
         _saveManager = saveManager;
+        SkillVM = skillVM;
     }
 
     public void OnAppearing()
     {
         _engine.Initialize();
         BuildOperationViewModels();
+        SkillVM.RefreshActiveSkills();
+        SkillVM.UpdateProgress();
         StartGameLoop();
         StartAutoSave();
     }
@@ -95,6 +100,9 @@ public partial class MainViewModel : ObservableObject
         {
             op.Refresh();
         }
+
+        // Update skill milestone progress
+        SkillVM.UpdateProgress();
     }
 
     [RelayCommand]
@@ -104,6 +112,7 @@ public partial class MainViewModel : ObservableObject
 
         _engine.DoPrestige();
         BuildOperationViewModels();
+        SkillVM.RefreshActiveSkills(); // Skills reset on prestige
         UpdateDisplay();
     }
 

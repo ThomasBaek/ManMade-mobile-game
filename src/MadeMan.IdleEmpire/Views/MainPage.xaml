@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
+             xmlns:components="clr-namespace:MadeMan.IdleEmpire.Views.Components"
              x:Class="MadeMan.IdleEmpire.Views.MainPage"
              x:DataType="vm:MainViewModel"
              BackgroundColor="{StaticResource Background}"
              Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,*,Auto" Padding="16">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="16">
 
         <!-- === CASH HEADER === -->
         <Frame Grid.Row="0"
@@ -40,8 +41,11 @@
             </Grid>
         </Frame>
 
+        <!-- === SKILLS PANEL === -->
+        <components:SkillsPanel Grid.Row="1"/>
+
         <!-- === OPERATIONS LIST === -->
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="2">
             <VerticalStackLayout Spacing="12"
                                  BindableLayout.ItemsSource="{Binding Operations}">
                 <BindableLayout.ItemTemplate>
@@ -108,7 +112,7 @@
         </ScrollView>
 
         <!-- === PRESTIGE PANEL === -->
-        <Frame Grid.Row="2"
+        <Frame Grid.Row="3"
                BackgroundColor="{StaticResource Primary}"
                CornerRadius="16"
                Padding="20"
@@ -129,6 +133,9 @@
                         FontAttributes="Bold"/>
             </VerticalStackLayout>
         </Frame>
+
+        <!-- === SKILL SELECTION MODAL (Overlay) === -->
+        <components:SkillSelectionModal Grid.RowSpan="4"/>
 
     </Grid>
 </ContentPage>

@@ -176,6 +176,7 @@ public class GameEngine : IGameEngine
 
         // Reset skills (they don't persist through prestige)
         SkillService.ResetSkills();
+        MilestoneService.Reset();
 
         // Starting cash from Old Connections skill
         State.Cash = SkillService.GetStartingCashBonus();

@@ -11,4 +11,5 @@ public interface IMilestoneService
     double GetMilestoneProgress();
     List<SkillDefinition> GetSelectionPool();
     void CompleteMilestone(string selectedSkillId);
+    void Reset();
 }

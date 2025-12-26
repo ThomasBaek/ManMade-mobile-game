@@ -37,6 +37,7 @@ public static class MauiProgram
 		});
 
 		// ViewModels
+		builder.Services.AddSingleton<SkillViewModel>();
 		builder.Services.AddTransient<MainViewModel>();
 
 		// Pages
