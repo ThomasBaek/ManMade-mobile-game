@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Current Task
-**Bundle C**: TASK-023 + TASK-024 (Integrate Skills into GameEngine + DI) - READY
+**Bundle D**: TASK-025 to TASK-028 (Skill UI Components) - READY
 
 ---
 
@@ -42,9 +42,9 @@
 | TASK-020 | Skill Calculator | COMPLETED | TASK-019 | 30 min |
 | TASK-021 | Skill Service | COMPLETED | TASK-020 | 45 min |
 | TASK-022 | Milestone Service | COMPLETED | TASK-021 | 30 min |
-| TASK-023 | Integrate Skills into GameEngine | READY | TASK-021, TASK-022 | 45 min |
-| TASK-024 | Update DI for Skills | BLOCKED | TASK-023 | 15 min |
-| TASK-025 | SkillViewModel | BLOCKED | TASK-024 | 30 min |
+| TASK-023 | Integrate Skills into GameEngine | COMPLETED | TASK-021, TASK-022 | 45 min |
+| TASK-024 | Update DI for Skills | COMPLETED | TASK-023 | 15 min |
+| TASK-025 | SkillViewModel | READY | TASK-024 | 30 min |
 | TASK-026 | Skill Selection Modal | BLOCKED | TASK-025 | 45 min |
 | TASK-027 | Skill Display Component | BLOCKED | TASK-025 | 30 min |
 | TASK-028 | Verify Skill Effects | BLOCKED | TASK-026, TASK-027 | 30 min |
@@ -102,6 +102,8 @@
 | TASK-020 | Skill Calculator | 2024-12-25 | 79e430e |
 | TASK-021 | Skill Service | 2024-12-25 | 79e430e |
 | TASK-022 | Milestone Service | 2024-12-25 | 79e430e |
+| TASK-023 | Integrate Skills into GameEngine | 2024-12-26 | b4a026c |
+| TASK-024 | Update DI for Skills | 2024-12-26 | b4a026c |
 
 ---
 

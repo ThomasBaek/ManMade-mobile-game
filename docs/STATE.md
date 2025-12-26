@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Current State
 
 ## Last Updated
-2024-12-25 (Skill System tasks added)
+2024-12-26 (Bundle C completed)
 
 ---
 
@@ -113,12 +113,12 @@
 ## Current Status
 **Phase 1 COMPLETED** - Foundation complete
 **Phase 2 COMPLETED** - UI implementation complete
-**Phase 3 PLANNED** - Skill System tasks (TASK-018 to TASK-028)
+**Phase 3 IN PROGRESS** - Skill System (Bundle B+C done, Bundle D next)
 **Phase 4 COMPLETED** - Gameplay verification passed
 **Phase 5 COMPLETED** - Persistence verification passed
 **Phase 6 READY** - Polish tasks (TASK-015 to TASK-017)
 
-Next: UI Polish (TASK-015) or start Skill System (Bundle B)
+Next: Bundle D (TASK-025 to TASK-028) - Skill UI Components
 
 ## Task Overview
 | Phase | Tasks | Status |
@@ -131,10 +131,10 @@ Next: UI Polish (TASK-015) or start Skill System (Bundle B)
 | Phase 6: Polish | TASK-015 to TASK-017 | READY |
 
 ## Active Task
-None - MVP Core Complete!
+Bundle D: TASK-025 to TASK-028 (Skill UI Components) - READY
 
 ## Last Completed Task
-Bundle E: TASK-011 to TASK-014 (Verification) - 2024-12-25
+Bundle C: TASK-023 + TASK-024 (Skill Integration + DI) - 2024-12-26
 
 ---
 
@@ -155,9 +155,10 @@ Bundle E: TASK-011 to TASK-014 (Verification) - 2024-12-25
 None
 
 ## Next Steps
-1. Complete TASK-009 (MainPage UI)
-2. Continue with Phase 2 UI tasks
-3. TASK-018 can be started in parallel (only depends on TASK-002 which is complete)
+1. Start Bundle D: TASK-025 (SkillViewModel)
+2. TASK-026 (Skill Selection Modal)
+3. TASK-027 (Skill Display Component)
+4. TASK-028 (Verify Skill Effects)
 
 ---
 
