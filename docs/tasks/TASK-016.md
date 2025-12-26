@@ -20,7 +20,9 @@ Bugs added here as they are found:
 
 | # | Description | Priority | Status |
 |---|-------------|----------|--------|
-| - | No bugs yet | - | - |
+| - | No bugs reported during testing | - | N/A |
+
+**Note:** Skill modal flicker bug was fixed during Bundle D (before TASK-015).
 
 ---
 
@@ -42,5 +44,9 @@ Bugs added here as they are found:
 
 ---
 
-**Task Status**: BLOCKED (waiting for TASK-015)
-**Last Updated**: 2024-12-25
+**Task Status**: COMPLETED
+**Last Updated**: 2024-12-26
+**Commit**: (bundled with TASK-017)
+
+## Resolution
+No new bugs reported after TASK-015 UI Polish. Previous skill modal flicker bug was already fixed in Bundle D.

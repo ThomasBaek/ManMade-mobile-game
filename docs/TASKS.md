@@ -1,7 +1,7 @@
 # Made Man: Idle Empire - Tasks Overview
 
 ## Current Task
-**Bundle F**: TASK-015 to TASK-017 (Polish) - READY
+**MVP COMPLETE!** All tasks finished.
 
 ---
 
@@ -74,8 +74,8 @@
 | Task | Name | Status | Dependencies | Estimate |
 |------|------|--------|--------------|----------|
 | TASK-015 | UI Polish | COMPLETED | TASK-028 | 1 hour |
-| TASK-016 | Bug Fixes | READY | TASK-015 | Variable |
-| TASK-017 | Final Testing | BLOCKED | TASK-016 | 1 hour |
+| TASK-016 | Bug Fixes | COMPLETED | TASK-015 | Variable |
+| TASK-017 | Final Testing | COMPLETED | TASK-016 | 1 hour |
 
 ---
 
@@ -109,6 +109,8 @@
 | TASK-027 | Skill Display Component | 2024-12-26 | 7927ff0 |
 | TASK-028 | Verify Skill Effects | 2024-12-26 | 7927ff0 |
 | TASK-015 | UI Polish | 2024-12-26 | fd84671 |
+| TASK-016 | Bug Fixes | 2024-12-26 | (no bugs) |
+| TASK-017 | Final Testing | 2024-12-26 | (see Bundle F) |
 
 ---
 
