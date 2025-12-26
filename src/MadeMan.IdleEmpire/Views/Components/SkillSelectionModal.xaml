@@ -2,7 +2,6 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
-             xmlns:models="clr-namespace:MadeMan.IdleEmpire.Models"
              x:Class="MadeMan.IdleEmpire.Views.Components.SkillSelectionModal"
              x:DataType="vm:MainViewModel"
              IsVisible="{Binding SkillVM.IsSelectionModalVisible}">
@@ -37,7 +36,7 @@
                 <VerticalStackLayout Spacing="8"
                                      BindableLayout.ItemsSource="{Binding SkillVM.SelectionPool}">
                     <BindableLayout.ItemTemplate>
-                        <DataTemplate x:DataType="models:SkillDefinition">
+                        <DataTemplate x:DataType="vm:SkillChoiceModel">
                             <Frame Padding="12"
                                    BackgroundColor="{StaticResource Background}"
                                    CornerRadius="12"
@@ -58,7 +57,7 @@
                                            BackgroundColor="{StaticResource Surface}"
                                            Padding="0"
                                            BorderColor="Transparent">
-                                        <Label Text="⭐"
+                                        <Label Text="{Binding Icon}"
                                                FontSize="22"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"/>
@@ -66,24 +65,43 @@
 
                                     <!-- Info -->
                                     <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                                        <Label Text="{Binding Name}"
-                                               FontSize="16"
-                                               FontAttributes="Bold"
-                                               TextColor="{StaticResource TextPrimary}"/>
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="15"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource TextPrimary}"/>
+                                            <!-- NEW or Level Tag -->
+                                            <Frame Grid.Column="1"
+                                                   BackgroundColor="{StaticResource Primary}"
+                                                   CornerRadius="4"
+                                                   Padding="6,2"
+                                                   BorderColor="Transparent">
+                                                <Label Text="{Binding LevelTag}"
+                                                       FontSize="10"
+                                                       FontAttributes="Bold"
+                                                       TextColor="White"/>
+                                            </Frame>
+                                        </Grid>
                                         <Label Text="{Binding Description}"
-                                               FontSize="12"
+                                               FontSize="11"
                                                TextColor="{StaticResource TextSecondary}"
                                                LineBreakMode="TailTruncation"/>
-                                        <Label FontSize="11"
-                                               TextColor="{StaticResource Gold}">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="+"/>
-                                                    <Span Text="{Binding EffectPerLevel, StringFormat='{0:F0}'}"/>
-                                                    <Span Text="% per level"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
+                                        <!-- Effect Preview -->
+                                        <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="4">
+                                            <Label Text="{Binding CurrentEffectDisplay}"
+                                                   FontSize="11"
+                                                   TextColor="{StaticResource TextSecondary}"
+                                                   HorizontalTextAlignment="End"/>
+                                            <Label Grid.Column="1"
+                                                   Text="→"
+                                                   FontSize="11"
+                                                   TextColor="{StaticResource TextSecondary}"/>
+                                            <Label Grid.Column="2"
+                                                   Text="{Binding NextEffectDisplay}"
+                                                   FontSize="11"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource Gold}"/>
+                                        </Grid>
                                     </VerticalStackLayout>
 
                                 </Grid>

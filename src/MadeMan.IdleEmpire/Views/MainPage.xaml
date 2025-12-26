@@ -8,44 +8,104 @@
              BackgroundColor="{StaticResource Background}"
              Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="16">
+    <!-- Safe Area Container -->
+    <Grid Padding="16,0,16,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- === PRESTIGE BADGE (if prestiged) === -->
+        <HorizontalStackLayout Grid.Row="0"
+                               HorizontalOptions="Center"
+                               Spacing="8"
+                               Margin="0,8,0,8"
+                               IsVisible="{Binding HasPrestiged}">
+            <Label Text="⭐"
+                   FontSize="14"
+                   VerticalOptions="Center"/>
+            <Label Text="{Binding PrestigeCount, StringFormat='Prestige {0}'}"
+                   FontSize="12"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Gold}"
+                   VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Primary}"
+                   CornerRadius="4"
+                   Padding="6,2"
+                   BorderColor="Transparent">
+                <Label Text="{Binding PrestigeBonusDisplay}"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+            </Frame>
+        </HorizontalStackLayout>
 
         <!-- === CASH HEADER === -->
-        <Frame Grid.Row="0"
+        <Frame Grid.Row="1"
                BackgroundColor="{StaticResource Surface}"
                CornerRadius="16"
-               Padding="20"
-               Margin="0,0,0,16"
+               Padding="16"
+               Margin="0,0,0,8"
                BorderColor="Transparent">
-            <Grid ColumnDefinitions="*,Auto">
-                <VerticalStackLayout>
-                    <Label Text="CASH"
-                           FontSize="12"
-                           TextColor="{StaticResource TextSecondary}"/>
-                    <Label Text="{Binding CashDisplay}"
-                           FontSize="36"
-                           FontAttributes="Bold"
-                           TextColor="{StaticResource Gold}"/>
-                </VerticalStackLayout>
+            <VerticalStackLayout Spacing="8">
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout>
+                        <Label Text="CASH"
+                               FontSize="11"
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Label Text="{Binding CashDisplay}"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Gold}"/>
+                    </VerticalStackLayout>
 
-                <Frame Grid.Column="1"
-                       BackgroundColor="{StaticResource SurfaceLight}"
-                       CornerRadius="8"
-                       Padding="12,8"
-                       VerticalOptions="Center"
-                       BorderColor="Transparent">
-                    <Label Text="{Binding IncomeDisplay}"
-                           FontSize="16"
-                           TextColor="{StaticResource Success}"/>
-                </Frame>
-            </Grid>
+                    <Frame Grid.Column="1"
+                           BackgroundColor="{StaticResource SurfaceLight}"
+                           CornerRadius="8"
+                           Padding="12,8"
+                           VerticalOptions="Center"
+                           BorderColor="Transparent">
+                        <Label Text="{Binding IncomeDisplay}"
+                               FontSize="14"
+                               TextColor="{StaticResource Success}"/>
+                    </Frame>
+                </Grid>
+
+                <!-- Total Earned + Prestige Progress -->
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <VerticalStackLayout>
+                        <Label Text="TOTAL EARNED"
+                               FontSize="10"
+                               TextColor="{StaticResource TextSecondary}"/>
+                        <Grid HeightRequest="6">
+                            <Frame BackgroundColor="{StaticResource SurfaceLight}"
+                                   CornerRadius="3"
+                                   Padding="0"
+                                   BorderColor="Transparent"/>
+                            <BoxView BackgroundColor="{StaticResource Primary}"
+                                     CornerRadius="3"
+                                     HorizontalOptions="Start"
+                                     WidthRequest="{Binding PrestigeProgress, Converter={StaticResource ProgressToWidth}}"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                    <Label Grid.Column="1"
+                           Text="{Binding TotalEarnedDisplay}"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}"
+                           VerticalOptions="End"/>
+                </Grid>
+            </VerticalStackLayout>
         </Frame>
 
         <!-- === SKILLS PANEL === -->
-        <components:SkillsPanel Grid.Row="1"/>
+        <components:SkillsPanel Grid.Row="2"/>
 
         <!-- === OPERATIONS LIST === -->
-        <ScrollView Grid.Row="2">
+        <ScrollView Grid.Row="3">
             <VerticalStackLayout Spacing="12"
                                  BindableLayout.ItemsSource="{Binding Operations}">
                 <BindableLayout.ItemTemplate>
@@ -112,7 +172,7 @@
         </ScrollView>
 
         <!-- === PRESTIGE PANEL === -->
-        <Frame Grid.Row="3"
+        <Frame Grid.Row="4"
                BackgroundColor="{StaticResource Primary}"
                CornerRadius="16"
                Padding="20"
@@ -135,7 +195,7 @@
         </Frame>
 
         <!-- === SKILL SELECTION MODAL (Overlay) === -->
-        <components:SkillSelectionModal Grid.RowSpan="4"/>
+        <components:SkillSelectionModal Grid.RowSpan="5"/>
 
     </Grid>
 </ContentPage>

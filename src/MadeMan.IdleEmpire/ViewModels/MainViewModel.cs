@@ -26,6 +26,23 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string _prestigeButtonText = "BECOME A MADE MAN";
 
+    // Prestige stats
+    [ObservableProperty]
+    private int _prestigeCount;
+
+    [ObservableProperty]
+    private string _prestigeBonusDisplay = "+0%";
+
+    [ObservableProperty]
+    private bool _hasPrestiged;
+
+    // Total earned / progress
+    [ObservableProperty]
+    private string _totalEarnedDisplay = "$0";
+
+    [ObservableProperty]
+    private double _prestigeProgress;
+
     public ObservableCollection<OperationViewModel> Operations { get; } = new();
 
     public SkillViewModel SkillVM { get; }
@@ -89,6 +106,16 @@ public partial class MainViewModel : ObservableObject
         CashDisplay = FormatCash(_engine.State.Cash);
         IncomeDisplay = $"+{FormatCash(_engine.IncomePerSecond)}/s";
         CanPrestige = _engine.CanPrestige();
+
+        // Prestige stats
+        PrestigeCount = _engine.State.PrestigeCount;
+        HasPrestiged = PrestigeCount > 0;
+        var bonusPercent = (_engine.State.PrestigeBonus - 1.0) * 100;
+        PrestigeBonusDisplay = $"+{bonusPercent:0}%";
+
+        // Total earned + progress to prestige
+        TotalEarnedDisplay = FormatCash(_engine.State.TotalEarned);
+        PrestigeProgress = Math.Min(_engine.State.TotalEarned / GameConfig.PrestigeThreshold, 1.0);
 
         if (CanPrestige)
         {
