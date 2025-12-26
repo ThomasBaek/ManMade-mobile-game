@@ -33,16 +33,17 @@
                                 <TapGestureRecognizer Command="{Binding TapCommand}"/>
                             </Frame.GestureRecognizers>
 
-                            <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto">
+                            <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto">
 
                                 <!-- Icon -->
-                                <Frame Grid.RowSpan="2"
+                                <Frame Grid.RowSpan="3"
                                        BackgroundColor="{StaticResource SurfaceLight}"
                                        CornerRadius="8"
                                        Padding="0"
                                        HeightRequest="50"
                                        WidthRequest="50"
-                                       BorderColor="Transparent">
+                                       BorderColor="Transparent"
+                                       VerticalOptions="Start">
                                     <Label Text="{Binding IconEmoji}"
                                            FontSize="28"
                                            HorizontalOptions="Center"
@@ -60,16 +61,41 @@
                                            TextColor="{StaticResource TextSecondary}"/>
                                 </HorizontalStackLayout>
 
-                                <!-- Income -->
-                                <Label Grid.Column="1" Grid.Row="1"
+                                <!-- Progress Bar Row (only when unlocked) -->
+                                <Grid Grid.Column="1" Grid.Row="1"
+                                      ColumnDefinitions="*,Auto"
+                                      Margin="12,6,0,0"
+                                      IsVisible="{Binding IsUnlocked}">
+
+                                    <!-- Progress Bar -->
+                                    <ProgressBar Progress="{Binding Progress}"
+                                                 ProgressColor="{StaticResource Gold}"
+                                                 BackgroundColor="{StaticResource SurfaceLight}"
+                                                 HeightRequest="8"
+                                                 VerticalOptions="Center"/>
+
+                                    <!-- Yield + Time -->
+                                    <HorizontalStackLayout Grid.Column="1" Spacing="4" Margin="8,0,0,0">
+                                        <Label Text="{Binding YieldDisplay}"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Gold}"/>
+                                        <Label Text="{Binding TimeRemainingDisplay}"
+                                               FontSize="12"
+                                               TextColor="{StaticResource TextSecondary}"/>
+                                    </HorizontalStackLayout>
+                                </Grid>
+
+                                <!-- Effective Income (small text) -->
+                                <Label Grid.Column="1" Grid.Row="2"
                                        Text="{Binding IncomeDisplay}"
-                                       FontSize="14"
-                                       TextColor="{StaticResource Gold}"
+                                       FontSize="11"
+                                       TextColor="{StaticResource TextSecondary}"
                                        IsVisible="{Binding IsUnlocked}"
-                                       Margin="12,4,0,0"/>
+                                       Margin="12,2,0,0"/>
 
                                 <!-- Action Button -->
-                                <Button Grid.Column="2" Grid.RowSpan="2"
+                                <Button Grid.Column="2" Grid.RowSpan="3"
                                         Text="{Binding ButtonText}"
                                         Command="{Binding TapCommand}"
                                         BackgroundColor="{Binding ButtonColor}"

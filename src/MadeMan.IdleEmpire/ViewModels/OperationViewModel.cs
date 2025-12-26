@@ -39,6 +39,16 @@ public partial class OperationViewModel : ObservableObject
     [ObservableProperty]
     private bool _isUnlocked;
 
+    // Progress bar support
+    [ObservableProperty]
+    private double _progress; // 0.0 - 1.0
+
+    [ObservableProperty]
+    private string _yieldDisplay = string.Empty; // "$20"
+
+    [ObservableProperty]
+    private string _timeRemainingDisplay = string.Empty; // "3.2s"
+
     public OperationViewModel(Operation operation, IGameEngine engine)
     {
         _operation = operation;
@@ -61,19 +71,43 @@ public partial class OperationViewModel : ObservableObject
             ButtonColor = _engine.CanUnlock(_operation.Id)
                 ? Color.FromArgb("#4ADE80")  // Success green
                 : Color.FromArgb("#4A5568"); // Locked gray
+
+            // Reset progress display for locked operations
+            Progress = 0;
+            YieldDisplay = string.Empty;
+            TimeRemainingDisplay = string.Empty;
         }
         else
         {
             LevelDisplay = $"Lvl {state.Level}";
-            var income = _operation.GetIncome(state.Level, _engine.State.PrestigeBonus);
-            IncomeDisplay = $"${income:F2}/s";
 
+            // Calculate yield for this cycle
+            var yield = _operation.GetYield(state.Level, _engine.State.PrestigeBonus);
+            YieldDisplay = $"${FormatNumber(yield)}";
+
+            // Effective income per second for reference
+            var incomePerSec = _operation.GetIncomePerSecond(state.Level, _engine.State.PrestigeBonus);
+            IncomeDisplay = $"${FormatNumber(incomePerSec)}/s";
+
+            // Progress calculation
+            Progress = Math.Min(state.AccumulatedTime / _operation.Interval, 1.0);
+            var timeRemaining = Math.Max(_operation.Interval - state.AccumulatedTime, 0);
+            TimeRemainingDisplay = $"{timeRemaining:F1}s";
+
+            // Upgrade button
             var upgradeCost = _operation.GetUpgradeCost(state.Level);
-            ButtonText = $"${upgradeCost:F0}";
+            ButtonText = $"${FormatNumber(upgradeCost)}";
             ButtonColor = _engine.CanUpgrade(_operation.Id)
                 ? Color.FromArgb("#E94560")  // Primary red
                 : Color.FromArgb("#4A5568"); // Locked gray
         }
+    }
+
+    private static string FormatNumber(double value)
+    {
+        if (value >= 1_000_000) return $"{value / 1_000_000:F1}M";
+        if (value >= 1_000) return $"{value / 1_000:F1}K";
+        return $"{value:F0}";
     }
 
     [RelayCommand]

@@ -34,14 +34,14 @@ public class GameEngine : IGameEngine
                 return _cachedBaseIncome;
             }
 
-            // Recalculate base income
+            // Recalculate effective income per second (yield/interval with multipliers)
             double total = 0;
             foreach (var op in GameConfig.Operations)
             {
                 var opState = GetOperationState(op.Id);
                 if (opState != null && opState.Level > 0)
                 {
-                    total += CalculateBaseOperationIncome(opState, op);
+                    total += CalculateEffectiveIncomePerSecond(opState, op);
                 }
             }
             // Add passive income from skills
@@ -54,29 +54,26 @@ public class GameEngine : IGameEngine
     }
 
     /// <summary>
-    /// Calculates actual income for a tick, including Lucky Break chance.
+    /// Calculates yield for a single operation cycle, including all multipliers and Lucky Break.
     /// </summary>
-    private double CalculateActualIncomeForTick(double deltaSeconds)
+    private double CalculateOperationYield(OperationState opState, Operation config)
     {
-        double total = 0;
-        foreach (var op in GameConfig.Operations)
+        var baseYield = config.GetYield(opState.Level, State.PrestigeBonus);
+
+        // Apply skill multipliers
+        var skillMultiplier = _skillService.GetTotalIncomeMultiplier();
+        var operationMultiplier = _skillService.GetOperationMultiplier(opState.Id);
+        var compoundMultiplier = _skillService.GetCompoundInterestMultiplier(State.SessionStartUtc);
+
+        var finalYield = baseYield * skillMultiplier * operationMultiplier * compoundMultiplier;
+
+        // Lucky Break check (2x yield chance) - per yield, not per tick
+        if (_skillService.RollLuckyBreak(Random.Shared))
         {
-            var opState = GetOperationState(op.Id);
-            if (opState != null && opState.Level > 0)
-            {
-                var income = CalculateBaseOperationIncome(opState, op);
-
-                // Lucky Break check (2x income chance) - applied per tick
-                if (_skillService.RollLuckyBreak(Random.Shared))
-                {
-                    income *= 2.0;
-                }
-
-                total += income;
-            }
+            finalYield *= 2.0;
         }
-        total += _skillService.GetPassiveIncomePerSecond();
-        return total * deltaSeconds;
+
+        return finalYield;
     }
 
     public GameEngine(
@@ -113,7 +110,8 @@ public class GameEngine : IGameEngine
             state.Operations.Add(new OperationState
             {
                 Id = op.Id,
-                Level = op.UnlockCost == 0 ? 1 : 0
+                Level = op.UnlockCost == 0 ? 1 : 0,
+                AccumulatedTime = 0
             });
         }
 
@@ -122,32 +120,48 @@ public class GameEngine : IGameEngine
 
     public void Tick(double deltaSeconds)
     {
-        // Use actual income calculation (includes Lucky Break chance)
-        double earned = CalculateActualIncomeForTick(deltaSeconds);
-        State.Cash += earned;
-        State.TotalEarned += earned;
+        // Interval-based tick: accumulate time and yield when interval is reached
+        foreach (var op in GameConfig.Operations)
+        {
+            var opState = GetOperationState(op.Id);
+            if (opState == null || opState.Level <= 0) continue;
+
+            // Accumulate time
+            opState.AccumulatedTime += deltaSeconds;
+
+            // Check for yield(s) - handle multiple yields if delta is large
+            while (opState.AccumulatedTime >= op.Interval)
+            {
+                opState.AccumulatedTime -= op.Interval;
+
+                // Calculate and apply yield
+                var yield = CalculateOperationYield(opState, op);
+                State.Cash += yield;
+                State.TotalEarned += yield;
+            }
+        }
 
         // Check for milestone
         _milestoneService.CheckForMilestone();
     }
 
     /// <summary>
-    /// Calculates base income for an operation (without Lucky Break).
-    /// Used for display and as base for actual income calculation.
+    /// Calculates effective income per second for display (yield/interval with multipliers).
     /// </summary>
-    private double CalculateBaseOperationIncome(OperationState opState, Operation config)
+    private double CalculateEffectiveIncomePerSecond(OperationState opState, Operation config)
     {
         if (opState.Level == 0) return 0;
 
-        // Base income with prestige bonus
-        var baseIncome = config.GetIncome(opState.Level, State.PrestigeBonus);
+        // Base yield per cycle with prestige bonus
+        var yieldPerCycle = config.GetYield(opState.Level, State.PrestigeBonus);
 
         // Apply skill multipliers
         var skillMultiplier = _skillService.GetTotalIncomeMultiplier();
         var operationMultiplier = _skillService.GetOperationMultiplier(opState.Id);
         var compoundMultiplier = _skillService.GetCompoundInterestMultiplier(State.SessionStartUtc);
 
-        return baseIncome * skillMultiplier * operationMultiplier * compoundMultiplier;
+        // Calculate income per second (yield / interval)
+        return (yieldPerCycle * skillMultiplier * operationMultiplier * compoundMultiplier) / config.Interval;
     }
 
     public bool CanUnlock(string operationId)
@@ -241,7 +255,8 @@ public class GameEngine : IGameEngine
             State.Operations.Add(new OperationState
             {
                 Id = op.Id,
-                Level = op.UnlockCost == 0 ? 1 : 0
+                Level = op.UnlockCost == 0 ? 1 : 0,
+                AccumulatedTime = 0 // Reset progress
             });
         }
 
@@ -255,41 +270,49 @@ public class GameEngine : IGameEngine
 
         // Max hours with skill bonus (Extended Shift)
         var maxHours = GameConfig.MaxOfflineHours + _skillService.GetOfflineMaxHoursBonus();
-        var hours = Math.Min(offlineTime.TotalHours, maxHours);
+        var offlineSeconds = Math.Min(offlineTime.TotalSeconds, maxHours * 3600);
 
-        if (hours > 0.01) // More than ~36 seconds
-        {
-            // Base efficiency + skill bonus (Night Owl)
-            var efficiency = GameConfig.OfflineEfficiency + _skillService.GetOfflineEfficiencyBonus();
-            efficiency = Math.Min(efficiency, 1.0); // Cap at 100%
-            LastOfflineEfficiency = efficiency;
-
-            // Calculate base offline income (use base income without skill effects to avoid double-dipping)
-            double baseIncomePerSecond = 0;
-            foreach (var op in GameConfig.Operations)
-            {
-                var opState = GetOperationState(op.Id);
-                if (opState != null && opState.Level > 0)
-                {
-                    baseIncomePerSecond += op.GetIncome(opState.Level, State.PrestigeBonus);
-                }
-            }
-
-            double earnings = baseIncomePerSecond * hours * 3600 * efficiency;
-
-            // Apply offline earnings multiplier (Godfather's Cut)
-            earnings *= _skillService.GetOfflineEarningsMultiplier();
-
-            LastOfflineEarnings = earnings;
-            State.Cash += earnings;
-            State.TotalEarned += earnings;
-        }
-        else
+        if (offlineSeconds < 60) // Less than 1 minute - no offline earnings
         {
             LastOfflineEarnings = 0;
             LastOfflineEfficiency = 0;
+            State.LastPlayedUtc = DateTime.UtcNow;
+            return;
         }
 
+        // Base efficiency + skill bonus (Night Owl)
+        var efficiency = GameConfig.OfflineEfficiency + _skillService.GetOfflineEfficiencyBonus();
+        efficiency = Math.Min(efficiency, 1.0); // Cap at 100%
+        LastOfflineEfficiency = efficiency;
+
+        // Calculate earnings per operation using interval-based logic
+        double totalEarnings = 0;
+
+        foreach (var op in GameConfig.Operations)
+        {
+            var opState = GetOperationState(op.Id);
+            if (opState == null || opState.Level <= 0) continue;
+
+            // How many complete cycles in offline time?
+            var completeCycles = Math.Floor(offlineSeconds / op.Interval);
+
+            // Base yield per cycle
+            var yieldPerCycle = op.GetYield(opState.Level, State.PrestigeBonus);
+
+            // Total for this operation (with efficiency)
+            var operationEarnings = completeCycles * yieldPerCycle * efficiency;
+
+            totalEarnings += operationEarnings;
+        }
+
+        // Apply offline earnings multiplier (Godfather's Cut skill)
+        totalEarnings *= _skillService.GetOfflineEarningsMultiplier();
+
+        LastOfflineEarnings = totalEarnings;
+        State.Cash += totalEarnings;
+        State.TotalEarned += totalEarnings;
+
+        // Note: AccumulatedTime is NOT modified - progress continues from where player left
         State.LastPlayedUtc = DateTime.UtcNow;
     }
 

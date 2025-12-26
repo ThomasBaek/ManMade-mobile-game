@@ -2,7 +2,7 @@ namespace MadeMan.IdleEmpire.Models;
 
 public static class GameConfig
 {
-    // === OPERATIONS ===
+    // === OPERATIONS (Interval-Based Yields) ===
     public static readonly Operation[] Operations = new[]
     {
         new Operation
@@ -11,8 +11,9 @@ public static class GameConfig
             Name = "Pickpocketing",
             Icon = "icon_pickpocket.png",
             Description = "Lift wallets from unsuspecting tourists",
-            BaseIncome = 1.0,
-            UnlockCost = 0,  // FREE starter operation
+            Interval = 1.0,       // 1 second
+            BaseYield = 1.0,      // $1 per cycle = $1/s effective
+            UnlockCost = 0,       // FREE starter operation
             BaseUpgradeCost = 5,  // Upgrades start at $5
             UpgradeMultiplier = 1.4
         },
@@ -22,7 +23,8 @@ public static class GameConfig
             Name = "Car Theft",
             Icon = "icon_car.png",
             Description = "Steal cars, sell the parts",
-            BaseIncome = 4.0,
+            Interval = 5.0,       // 5 seconds
+            BaseYield = 20.0,     // $20 per cycle = $4/s effective
             UnlockCost = 50,
             UpgradeMultiplier = 1.5
         },
@@ -32,7 +34,8 @@ public static class GameConfig
             Name = "Burglary",
             Icon = "icon_burglary.png",
             Description = "Break into the homes of the wealthy",
-            BaseIncome = 15.0,
+            Interval = 20.0,      // 20 seconds
+            BaseYield = 300.0,    // $300 per cycle = $15/s effective
             UnlockCost = 250,
             UpgradeMultiplier = 1.6
         },
@@ -42,7 +45,8 @@ public static class GameConfig
             Name = "Speakeasy",
             Icon = "icon_speakeasy.png",
             Description = "Your first illegal watering hole",
-            BaseIncome = 50.0,
+            Interval = 60.0,      // 60 seconds
+            BaseYield = 3000.0,   // $3000 per cycle = $50/s effective
             UnlockCost = 1000,
             UpgradeMultiplier = 1.8
         },
@@ -52,7 +56,8 @@ public static class GameConfig
             Name = "Underground Casino",
             Icon = "icon_casino.png",
             Description = "The house always wins",
-            BaseIncome = 200.0,
+            Interval = 120.0,     // 120 seconds
+            BaseYield = 24000.0,  // $24000 per cycle = $200/s effective
             UnlockCost = 5000,
             UpgradeMultiplier = 2.0
         }

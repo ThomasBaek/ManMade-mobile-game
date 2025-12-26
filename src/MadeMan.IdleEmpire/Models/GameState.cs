@@ -28,4 +28,5 @@ public class OperationState
 {
     public string Id { get; set; } = string.Empty;
     public int Level { get; set; } = 0; // 0 = locked
+    public double AccumulatedTime { get; set; } = 0; // Progress toward next yield
 }
