@@ -77,6 +77,13 @@ public partial class MainViewModel : ObservableObject
     public string CurrentTitle => TitleConfig.GetTitle(_engine.State.PrestigeCount).Name;
     public string CurrentTitleDescription => TitleConfig.GetTitle(_engine.State.PrestigeCount).Description;
 
+    // Next title after prestige (for modal)
+    public string NextTitle => TitleConfig.GetTitle(_engine.State.PrestigeCount + 1).Name;
+
+    // Income bonus as percentage (for modal display)
+    public string CurrentIncomeBonusDisplay => $"{(_engine.State.PrestigeBonus - 1.0) * 100:0}%";
+    public string NextIncomeBonusDisplay => $"{(_engine.State.PrestigeBonus + GameConfig.PrestigeBonusPerReset - 1.0) * 100:0}%";
+
     [ObservableProperty]
     private bool _showTitleUnlockPopup;
 
@@ -314,8 +321,11 @@ public partial class MainViewModel : ObservableObject
         // Update all properties including title
         OnPropertyChanged(nameof(CurrentTitle));
         OnPropertyChanged(nameof(CurrentTitleDescription));
+        OnPropertyChanged(nameof(NextTitle));
         OnPropertyChanged(nameof(CurrentPrestigeBonusDisplay));
         OnPropertyChanged(nameof(NextPrestigeBonusDisplay));
+        OnPropertyChanged(nameof(CurrentIncomeBonusDisplay));
+        OnPropertyChanged(nameof(NextIncomeBonusDisplay));
         UpdateDisplay();
 
         // Fire celebration event with bonus percentage and title info

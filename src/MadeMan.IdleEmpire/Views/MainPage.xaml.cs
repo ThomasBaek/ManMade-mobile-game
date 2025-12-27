@@ -139,6 +139,8 @@ public partial class MainPage : ContentPage
         _viewModel.OnAppearing();
 
         // Resubscribe to events (in case we unsubscribed in OnDisappearing)
+        _viewModel.PropertyChanged -= OnViewModelPropertyChanged; // Prevent double-subscription
+        _viewModel.PropertyChanged += OnViewModelPropertyChanged;
         _viewModel.PrestigeCompleted -= OnPrestigeCompleted; // Prevent double-subscription
         _viewModel.PrestigeCompleted += OnPrestigeCompleted;
         SubscribeToOperationEvents();

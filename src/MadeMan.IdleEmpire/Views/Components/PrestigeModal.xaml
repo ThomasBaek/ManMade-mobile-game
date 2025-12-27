@@ -3,47 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
              x:Class="MadeMan.IdleEmpire.Views.Components.PrestigeModal"
-             x:DataType="vm:MainViewModel"
-             IsVisible="{Binding IsPrestigeModalVisible}">
+             x:DataType="vm:MainViewModel">
 
     <!-- Dark overlay -->
-    <Grid BackgroundColor="#CC000000">
-        <Grid.GestureRecognizers>
-            <TapGestureRecognizer Command="{Binding DismissPrestigeModalCommand}"/>
-        </Grid.GestureRecognizers>
+    <Grid x:Name="Overlay"
+          BackgroundColor="#CC000000"
+          IsVisible="{Binding IsPrestigeModalVisible}">
 
         <!-- Modal Card -->
-        <Frame BackgroundColor="{StaticResource Surface}"
-               CornerRadius="20"
+        <Frame x:Name="ModalCard"
+               BackgroundColor="{StaticResource Surface}"
+               CornerRadius="16"
                Padding="0"
                Margin="24"
                VerticalOptions="Center"
                HorizontalOptions="Center"
                MaximumWidthRequest="350"
-               BorderColor="Transparent">
+               BorderColor="{StaticResource Gold}">
 
             <Grid RowDefinitions="Auto,*">
 
-                <!-- Header with close button -->
+                <!-- Header -->
                 <Grid BackgroundColor="{StaticResource Primary}"
-                      Padding="16">
+                      Padding="20,16">
                     <Label Text="PRESTIGE AVAILABLE"
-                           FontSize="18"
-                           FontAttributes="Bold"
+                           FontFamily="BebasNeue"
+                           FontSize="24"
+                           CharacterSpacing="2"
                            TextColor="White"
                            HorizontalOptions="Center"/>
-
-                    <!-- Close button -->
-                    <Button Text="X"
-                            Command="{Binding DismissPrestigeModalCommand}"
-                            BackgroundColor="Transparent"
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            FontSize="16"
-                            HorizontalOptions="End"
-                            VerticalOptions="Center"
-                            WidthRequest="40"
-                            HeightRequest="40"/>
                 </Grid>
 
                 <!-- Content -->
@@ -51,10 +39,24 @@
                                      Padding="24"
                                      Spacing="16">
 
-                    <!-- Star icon -->
-                    <Label Text="⭐"
-                           FontSize="48"
-                           HorizontalOptions="Center"/>
+                    <!-- Title progression -->
+                    <Label HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding CurrentTitle}"
+                                      FontFamily="BebasNeue"
+                                      FontSize="22"
+                                      TextColor="{StaticResource TextSecondary}"/>
+                                <Span Text="  ›  "
+                                      FontSize="22"
+                                      TextColor="{StaticResource Gold}"/>
+                                <Span Text="{Binding NextTitle}"
+                                      FontFamily="BebasNeue"
+                                      FontSize="22"
+                                      TextColor="{StaticResource Gold}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
                     <!-- Description -->
                     <Label Text="Reset your empire for a permanent bonus!"
@@ -63,42 +65,34 @@
                            HorizontalOptions="Center"
                            HorizontalTextAlignment="Center"/>
 
-                    <!-- Bonus comparison -->
+                    <!-- Income bonus comparison -->
                     <Frame BackgroundColor="{StaticResource SurfaceLight}"
                            CornerRadius="8"
                            Padding="16"
                            BorderColor="Transparent">
-                        <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
-                            <VerticalStackLayout>
-                                <Label Text="Current"
-                                       FontSize="11"
-                                       TextColor="{StaticResource TextSecondary}"
-                                       HorizontalOptions="Center"/>
-                                <Label Text="{Binding CurrentPrestigeBonusDisplay}"
-                                       FontSize="18"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource TextPrimary}"
-                                       HorizontalOptions="Center"/>
-                            </VerticalStackLayout>
-
-                            <Label Grid.Column="1"
-                                   Text="→"
-                                   FontSize="24"
-                                   TextColor="{StaticResource Gold}"
-                                   VerticalOptions="Center"/>
-
-                            <VerticalStackLayout Grid.Column="2">
-                                <Label Text="After"
-                                       FontSize="11"
-                                       TextColor="{StaticResource TextSecondary}"
-                                       HorizontalOptions="Center"/>
-                                <Label Text="{Binding NextPrestigeBonusDisplay}"
-                                       FontSize="18"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource Gold}"
-                                       HorizontalOptions="Center"/>
-                            </VerticalStackLayout>
-                        </Grid>
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="INCOME BONUS"
+                                   FontSize="11"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   HorizontalOptions="Center"/>
+                            <Label HorizontalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding CurrentIncomeBonusDisplay}"
+                                              FontSize="24"
+                                              FontAttributes="Bold"
+                                              TextColor="{StaticResource TextPrimary}"/>
+                                        <Span Text="  ›  "
+                                              FontSize="24"
+                                              TextColor="{StaticResource Gold}"/>
+                                        <Span Text="{Binding NextIncomeBonusDisplay}"
+                                              FontSize="24"
+                                              FontAttributes="Bold"
+                                              TextColor="{StaticResource Gold}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </VerticalStackLayout>
                     </Frame>
 
                     <!-- Warning -->
@@ -118,7 +112,7 @@
                             HeightRequest="50"/>
 
                     <!-- Later button -->
-                    <Button Text="Maybe Later"
+                    <Button Text="Continue Building"
                             Command="{Binding DismissPrestigeModalCommand}"
                             BackgroundColor="Transparent"
                             TextColor="{StaticResource TextSecondary}"
