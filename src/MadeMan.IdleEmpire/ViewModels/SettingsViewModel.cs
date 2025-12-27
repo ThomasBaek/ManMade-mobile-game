@@ -13,6 +13,7 @@ public partial class SettingsViewModel : ObservableObject
     private const string NotificationsKey = "settings_notifications";
     private const string VibrationKey = "settings_vibration";
     private const string FilmEffectsKey = "settings_film_effects";
+    private const string CelebrationsKey = "settings_celebrations";
 
     private readonly SaveManager _saveManager;
     private readonly IGameEngine _gameEngine;
@@ -34,6 +35,9 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     private bool _filmEffectsEnabled;
 
+    [ObservableProperty]
+    private bool _celebrationsEnabled;
+
     public SettingsViewModel(SaveManager saveManager, IGameEngine gameEngine)
     {
         _saveManager = saveManager;
@@ -45,6 +49,7 @@ public partial class SettingsViewModel : ObservableObject
         NotificationsEnabled = Preferences.Default.Get(NotificationsKey, true);
         VibrationEnabled = Preferences.Default.Get(VibrationKey, true);
         FilmEffectsEnabled = Preferences.Default.Get(FilmEffectsKey, true);
+        CelebrationsEnabled = Preferences.Default.Get(CelebrationsKey, true);
 
         // Apply vibration setting to helper
         HapticHelper.IsEnabled = VibrationEnabled;
@@ -74,6 +79,11 @@ public partial class SettingsViewModel : ObservableObject
     partial void OnFilmEffectsEnabledChanged(bool value)
     {
         Preferences.Default.Set(FilmEffectsKey, value);
+    }
+
+    partial void OnCelebrationsEnabledChanged(bool value)
+    {
+        Preferences.Default.Set(CelebrationsKey, value);
     }
 
     [RelayCommand]

@@ -2,10 +2,11 @@
 
 ## Metadata
 - **Phase**: 7 - Visual Polish
-- **Dependencies**: TASK-029 (Tema)
+- **Bundle**: Q - Enhanced UI
+- **Dependencies**: Ingen (TASK-075 anbefalet)
 - **Estimated Time**: 2-3 hours
 - **Status**: READY
-- **Design Reference**: N/A
+- **Priority**: 🔴 Høj
 - **Frequency Impact**: NO
 
 ---

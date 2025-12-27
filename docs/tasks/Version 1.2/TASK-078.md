@@ -2,10 +2,11 @@
 
 ## Metadata
 - **Phase**: 7 - Visual Polish
-- **Dependencies**: None
+- **Bundle**: P - Animation Foundation
+- **Dependencies**: Ingen
 - **Estimated Time**: 30 min - 1 hour
 - **Status**: READY
-- **Design Reference**: N/A
+- **Priority**: 🟡 Medium (Quick Win!)
 - **Frequency Impact**: NO
 
 ---

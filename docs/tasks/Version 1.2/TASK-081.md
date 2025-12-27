@@ -2,10 +2,11 @@
 
 ## Metadata
 - **Phase**: 7 - Visual Polish
-- **Dependencies**: TASK-075 (Animations), TASK-080 (Lottie) recommended
+- **Bundle**: S - Grand Finale
+- **Dependencies**: TASK-075, TASK-078, TASK-080 (alle anbefalet)
 - **Estimated Time**: 3-4 hours
 - **Status**: READY
-- **Design Reference**: N/A
+- **Priority**: 🟢 Lav (men stor impact!)
 - **Frequency Impact**: NO
 
 ---

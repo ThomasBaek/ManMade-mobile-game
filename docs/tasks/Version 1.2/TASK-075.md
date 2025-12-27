@@ -2,10 +2,11 @@
 
 ## Metadata
 - **Phase**: 7 - Visual Polish
-- **Dependencies**: TASK-029 (Tema)
+- **Bundle**: P - Animation Foundation
+- **Dependencies**: Ingen
 - **Estimated Time**: 1-2 hours
 - **Status**: READY
-- **Design Reference**: N/A
+- **Priority**: 🔴 Høj
 - **Frequency Impact**: NO
 
 ---

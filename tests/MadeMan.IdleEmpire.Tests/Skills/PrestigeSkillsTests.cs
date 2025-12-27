@@ -201,3 +201,4 @@ public class EarlyBirdTests : SkillTestBase
         Assert.True(multiplier < 1.0);
     }
 }
+    

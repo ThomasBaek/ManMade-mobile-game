@@ -2,10 +2,11 @@
 
 ## Metadata
 - **Phase**: 7 - Visual Polish
-- **Dependencies**: TASK-029 (Tema)
+- **Bundle**: R - Atmospheric Effects
+- **Dependencies**: Ingen
 - **Estimated Time**: 2-3 hours
 - **Status**: READY
-- **Design Reference**: N/A
+- **Priority**: 🟡 Medium
 - **Frequency Impact**: NO
 
 ---

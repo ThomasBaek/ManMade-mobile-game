@@ -94,6 +94,10 @@ public partial class MainViewModel : ObservableObject
 
     public SkillViewModel SkillVM { get; }
 
+    // Event fired when prestige is completed (for celebration)
+    // Parameters: bonusPercent, newTitleName, newTitleDescription
+    public event Action<double, string, string>? PrestigeCompleted;
+
     // Expose game engine for Welcome Back modal
     public IGameEngine GameEngine => _engine;
 
@@ -283,23 +287,29 @@ public partial class MainViewModel : ObservableObject
     private void Prestige()
     {
         if (!_engine.CanPrestige()) return;
+        DoPrestigeInternal();
+    }
 
-        // Remember current title before prestige
-        var oldTitle = TitleConfig.GetTitle(_engine.State.PrestigeCount);
+    /// <summary>
+    /// Debug command to test prestige without meeting requirements.
+    /// </summary>
+    [RelayCommand]
+    private void DebugPrestige()
+    {
+        // Force prestige for testing
+        _engine.State.TotalEarned = 25000; // Meet threshold
+        DoPrestigeInternal();
+    }
 
+    private void DoPrestigeInternal()
+    {
         _engine.DoPrestige();
         IsPrestigeModalVisible = false;
         BuildOperationViewModels();
         SkillVM.RefreshActiveSkills(); // Skills reset on prestige
 
-        // Check for new title
-        var newTitle = TitleConfig.GetTitle(_engine.State.PrestigeCount);
-        if (newTitle != oldTitle)
-        {
-            UnlockedTitleName = newTitle.Name;
-            UnlockedTitleDescription = newTitle.Description;
-            ShowTitleUnlockPopup = true;
-        }
+        // Get current title after prestige
+        var currentTitle = TitleConfig.GetTitle(_engine.State.PrestigeCount);
 
         // Update all properties including title
         OnPropertyChanged(nameof(CurrentTitle));
@@ -307,6 +317,10 @@ public partial class MainViewModel : ObservableObject
         OnPropertyChanged(nameof(CurrentPrestigeBonusDisplay));
         OnPropertyChanged(nameof(NextPrestigeBonusDisplay));
         UpdateDisplay();
+
+        // Fire celebration event with bonus percentage and title info
+        var bonusPercent = (_engine.State.PrestigeBonus - 1.0) * 100;
+        PrestigeCompleted?.Invoke(bonusPercent, currentTitle.Name, currentTitle.Description);
     }
 
     private void StartAutoSave()

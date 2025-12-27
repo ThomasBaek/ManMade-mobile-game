@@ -1,24 +1,46 @@
 using MadeMan.IdleEmpire.Helpers;
+using MadeMan.IdleEmpire.Services;
 using MadeMan.IdleEmpire.ViewModels;
+using SkiaSharp.Extended.UI.Controls;
 
 namespace MadeMan.IdleEmpire.Views;
 
 public partial class MainPage : ContentPage
 {
     private readonly MainViewModel _viewModel;
+    private readonly ICelebrationService _celebrationService;
     private bool _prestigeModalShownThisSession;
 
-    public MainPage(MainViewModel viewModel)
+    public MainPage(MainViewModel viewModel, ICelebrationService celebrationService)
     {
         InitializeComponent();
         _viewModel = viewModel;
+        _celebrationService = celebrationService;
         BindingContext = _viewModel;
 
         // Subscribe to property changes to detect prestige availability
         _viewModel.PropertyChanged += OnViewModelPropertyChanged;
 
+        // Subscribe to prestige completion for celebration
+        _viewModel.PrestigeCompleted += OnPrestigeCompleted;
+
         // Subscribe to TapCompleted events for animations
         SubscribeToOperationEvents();
+    }
+
+    private async void OnPrestigeCompleted(double bonusPercent, string newTitle, string titleDescription)
+    {
+        await _celebrationService.PlayPrestigeCelebrationAsync(
+            CelebrationFlash,
+            ConfettiAnimation,
+            CelebrationTitle,
+            CelebrationBonus,
+            CelebrationTitleFrame,
+            CelebrationNewTitle,
+            CelebrationTitleDesc,
+            bonusPercent,
+            newTitle,
+            titleDescription);
     }
 
     private void SubscribeToOperationEvents()
@@ -116,7 +138,9 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
         _viewModel.OnAppearing();
 
-        // Resubscribe to operation events (in case we unsubscribed in OnDisappearing)
+        // Resubscribe to events (in case we unsubscribed in OnDisappearing)
+        _viewModel.PrestigeCompleted -= OnPrestigeCompleted; // Prevent double-subscription
+        _viewModel.PrestigeCompleted += OnPrestigeCompleted;
         SubscribeToOperationEvents();
 
         // Check for offline earnings to display
@@ -133,6 +157,7 @@ public partial class MainPage : ContentPage
     {
         base.OnDisappearing();
         _viewModel.PropertyChanged -= OnViewModelPropertyChanged;
+        _viewModel.PrestigeCompleted -= OnPrestigeCompleted;
         UnsubscribeFromOperationEvents();
         _viewModel.OnDisappearing();
     }

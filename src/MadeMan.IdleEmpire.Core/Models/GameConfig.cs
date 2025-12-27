@@ -65,8 +65,8 @@ public static class GameConfig
     };
 
     // === PRESTIGE ===
-    // v1.1: Threshold increased to $25K, bonus reduced to 20%
-    public const double PrestigeThreshold = 25_000;
+    // DEBUG: Set to 250 for testing, production should be 25_000
+    public const double PrestigeThreshold = 250;
     public const double PrestigeBonusPerReset = 0.20;  // v1.1: was 0.25
 
     // === OFFLINE ===

@@ -104,6 +104,26 @@
                                 ThumbColor="{StaticResource TextPrimary}"/>
                     </Grid>
 
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="{StaticResource SurfaceLight}"
+                             Margin="0,8"/>
+
+                    <!-- Celebrations -->
+                    <Grid ColumnDefinitions="*,Auto" HeightRequest="48">
+                        <VerticalStackLayout VerticalOptions="Center">
+                            <Label Text="Celebrations"
+                                   FontSize="16"
+                                   TextColor="{StaticResource TextPrimary}"/>
+                            <Label Text="Confetti on prestige"
+                                   FontSize="11"
+                                   TextColor="{StaticResource TextSecondary}"/>
+                        </VerticalStackLayout>
+                        <Switch Grid.Column="1"
+                                IsToggled="{Binding CelebrationsEnabled}"
+                                OnColor="{StaticResource Gold}"
+                                ThumbColor="{StaticResource TextPrimary}"/>
+                    </Grid>
+
                 </VerticalStackLayout>
             </Frame>
 

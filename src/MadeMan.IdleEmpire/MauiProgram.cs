@@ -24,6 +24,7 @@ public static class MauiProgram
 
 		// Core Services
 		builder.Services.AddSingleton<SaveManager>();
+		builder.Services.AddSingleton<ICelebrationService, CelebrationService>();
 
 		// State holder (breaks circular dependency - registered first)
 		builder.Services.AddSingleton<GameStateHolder>();

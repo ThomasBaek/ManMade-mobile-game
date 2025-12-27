@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
              xmlns:components="clr-namespace:MadeMan.IdleEmpire.Views.Components"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="MadeMan.IdleEmpire.Views.MainPage"
              x:DataType="vm:MainViewModel"
              BackgroundColor="{StaticResource Background}"
@@ -153,6 +154,73 @@
                HorizontalOptions="Fill"
                VerticalOptions="Fill"
                IsVisible="{Binding FilmEffectsEnabled}"/>
+
+        <!-- === CELEBRATION OVERLAY (Prestige) === -->
+        <!-- Screen Flash -->
+        <BoxView x:Name="CelebrationFlash"
+                 Grid.RowSpan="3"
+                 Color="White"
+                 Opacity="0"
+                 IsVisible="False"
+                 InputTransparent="True"/>
+
+        <!-- Confetti Animation -->
+        <skia:SKLottieView x:Name="ConfettiAnimation"
+                           Grid.RowSpan="3"
+                           Source="anim_confetti.json"
+                           RepeatCount="0"
+                           IsVisible="False"
+                           InputTransparent="True"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Fill"/>
+
+        <!-- Celebration Text -->
+        <VerticalStackLayout Grid.RowSpan="3"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             InputTransparent="True"
+                             Spacing="12">
+            <Label x:Name="CelebrationTitle"
+                   Text="PRESTIGE COMPLETE!"
+                   FontFamily="BebasNeue"
+                   FontSize="42"
+                   TextColor="{StaticResource Gold}"
+                   HorizontalOptions="Center"
+                   IsVisible="False"/>
+            <Label x:Name="CelebrationBonus"
+                   Text="+20% INCOME BONUS!"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   IsVisible="False"/>
+            <!-- New Title -->
+            <Frame x:Name="CelebrationTitleFrame"
+                   BackgroundColor="{StaticResource Surface}"
+                   CornerRadius="12"
+                   Padding="20,12"
+                   BorderColor="{StaticResource Gold}"
+                   IsVisible="False"
+                   HorizontalOptions="Center">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="NEW TITLE UNLOCKED"
+                           FontSize="10"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"/>
+                    <Label x:Name="CelebrationNewTitle"
+                           Text="Street Thug"
+                           FontFamily="BebasNeue"
+                           FontSize="28"
+                           TextColor="{StaticResource Gold}"
+                           HorizontalOptions="Center"/>
+                    <Label x:Name="CelebrationTitleDesc"
+                           Text="You're making a name"
+                           FontSize="12"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
 
     </Grid>
 </ContentPage>
