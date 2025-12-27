@@ -5,16 +5,16 @@ public static class SkillConfig
     // === MILESTONE THRESHOLDS ===
     public static readonly double[] MilestoneThresholds = new[]
     {
-        1_000.0,
-        5_000.0,
-        15_000.0,
-        50_000.0,
-        150_000.0,
-        500_000.0,
-        1_500_000.0,
-        5_000_000.0,
-        15_000_000.0,
-        50_000_000.0
+        2_500.0,
+        10_000.0,
+        30_000.0,
+        75_000.0,
+        200_000.0,
+        600_000.0,
+        2_000_000.0,
+        7_500_000.0,
+        25_000_000.0,
+        100_000_000.0
     };
 
     public const int MaxSkills = 5;
@@ -33,7 +33,7 @@ public static class SkillConfig
             Icon = "skill_cash_flow.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 4.0 // +4% per level
+            EffectPerLevel = 3.0 // v1.1: was 4%
         },
         new SkillDefinition
         {
@@ -43,7 +43,7 @@ public static class SkillConfig
             Icon = "skill_street_smarts.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 10.0, // +10% per level
+            EffectPerLevel = 8.0, // v1.1: was 10%
             TargetTier = 1
         },
         new SkillDefinition
@@ -54,7 +54,7 @@ public static class SkillConfig
             Icon = "skill_business_acumen.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 12.0, // +12% per level
+            EffectPerLevel = 8.0, // v1.1: was 12%
             TargetTier = 2
         },
         new SkillDefinition
@@ -65,7 +65,7 @@ public static class SkillConfig
             Icon = "skill_lucky_break.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Chance,
-            EffectPerLevel = 4.0 // +4% chance per level
+            EffectPerLevel = 3.0 // v1.1: was 4%
         },
         new SkillDefinition
         {
@@ -75,7 +75,7 @@ public static class SkillConfig
             Icon = "skill_the_skim.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 5.0 // +5% cashback per level
+            EffectPerLevel = 4.0 // v1.1: was 5%
         },
         new SkillDefinition
         {
@@ -85,7 +85,7 @@ public static class SkillConfig
             Icon = "skill_compound_interest.png",
             Category = SkillCategory.Income,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 3.0 // +3% per 5 min per level (max 6 intervals)
+            EffectPerLevel = 2.0 // v1.1: was 3% (max 6 intervals)
         },
 
         // === OPERATIONS SKILLS (4) ===
@@ -97,7 +97,7 @@ public static class SkillConfig
             Icon = "skill_quick_hands.png",
             Category = SkillCategory.Operations,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 25.0, // +25% per level
+            EffectPerLevel = 12.0, // v1.1: was 25%
             TargetOperationId = "pickpocket"
         },
         new SkillDefinition
@@ -108,7 +108,7 @@ public static class SkillConfig
             Icon = "skill_chop_shop.png",
             Category = SkillCategory.Operations,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 20.0, // +20% per level
+            EffectPerLevel = 12.0, // v1.1: was 20%
             TargetOperationId = "cartheft"
         },
         new SkillDefinition
@@ -119,7 +119,7 @@ public static class SkillConfig
             Icon = "skill_inside_man.png",
             Category = SkillCategory.Operations,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 18.0, // +18% per level
+            EffectPerLevel = 12.0, // v1.1: was 18%
             TargetOperationId = "burglary"
         },
         new SkillDefinition
@@ -130,7 +130,7 @@ public static class SkillConfig
             Icon = "skill_happy_hour.png",
             Category = SkillCategory.Operations,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 15.0, // +15% per level
+            EffectPerLevel = 12.0, // v1.1: was 15%
             TargetOperationId = "speakeasy"
         },
 
@@ -143,7 +143,7 @@ public static class SkillConfig
             Icon = "skill_night_owl.png",
             Category = SkillCategory.Offline,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 10.0 // +10% efficiency per level (50% -> 100%)
+            EffectPerLevel = 6.0 // v1.1: was 10%
         },
         new SkillDefinition
         {
@@ -153,7 +153,7 @@ public static class SkillConfig
             Icon = "skill_extended_shift.png",
             Category = SkillCategory.Offline,
             EffectType = SkillEffectType.Duration,
-            EffectPerLevel = 1.0 // +1 hour per level
+            EffectPerLevel = 0.5 // v1.1: was 1 hour
         },
         new SkillDefinition
         {
@@ -163,7 +163,7 @@ public static class SkillConfig
             Icon = "skill_passive_income.png",
             Category = SkillCategory.Offline,
             EffectType = SkillEffectType.FlatBonus,
-            EffectPerLevel = 1.0 // +$1/s per level
+            EffectPerLevel = 0.5 // v1.1: was $1/s
         },
         new SkillDefinition
         {
@@ -173,7 +173,7 @@ public static class SkillConfig
             Icon = "skill_godfathers_cut.png",
             Category = SkillCategory.Offline,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 8.0 // +8% per level
+            EffectPerLevel = 6.0 // v1.1: was 8%
         },
 
         // === PRESTIGE SKILLS (4) ===
@@ -185,7 +185,7 @@ public static class SkillConfig
             Icon = "skill_old_connections.png",
             Category = SkillCategory.Prestige,
             EffectType = SkillEffectType.FlatBonus,
-            EffectPerLevel = 100.0 // +$100 per level
+            EffectPerLevel = 75.0 // v1.1: was $100
         },
         new SkillDefinition
         {
@@ -195,7 +195,7 @@ public static class SkillConfig
             Icon = "skill_reputation.png",
             Category = SkillCategory.Prestige,
             EffectType = SkillEffectType.Multiplier,
-            EffectPerLevel = 6.0 // +6% per level
+            EffectPerLevel = 4.0 // v1.1: was 6%
         },
         new SkillDefinition
         {
@@ -205,7 +205,7 @@ public static class SkillConfig
             Icon = "skill_fast_learner.png",
             Category = SkillCategory.Prestige,
             EffectType = SkillEffectType.Reduction,
-            EffectPerLevel = 4.0 // -4% per level
+            EffectPerLevel = 3.0 // v1.1: was 4%
         },
         new SkillDefinition
         {
@@ -215,7 +215,7 @@ public static class SkillConfig
             Icon = "skill_early_bird.png",
             Category = SkillCategory.Prestige,
             EffectType = SkillEffectType.Reduction,
-            EffectPerLevel = 5.0 // -5% per level
+            EffectPerLevel = 4.0 // v1.1: was 5%
         }
     };
 
