@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MadeMan.IdleEmpire.Helpers;
 using MadeMan.IdleEmpire.Services;
 using MadeMan.IdleEmpire.Utilities;
 
@@ -10,6 +11,7 @@ public partial class SettingsViewModel : ObservableObject
     private const string SoundKey = "settings_sound";
     private const string MusicKey = "settings_music";
     private const string NotificationsKey = "settings_notifications";
+    private const string VibrationKey = "settings_vibration";
 
     private readonly SaveManager _saveManager;
     private readonly IGameEngine _gameEngine;
@@ -25,6 +27,9 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     private bool _notificationsEnabled;
 
+    [ObservableProperty]
+    private bool _vibrationEnabled;
+
     public SettingsViewModel(SaveManager saveManager, IGameEngine gameEngine)
     {
         _saveManager = saveManager;
@@ -34,6 +39,10 @@ public partial class SettingsViewModel : ObservableObject
         SoundEnabled = Preferences.Default.Get(SoundKey, true);
         MusicEnabled = Preferences.Default.Get(MusicKey, true);
         NotificationsEnabled = Preferences.Default.Get(NotificationsKey, true);
+        VibrationEnabled = Preferences.Default.Get(VibrationKey, true);
+
+        // Apply vibration setting to helper
+        HapticHelper.IsEnabled = VibrationEnabled;
     }
 
     partial void OnSoundEnabledChanged(bool value)
@@ -49,6 +58,12 @@ public partial class SettingsViewModel : ObservableObject
     partial void OnNotificationsEnabledChanged(bool value)
     {
         Preferences.Default.Set(NotificationsKey, value);
+    }
+
+    partial void OnVibrationEnabledChanged(bool value)
+    {
+        Preferences.Default.Set(VibrationKey, value);
+        HapticHelper.IsEnabled = value;
     }
 
     [RelayCommand]

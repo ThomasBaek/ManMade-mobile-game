@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MadeMan.IdleEmpire.Helpers;
 using MadeMan.IdleEmpire.Models;
 using MadeMan.IdleEmpire.Services;
 using MadeMan.IdleEmpire.Utilities;
@@ -175,7 +176,7 @@ public partial class OperationViewModel : ObservableObject
 
             var canUpgrade = _engine.CanUpgrade(_operation.Id);
             var newButtonColor = canUpgrade
-                ? GetResourceColor("Primary")
+                ? GetResourceColor("Success")
                 : GetResourceColor("Smoke");
             if (newButtonColor != _lastButtonColor)
             {
@@ -194,10 +195,52 @@ public partial class OperationViewModel : ObservableObject
         return Colors.Gray;
     }
 
+    /// <summary>
+    /// Result of a tap action for animation purposes.
+    /// </summary>
+    public enum TapResult
+    {
+        CannotAfford,
+        Upgraded,
+        Unlocked
+    }
+
+    /// <summary>
+    /// Event raised after tap with result for UI animations.
+    /// </summary>
+    public event Action<TapResult>? TapCompleted;
+
     [RelayCommand]
     private void Tap()
     {
+        // Check if we can afford before attempting
+        bool canAfford = IsUnlocked
+            ? _engine.CanUpgrade(_operation.Id)
+            : _engine.CanUnlock(_operation.Id);
+
+        if (!canAfford)
+        {
+            HapticHelper.Error();
+            TapCompleted?.Invoke(TapResult.CannotAfford);
+            return;
+        }
+
+        // Track if this is an unlock (level was 0)
+        bool wasLocked = !IsUnlocked;
+
         _engine.UnlockOrUpgrade(_operation.Id);
         Refresh();
+
+        // Provide appropriate feedback
+        if (wasLocked)
+        {
+            HapticHelper.Success();
+            TapCompleted?.Invoke(TapResult.Unlocked);
+        }
+        else
+        {
+            HapticHelper.Click();
+            TapCompleted?.Invoke(TapResult.Upgraded);
+        }
     }
 }

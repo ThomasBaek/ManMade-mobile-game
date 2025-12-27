@@ -1,3 +1,4 @@
+using MadeMan.IdleEmpire.Helpers;
 using MadeMan.IdleEmpire.ViewModels;
 
 namespace MadeMan.IdleEmpire.Views;
@@ -15,6 +16,66 @@ public partial class MainPage : ContentPage
 
         // Subscribe to property changes to detect prestige availability
         _viewModel.PropertyChanged += OnViewModelPropertyChanged;
+
+        // Subscribe to TapCompleted events for animations
+        SubscribeToOperationEvents();
+    }
+
+    private void SubscribeToOperationEvents()
+    {
+        foreach (var op in _viewModel.Operations)
+        {
+            // Unsubscribe first to prevent double-subscription
+            op.TapCompleted -= OnOperationTapCompleted;
+            op.TapCompleted += OnOperationTapCompleted;
+        }
+    }
+
+    private void UnsubscribeFromOperationEvents()
+    {
+        foreach (var op in _viewModel.Operations)
+        {
+            op.TapCompleted -= OnOperationTapCompleted;
+        }
+    }
+
+    private void OnOperationTapCompleted(OperationViewModel.TapResult result)
+    {
+        // No longer used - animation handled directly in OnOperationButtonClicked
+    }
+
+    private async void OnOperationButtonClicked(object? sender, EventArgs e)
+    {
+        if (sender is not Button button) return;
+        if (button.BindingContext is not OperationViewModel opVm) return;
+
+        // Check affordability BEFORE executing the tap
+        bool canAfford = opVm.IsUnlocked
+            ? opVm.ButtonColor == GetResourceColor("Success")
+            : opVm.ButtonColor == GetResourceColor("Success");
+
+        // Execute the tap command
+        if (opVm.TapCommand.CanExecute(null))
+        {
+            opVm.TapCommand.Execute(null);
+        }
+
+        // Animate based on what we checked BEFORE the tap
+        if (canAfford)
+        {
+            await AnimationHelper.BounceAsync(button);
+        }
+        else
+        {
+            await AnimationHelper.ShakeAsync(button);
+        }
+    }
+
+    private static Color GetResourceColor(string key)
+    {
+        if (Application.Current?.Resources.TryGetValue(key, out var value) == true && value is Color color)
+            return color;
+        return Colors.Gray;
     }
 
     private async void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -55,6 +116,9 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
         _viewModel.OnAppearing();
 
+        // Resubscribe to operation events (in case we unsubscribed in OnDisappearing)
+        SubscribeToOperationEvents();
+
         // Check for offline earnings to display
         ShowWelcomeBackIfNeeded();
 
@@ -68,7 +132,8 @@ public partial class MainPage : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        _viewModel.PropertyChanged -= OnViewModelPropertyChanged; // Fix memory leak
+        _viewModel.PropertyChanged -= OnViewModelPropertyChanged;
+        UnsubscribeFromOperationEvents();
         _viewModel.OnDisappearing();
     }
 

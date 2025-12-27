@@ -106,7 +106,7 @@
                                 <!-- Action Button (compact) -->
                                 <Button Grid.Column="2"
                                         Text="{Binding ButtonText}"
-                                        Command="{Binding TapCommand}"
+                                        Clicked="OnOperationButtonClicked"
                                         BackgroundColor="{Binding ButtonColor}"
                                         TextColor="White"
                                         CornerRadius="6"

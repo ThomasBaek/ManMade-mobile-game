@@ -70,6 +70,22 @@
                                 ThumbColor="{StaticResource TextPrimary}"/>
                     </Grid>
 
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="{StaticResource SurfaceLight}"
+                             Margin="0,8"/>
+
+                    <!-- Vibration -->
+                    <Grid ColumnDefinitions="*,Auto" HeightRequest="48">
+                        <Label Text="Vibration"
+                               FontSize="16"
+                               TextColor="{StaticResource TextPrimary}"
+                               VerticalOptions="Center"/>
+                        <Switch Grid.Column="1"
+                                IsToggled="{Binding VibrationEnabled}"
+                                OnColor="{StaticResource Gold}"
+                                ThumbColor="{StaticResource TextPrimary}"/>
+                    </Grid>
+
                 </VerticalStackLayout>
             </Frame>
 
