@@ -9,19 +9,19 @@
              BackgroundColor="{StaticResource Background}"
              Shell.NavBarIsVisible="False">
 
-    <!-- Safe Area Container -->
-    <Grid Padding="16,0,16,16">
+    <!-- Main Container -->
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- === TOP BAR (Reusable Component) === -->
+        <!-- === TOP BAR (Edge-to-edge static bar) === -->
         <components:TopBar Grid.Row="0"/>
 
-        <!-- === OPERATIONS LIST (Compact) === -->
-        <ScrollView Grid.Row="1">
+        <!-- === OPERATIONS LIST (with padding) === -->
+        <ScrollView Grid.Row="1" Padding="16,12,16,16">
             <VerticalStackLayout Spacing="8"
                                  BindableLayout.ItemsSource="{Binding Operations}">
                 <BindableLayout.ItemTemplate>
@@ -76,17 +76,12 @@
                                                  Margin="0,2,0,0"
                                                  IsVisible="{Binding IsUnlocked}"/>
 
-                                    <!-- Progress Bar (locked: unlock progress) -->
-                                    <Grid HeightRequest="4"
-                                          IsVisible="{Binding IsUnlocked, Converter={StaticResource InverseBoolConverter}}"
-                                          Margin="0,2,0,0">
-                                        <BoxView BackgroundColor="{StaticResource SurfaceLight}"
-                                                 CornerRadius="2"/>
-                                        <BoxView BackgroundColor="{StaticResource Gold}"
-                                                 CornerRadius="2"
-                                                 HorizontalOptions="Start"
-                                                 WidthRequest="{Binding UnlockProgress, Converter={StaticResource ProgressToWidthConverter}}"/>
-                                    </Grid>
+                                    <!-- Potential income teaser (locked only) -->
+                                    <Label Text="{Binding PotentialIncomeDisplay}"
+                                           FontSize="11"
+                                           TextColor="{StaticResource TextSecondary}"
+                                           IsVisible="{Binding IsUnlocked, Converter={StaticResource InverseBoolConverter}}"
+                                           Margin="0,2,0,0"/>
 
                                     <!-- Income display (unlocked only) -->
                                     <HorizontalStackLayout Spacing="6"
@@ -135,25 +130,6 @@
 
         <!-- === TITLE UNLOCK MODAL (Overlay - on top) === -->
         <components:TitleUnlockModal Grid.RowSpan="3"/>
-
-        <!-- === FILM EFFECT OVERLAYS === -->
-        <Image Source="overlay_vignette"
-               Grid.RowSpan="3"
-               Aspect="Fill"
-               Opacity="0.25"
-               InputTransparent="True"
-               HorizontalOptions="Fill"
-               VerticalOptions="Fill"
-               IsVisible="{Binding FilmEffectsEnabled}"/>
-
-        <Image Source="overlay_grain"
-               Grid.RowSpan="3"
-               Aspect="Fill"
-               Opacity="0.20"
-               InputTransparent="True"
-               HorizontalOptions="Fill"
-               VerticalOptions="Fill"
-               IsVisible="{Binding FilmEffectsEnabled}"/>
 
         <!-- === CELEBRATION OVERLAY (Prestige) === -->
         <!-- Screen Flash -->

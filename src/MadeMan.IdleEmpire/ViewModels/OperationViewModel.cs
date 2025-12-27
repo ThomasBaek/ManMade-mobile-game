@@ -70,6 +70,9 @@ public partial class OperationViewModel : ObservableObject
     [ObservableProperty]
     private string _timeRemainingDisplay = string.Empty; // "3.2s"
 
+    [ObservableProperty]
+    private string _potentialIncomeDisplay = string.Empty; // "Earns $0.5/s" for locked
+
     public OperationViewModel(Operation operation, IGameEngine engine)
     {
         _operation = operation;
@@ -86,10 +89,15 @@ public partial class OperationViewModel : ObservableObject
 
         if (!IsUnlocked)
         {
-            LevelDisplay = "LOCKED";
+            // Free operations (like Pickpocket) show "START", others show cost
+            var isFreeOperation = _operation.UnlockCost == 0;
 
-            // Only update if changed
-            var newButtonText = $"${NumberFormatter.FormatNumber(_operation.UnlockCost)}";
+            LevelDisplay = isFreeOperation ? "" : "";  // No level display for locked
+
+            // Button text: "START" for free, "$X" for others
+            var newButtonText = isFreeOperation
+                ? "START"
+                : $"${NumberFormatter.FormatNumber(_operation.UnlockCost)}";
             if (newButtonText != _lastButtonText)
             {
                 ButtonText = newButtonText;
@@ -116,8 +124,12 @@ public partial class OperationViewModel : ObservableObject
                 _lastUnlockProgress = newUnlockProgress;
             }
 
-            // Show if: 50%+ progress OR is next to unlock
-            ShouldShow = UnlockProgress >= 0.5 || IsNextToUnlock;
+            // Free operations always show, others show if 50%+ progress or next to unlock
+            ShouldShow = isFreeOperation || UnlockProgress >= 0.5 || IsNextToUnlock;
+
+            // Show potential income teaser for locked operations
+            var potentialIncome = _operation.GetIncomePerSecond(1, _engine.State.PrestigeBonus);
+            PotentialIncomeDisplay = $"Earns {NumberFormatter.FormatCurrency(potentialIncome)}/s";
 
             // Reset progress display for locked operations
             if (_lastProgress != 0) { Progress = 0; _lastProgress = 0; }
@@ -130,6 +142,7 @@ public partial class OperationViewModel : ObservableObject
             ShouldShow = true; // Always show unlocked operations
             UnlockProgress = 1.0;
             LevelDisplay = $"Lvl {state.Level}";
+            PotentialIncomeDisplay = "";  // Clear teaser for unlocked
 
             // Calculate yield for this cycle
             var yield = _operation.GetYield(state.Level, _engine.State.PrestigeBonus);

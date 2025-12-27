@@ -103,14 +103,18 @@ public class GameEngine : IGameEngine
 
     private GameState CreateNewGame()
     {
-        var state = new GameState();
+        var state = new GameState
+        {
+            Cash = GameConfig.StartingCash  // Start with $5
+        };
 
+        // All operations start at level 0 - player must manually start
         foreach (var op in GameConfig.Operations)
         {
             state.Operations.Add(new OperationState
             {
                 Id = op.Id,
-                Level = op.UnlockCost == 0 ? 1 : 0,
+                Level = 0,
                 AccumulatedTime = 0
             });
         }
@@ -245,17 +249,18 @@ public class GameEngine : IGameEngine
         _skillService.ResetSkills();
         _milestoneService.Reset();
 
-        // Starting cash from Old Connections skill
-        State.Cash = _skillService.GetStartingCashBonus();
+        // Starting cash: base + Old Connections skill bonus
+        State.Cash = GameConfig.StartingCash + _skillService.GetStartingCashBonus();
         State.TotalEarned = 0;
 
+        // All operations start at level 0 - player must manually start again
         State.Operations.Clear();
         foreach (var op in GameConfig.Operations)
         {
             State.Operations.Add(new OperationState
             {
                 Id = op.Id,
-                Level = op.UnlockCost == 0 ? 1 : 0,
+                Level = 0,
                 AccumulatedTime = 0 // Reset progress
             });
         }

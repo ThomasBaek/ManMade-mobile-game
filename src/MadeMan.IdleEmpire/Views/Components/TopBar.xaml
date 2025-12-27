@@ -4,134 +4,129 @@
              xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
              xmlns:controls="clr-namespace:MadeMan.IdleEmpire.Controls"
              x:Class="MadeMan.IdleEmpire.Views.Components.TopBar"
-             x:DataType="vm:MainViewModel">
+             x:DataType="vm:MainViewModel"
+             BackgroundColor="{StaticResource Surface}">
 
-    <VerticalStackLayout Spacing="4">
-        <!-- === TOP BAR (Compact Cash/Income Display) === -->
-        <Frame BackgroundColor="{StaticResource Surface}"
-               CornerRadius="12"
-               Padding="12,8"
-               Margin="0,8,0,4"
-               BorderColor="Transparent">
-            <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
-                <!-- Cash (Animated) -->
+    <VerticalStackLayout Spacing="0">
+        <!-- === TOP BAR (Cash/Income Display) - Edge to edge === -->
+        <Grid Padding="16,12" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
+            <!-- Cash (Animated) -->
+            <HorizontalStackLayout Spacing="4">
+                <Label Text="💰"
+                       FontSize="16"
+                       VerticalOptions="Center"/>
+                <controls:AnimatedNumberLabel
+                       TargetValue="{Binding CashValue}"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Gold}"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <!-- Income -->
+            <Border Grid.Column="1"
+                    BackgroundColor="{StaticResource SurfaceLight}"
+                    StrokeThickness="0"
+                    Padding="8,4">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="6"/>
+                </Border.StrokeShape>
+                <Label Text="{Binding IncomeDisplay}"
+                       FontSize="12"
+                       TextColor="{StaticResource Success}"/>
+            </Border>
+
+            <!-- Expenses (placeholder) -->
+            <Label Grid.Column="2"
+                   Text="-$0/s"
+                   FontSize="12"
+                   TextColor="{StaticResource Smoke}"
+                   VerticalOptions="Center"/>
+
+            <!-- Prestige Badge (clickable) -->
+            <Border Grid.Column="3"
+                    BackgroundColor="{Binding PrestigeBadgeColor}"
+                    StrokeThickness="0"
+                    Padding="8,4">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="6"/>
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowPrestigeModalCommand}"/>
+                </Border.GestureRecognizers>
                 <HorizontalStackLayout Spacing="4">
-                    <Label Text="💰"
-                           FontSize="16"
+                    <Label Text="⭐"
+                           FontSize="10"
+                           VerticalOptions="Center"
+                           IsVisible="{Binding CanPrestige}"/>
+                    <Label Text="P:"
+                           FontSize="10"
+                           TextColor="{StaticResource TextSecondary}"
                            VerticalOptions="Center"/>
-                    <controls:AnimatedNumberLabel
-                           TargetValue="{Binding CashValue}"
-                           Prefix="$"
-                           FontSize="18"
+                    <Label Text="{Binding PrestigeCount}"
+                           FontSize="12"
                            FontAttributes="Bold"
                            TextColor="{StaticResource Gold}"
                            VerticalOptions="Center"/>
                 </HorizontalStackLayout>
+            </Border>
+        </Grid>
 
-                <!-- Income -->
-                <Frame Grid.Column="1"
-                       BackgroundColor="{StaticResource SurfaceLight}"
-                       CornerRadius="6"
-                       Padding="8,4"
-                       BorderColor="Transparent">
-                    <Label Text="{Binding IncomeDisplay}"
-                           FontSize="12"
-                           TextColor="{StaticResource Success}"/>
-                </Frame>
-
-                <!-- Expenses (placeholder) -->
-                <Label Grid.Column="2"
-                       Text="-$0/s"
-                       FontSize="12"
-                       TextColor="{StaticResource Smoke}"
-                       VerticalOptions="Center"/>
-
-                <!-- Prestige Badge (clickable) -->
-                <Frame Grid.Column="3"
-                       BackgroundColor="{Binding PrestigeBadgeColor}"
-                       CornerRadius="6"
-                       Padding="8,4"
-                       BorderColor="Transparent">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ShowPrestigeModalCommand}"/>
-                    </Frame.GestureRecognizers>
-                    <HorizontalStackLayout Spacing="4">
-                        <Label Text="⭐"
-                               FontSize="10"
-                               VerticalOptions="Center"
-                               IsVisible="{Binding CanPrestige}"/>
-                        <Label Text="P:"
-                               FontSize="10"
-                               TextColor="{StaticResource TextSecondary}"
-                               VerticalOptions="Center"/>
-                        <Label Text="{Binding PrestigeCount}"
-                               FontSize="12"
-                               FontAttributes="Bold"
-                               TextColor="{StaticResource Gold}"
-                               VerticalOptions="Center"/>
-                    </HorizontalStackLayout>
-                </Frame>
-            </Grid>
-        </Frame>
+        <!-- Separator line -->
+        <BoxView HeightRequest="1"
+                 BackgroundColor="{StaticResource SurfaceLight}"
+                 HorizontalOptions="Fill"/>
 
         <!-- === TITLE + PRESTIGE PROGRESS === -->
-        <Frame BackgroundColor="{StaticResource Surface}"
-               CornerRadius="12"
-               Padding="12"
-               Margin="0,0,0,8"
-               BorderColor="Transparent">
-            <Grid RowDefinitions="Auto,Auto" RowSpacing="8">
-                <!-- Title Row -->
-                <Grid ColumnDefinitions="Auto,*,Auto">
-                    <HorizontalStackLayout Spacing="4">
-                        <Label Text="🎩"
-                               FontSize="14"
-                               VerticalOptions="Center"/>
-                        <Label Text="{Binding CurrentTitle}"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               TextColor="{StaticResource Gold}"
-                               VerticalOptions="Center"/>
-                    </HorizontalStackLayout>
-                    <Label Grid.Column="2"
-                           Text="{Binding CurrentTitleDescription}"
+        <Grid Padding="16,12" RowDefinitions="Auto,Auto" RowSpacing="8">
+            <!-- Title Row -->
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <HorizontalStackLayout Spacing="4">
+                    <Label Text="🎩"
+                           FontSize="14"
+                           VerticalOptions="Center"/>
+                    <Label Text="{Binding CurrentTitle}"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Gold}"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <Label Grid.Column="2"
+                       Text="{Binding CurrentTitleDescription}"
+                       FontSize="10"
+                       TextColor="{StaticResource TextSecondary}"
+                       VerticalOptions="Center"
+                       LineBreakMode="TailTruncation"
+                       MaximumWidthRequest="160"/>
+            </Grid>
+
+            <!-- Prestige Progress Row -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="PRESTIGE PROGRESS"
+                           FontSize="10"
+                           TextColor="{StaticResource TextSecondary}"/>
+                    <Grid HeightRequest="6">
+                        <BoxView BackgroundColor="{StaticResource SurfaceLight}"
+                                 CornerRadius="3"/>
+                        <BoxView BackgroundColor="{StaticResource Primary}"
+                                 CornerRadius="3"
+                                 HorizontalOptions="Start"
+                                 WidthRequest="{Binding PrestigeProgress, Converter={StaticResource ProgressToWidth}}"/>
+                    </Grid>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                    <Label Text="{Binding TotalEarnedDisplay}"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}"
+                           HorizontalOptions="End"/>
+                    <Label Text="{Binding PrestigeThresholdDisplay}"
                            FontSize="10"
                            TextColor="{StaticResource TextSecondary}"
-                           VerticalOptions="Center"
-                           LineBreakMode="TailTruncation"
-                           MaximumWidthRequest="160"/>
-                </Grid>
-
-                <!-- Prestige Progress Row -->
-                <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                    <VerticalStackLayout Spacing="4">
-                        <Label Text="PRESTIGE PROGRESS"
-                               FontSize="10"
-                               TextColor="{StaticResource TextSecondary}"/>
-                        <Grid HeightRequest="6">
-                            <Frame BackgroundColor="{StaticResource SurfaceLight}"
-                                   CornerRadius="3"
-                                   Padding="0"
-                                   BorderColor="Transparent"/>
-                            <BoxView BackgroundColor="{StaticResource Primary}"
-                                     CornerRadius="3"
-                                     HorizontalOptions="Start"
-                                     WidthRequest="{Binding PrestigeProgress, Converter={StaticResource ProgressToWidth}}"/>
-                        </Grid>
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                        <Label Text="{Binding TotalEarnedDisplay}"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               TextColor="{StaticResource TextPrimary}"
-                               HorizontalOptions="End"/>
-                        <Label Text="{Binding PrestigeThresholdDisplay}"
-                               FontSize="10"
-                               TextColor="{StaticResource TextSecondary}"
-                               HorizontalOptions="End"/>
-                    </VerticalStackLayout>
-                </Grid>
+                           HorizontalOptions="End"/>
+                </VerticalStackLayout>
             </Grid>
-        </Frame>
+        </Grid>
     </VerticalStackLayout>
 </ContentView>

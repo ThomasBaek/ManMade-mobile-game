@@ -30,7 +30,7 @@ public class AnimatedNumberLabel : Label
         nameof(Prefix),
         typeof(string),
         typeof(AnimatedNumberLabel),
-        "$");
+        "");
 
     public double TargetValue
     {

@@ -88,26 +88,6 @@
                              BackgroundColor="{StaticResource SurfaceLight}"
                              Margin="0,8"/>
 
-                    <!-- Film Effects -->
-                    <Grid ColumnDefinitions="*,Auto" HeightRequest="48">
-                        <VerticalStackLayout VerticalOptions="Center">
-                            <Label Text="Film Effects"
-                                   FontSize="16"
-                                   TextColor="{StaticResource TextPrimary}"/>
-                            <Label Text="Grain &amp; vignette overlays"
-                                   FontSize="11"
-                                   TextColor="{StaticResource TextSecondary}"/>
-                        </VerticalStackLayout>
-                        <Switch Grid.Column="1"
-                                IsToggled="{Binding FilmEffectsEnabled}"
-                                OnColor="{StaticResource Gold}"
-                                ThumbColor="{StaticResource TextPrimary}"/>
-                    </Grid>
-
-                    <BoxView HeightRequest="1"
-                             BackgroundColor="{StaticResource SurfaceLight}"
-                             Margin="0,8"/>
-
                     <!-- Celebrations -->
                     <Grid ColumnDefinitions="*,Auto" HeightRequest="48">
                         <VerticalStackLayout VerticalOptions="Center">

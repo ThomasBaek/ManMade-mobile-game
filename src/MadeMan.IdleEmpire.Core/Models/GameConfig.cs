@@ -64,9 +64,11 @@ public static class GameConfig
         }
     };
 
+    // === STARTING STATE ===
+    public const double StartingCash = 5.0;  // Player starts with $5
+
     // === PRESTIGE ===
-    // DEBUG: Set to 250 for testing, production should be 25_000
-    public const double PrestigeThreshold = 250;
+    public const double PrestigeThreshold = 25_000;
     public const double PrestigeBonusPerReset = 0.20;  // v1.1: was 0.25
 
     // === OFFLINE ===
