@@ -8,17 +8,18 @@
              BackgroundColor="{StaticResource Background}"
              Shell.NavBarIsVisible="False">
 
-    <Grid Padding="16,0,16,16">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- === TOP BAR === -->
-        <components:TopBar Grid.Row="0"/>
+        <components:TopBar Grid.Row="0" ShowPrestigeProgress="False"/>
 
         <!-- === LOCKED CONTENT === -->
         <VerticalStackLayout Grid.Row="1"
+                             Margin="16,0,16,16"
                              VerticalOptions="Center"
                              HorizontalOptions="Center"
                              Spacing="16"

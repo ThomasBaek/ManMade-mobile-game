@@ -5,8 +5,9 @@
 - **Bundle**: V (UI Refinements)
 - **Dependencies**: None
 - **Estimated Time**: 45 min
-- **Status**: READY
+- **Status**: ✅ COMPLETED
 - **Priority**: Medium
+- **Completed**: 2024-12-27
 
 ---
 
@@ -132,11 +133,27 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 
 ## Acceptance Criteria
 
-- [ ] Prestige progress only visible on Empire tab
-- [ ] Player title visible on all tabs
-- [ ] Smooth transition when switching tabs
-- [ ] No layout jumps when progress hides/shows
-- [ ] Build succeeds
+- [x] Prestige progress only visible on Empire tab
+- [x] Player title visible on all tabs
+- [x] Smooth transition when switching tabs
+- [x] No layout jumps when progress hides/shows
+- [x] Build succeeds
+
+---
+
+## Completion Notes
+
+**Implementation:**
+- Added `ShowPrestigeProgress` bindable property to TopBar
+- TopBar.xaml uses `x:Name="PrestigeProgressSection"` for visibility control
+- MainPage uses default (true), other pages set `ShowPrestigeProgress="False"`
+
+**Files Modified:**
+- `Views/Components/TopBar.xaml` - Added x:Name to prestige section
+- `Views/Components/TopBar.xaml.cs` - Added ShowPrestigeProgress property
+- `Views/SkillsTabPage.xaml` - ShowPrestigeProgress="False"
+- `Views/CasinoPage.xaml` - ShowPrestigeProgress="False"
+- `Views/OrgCrimePage.xaml` - ShowPrestigeProgress="False"
 
 ---
 
@@ -152,4 +169,4 @@ dotnet build src/MadeMan.IdleEmpire -f net10.0-android
 
 ---
 
-**Task Status**: READY
+**Task Status**: ✅ COMPLETED (2024-12-27)

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
              xmlns:components="clr-namespace:MadeMan.IdleEmpire.Views.Components"
+             xmlns:controls="clr-namespace:MadeMan.IdleEmpire.Controls"
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="MadeMan.IdleEmpire.Views.MainPage"
              x:DataType="vm:MainViewModel"
@@ -68,13 +69,14 @@
                                                TextColor="{StaticResource TextSecondary}"/>
                                     </HorizontalStackLayout>
 
-                                    <!-- Progress Bar (unlocked: yield progress) -->
-                                    <ProgressBar Progress="{Binding Progress}"
-                                                 ProgressColor="{StaticResource Gold}"
-                                                 BackgroundColor="{StaticResource SurfaceLight}"
-                                                 HeightRequest="6"
-                                                 Margin="0,2,0,0"
-                                                 IsVisible="{Binding IsUnlocked}"/>
+                                    <!-- Progress Bar (unlocked: yield progress) - Animated -->
+                                    <controls:AnimatedProgressBar TargetProgress="{Binding Progress}"
+                                                                  ProgressColor="{StaticResource Gold}"
+                                                                  BackgroundColor="{StaticResource SurfaceLight}"
+                                                                  HeightRequest="6"
+                                                                  Margin="0,2,0,0"
+                                                                  AnimationDuration="400"
+                                                                  IsVisible="{Binding IsUnlocked}"/>
 
                                     <!-- Potential income teaser (locked only) -->
                                     <Label Text="{Binding PotentialIncomeDisplay}"

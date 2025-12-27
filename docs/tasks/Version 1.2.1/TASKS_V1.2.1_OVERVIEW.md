@@ -12,10 +12,10 @@ Quality-of-life improvements, stats tracking, documentation, and performance opt
 | TASK-082 | Zero Income Start | T | 30 min | High | ✅ |
 | TASK-083 | Operations Locked UI | T | 45 min | High | ✅ |
 | TASK-084 | Stats Page | U | 2 hours | Medium | ✅ |
-| TASK-085 | Prestige Progress Visibility | V | 45 min | Medium | |
+| TASK-085 | Prestige Progress Visibility | V | 45 min | Medium | ✅ |
 | TASK-086 | Skills Guide Page | U | 1 hour | Medium | ✅ |
 | TASK-087 | How to Play Page | U | 2-3 hours | Low | ✅ |
-| TASK-088 | Smooth Countdown Animation | V | 1-2 hours | Medium | |
+| TASK-088 | Smooth Countdown Animation | V | 1-2 hours | Medium | ✅ |
 | TASK-089 | Remove $ from TopBar | T | 15 min | Low | ✅ |
 | TASK-090 | Tab Switching Performance | W | 2-3 hours | High | |
 
@@ -64,9 +64,10 @@ Quality-of-life improvements, stats tracking, documentation, and performance opt
 
 ---
 
-### Bundle V: UI Refinements (TASK-085, TASK-088)
+### Bundle V: UI Refinements (TASK-085, TASK-088) ✅ COMPLETED
 **Priority:** Medium - Visual polish
 **Estimate:** 2-3 hours
+**Completed:** 2024-12-27
 
 | Task | Description | Impact |
 |------|-------------|--------|
@@ -190,7 +191,7 @@ Note: Stats page is view-only, no toggle needed.
 
 - [x] **Bundle T Complete** - Quick UX fixes
 - [x] **Bundle U Complete** - Stats & documentation
-- [ ] **Bundle V Complete** - UI refinements
+- [x] **Bundle V Complete** - UI refinements
 - [ ] **Bundle W Complete** - Performance investigation
 - [x] **All Tests Pass** - 149+ tests passing
 - [x] **Build Clean** - 0 errors, minimal warnings

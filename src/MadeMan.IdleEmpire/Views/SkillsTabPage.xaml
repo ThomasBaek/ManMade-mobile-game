@@ -9,17 +9,17 @@
              BackgroundColor="{StaticResource Background}"
              Shell.NavBarIsVisible="False">
 
-    <Grid Padding="16,0,16,16">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- === TOP BAR === -->
-        <components:TopBar Grid.Row="0"/>
+        <components:TopBar Grid.Row="0" ShowPrestigeProgress="False"/>
 
         <!-- === SKILLS CONTENT === -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Padding="16,0,16,16">
 
             <!-- LOCKED STATE (No skills yet) -->
             <VerticalStackLayout VerticalOptions="Center"

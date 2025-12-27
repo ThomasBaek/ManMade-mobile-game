@@ -9,7 +9,7 @@
 
     <VerticalStackLayout Spacing="0">
         <!-- === TOP BAR (Cash/Income Display) - Edge to edge === -->
-        <Grid Padding="16,12" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
+        <Grid Padding="16,12,16,12" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
             <!-- Cash (Animated) -->
             <HorizontalStackLayout Spacing="4">
                 <Label Text="💰"
@@ -77,56 +77,53 @@
                  BackgroundColor="{StaticResource SurfaceLight}"
                  HorizontalOptions="Fill"/>
 
-        <!-- === TITLE + PRESTIGE PROGRESS === -->
-        <Grid Padding="16,12" RowDefinitions="Auto,Auto" RowSpacing="8">
-            <!-- Title Row -->
-            <Grid ColumnDefinitions="Auto,*,Auto">
-                <HorizontalStackLayout Spacing="4">
-                    <Label Text="🎩"
-                           FontSize="14"
-                           VerticalOptions="Center"/>
-                    <Label Text="{Binding CurrentTitle}"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           TextColor="{StaticResource Gold}"
-                           VerticalOptions="Center"/>
-                </HorizontalStackLayout>
-                <Label Grid.Column="2"
-                       Text="{Binding CurrentTitleDescription}"
+        <!-- === TITLE ROW (Always visible) === -->
+        <Grid Padding="16,12,16,12" ColumnDefinitions="Auto,*,Auto">
+            <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                <Label Text="🎩"
+                       FontSize="14"
+                       VerticalOptions="Center"/>
+                <Label Text="{Binding CurrentTitle}"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Gold}"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            <Label Grid.Column="2"
+                   Text="{Binding CurrentTitleDescription}"
+                   FontSize="10"
+                   TextColor="{StaticResource TextSecondary}"
+                   VerticalOptions="Center"
+                   LineBreakMode="TailTruncation"
+                   MaximumWidthRequest="160"/>
+        </Grid>
+
+        <!-- === PRESTIGE PROGRESS (Empire tab only) === -->
+        <Grid x:Name="PrestigeProgressSection" Padding="16,0,16,12" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="PRESTIGE PROGRESS"
+                       FontSize="10"
+                       TextColor="{StaticResource TextSecondary}"/>
+                <Grid HeightRequest="6">
+                    <BoxView BackgroundColor="{StaticResource SurfaceLight}"
+                             CornerRadius="3"/>
+                    <BoxView BackgroundColor="{StaticResource Primary}"
+                             CornerRadius="3"
+                             HorizontalOptions="Start"
+                             WidthRequest="{Binding PrestigeProgress, Converter={StaticResource ProgressToWidth}}"/>
+                </Grid>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label Text="{Binding TotalEarnedDisplay}"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextPrimary}"
+                       HorizontalOptions="End"/>
+                <Label Text="{Binding PrestigeThresholdDisplay}"
                        FontSize="10"
                        TextColor="{StaticResource TextSecondary}"
-                       VerticalOptions="Center"
-                       LineBreakMode="TailTruncation"
-                       MaximumWidthRequest="160"/>
-            </Grid>
-
-            <!-- Prestige Progress Row -->
-            <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                <VerticalStackLayout Spacing="4">
-                    <Label Text="PRESTIGE PROGRESS"
-                           FontSize="10"
-                           TextColor="{StaticResource TextSecondary}"/>
-                    <Grid HeightRequest="6">
-                        <BoxView BackgroundColor="{StaticResource SurfaceLight}"
-                                 CornerRadius="3"/>
-                        <BoxView BackgroundColor="{StaticResource Primary}"
-                                 CornerRadius="3"
-                                 HorizontalOptions="Start"
-                                 WidthRequest="{Binding PrestigeProgress, Converter={StaticResource ProgressToWidth}}"/>
-                    </Grid>
-                </VerticalStackLayout>
-                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                    <Label Text="{Binding TotalEarnedDisplay}"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           TextColor="{StaticResource TextPrimary}"
-                           HorizontalOptions="End"/>
-                    <Label Text="{Binding PrestigeThresholdDisplay}"
-                           FontSize="10"
-                           TextColor="{StaticResource TextSecondary}"
-                           HorizontalOptions="End"/>
-                </VerticalStackLayout>
-            </Grid>
+                       HorizontalOptions="End"/>
+            </VerticalStackLayout>
         </Grid>
     </VerticalStackLayout>
 </ContentView>

@@ -35,7 +35,9 @@
   - TASK-084: Stats Page ✅
   - TASK-086: Skills Guide Page ✅
   - TASK-087: How to Play Page ✅
-- Bundle V: UI Refinements (pending)
+- Bundle V: UI Refinements ✅
+  - TASK-085: Prestige Progress Visibility ✅
+  - TASK-088: Smooth Countdown Animation ✅
 - Bundle W: Performance (pending)
 
 ---
@@ -145,7 +147,6 @@ $2,500 → $10,000 → $30,000 → $75,000 → $200,000 → $600,000 → $2,000,
 ---
 
 ## Next Steps
-1. Complete Bundle V: UI Refinements (TASK-085, TASK-088)
-2. Complete Bundle W: Tab Performance (TASK-090)
-3. Version 1.2: Crew & Mission System
-4. App store preparation
+1. Complete Bundle W: Tab Performance (TASK-090)
+2. Version 1.2: Crew & Mission System
+3. App store preparation
