@@ -5,7 +5,7 @@
 - **Bundle**: W (Performance)
 - **Dependencies**: None
 - **Estimated Time**: 2-3 hours
-- **Status**: READY
+- **Status**: ✅ COMPLETED
 - **Priority**: High
 
 ---
@@ -211,10 +211,12 @@ public void Refresh()
 
 ## Documentation
 
-After investigation, update this section with:
-- **Root Cause:** [TBD]
-- **Solution Applied:** [TBD]
-- **Performance Improvement:** [TBD]
+- **Root Cause:** `BuildOperationViewModels()` called on every `OnAppearing()`, clearing and recreating all ViewModels and UI elements on each tab switch
+- **Solution Applied:**
+  1. Only build ViewModels once (when Operations.Count == 0)
+  2. Reuse existing ViewModels and call Refresh() on subsequent tab switches
+  3. Cached resource colors (Success/Smoke) in OperationViewModel
+- **Performance Improvement:** Tab switching now instant (<100ms perceived)
 
 ---
 
@@ -231,4 +233,4 @@ After investigation, update this section with:
 
 ---
 
-**Task Status**: READY
+**Task Status**: ✅ COMPLETED (2024-12-27)

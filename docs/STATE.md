@@ -8,7 +8,7 @@
 ## Current Status
 **Version 1.0 (MVP)** - COMPLETE
 **Version 1.1 (Economy Rebalancing + Tests)** - COMPLETE
-**Version 1.2.1 (UX Improvements)** - IN PROGRESS
+**Version 1.2.1 (UX Improvements)** - COMPLETE
 
 ---
 
@@ -38,7 +38,8 @@
 - Bundle V: UI Refinements ✅
   - TASK-085: Prestige Progress Visibility ✅
   - TASK-088: Smooth Countdown Animation ✅
-- Bundle W: Performance (pending)
+- Bundle W: Performance ✅
+  - TASK-090: Tab Performance ✅
 
 ---
 
@@ -147,6 +148,5 @@ $2,500 → $10,000 → $30,000 → $75,000 → $200,000 → $600,000 → $2,000,
 ---
 
 ## Next Steps
-1. Complete Bundle W: Tab Performance (TASK-090)
-2. Version 1.2: Crew & Mission System
-3. App store preparation
+1. Version 1.2: Crew & Mission System
+2. App store preparation

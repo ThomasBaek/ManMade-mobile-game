@@ -17,7 +17,7 @@ Quality-of-life improvements, stats tracking, documentation, and performance opt
 | TASK-087 | How to Play Page | U | 2-3 hours | Low | ✅ |
 | TASK-088 | Smooth Countdown Animation | V | 1-2 hours | Medium | ✅ |
 | TASK-089 | Remove $ from TopBar | T | 15 min | Low | ✅ |
-| TASK-090 | Tab Switching Performance | W | 2-3 hours | High | |
+| TASK-090 | Tab Switching Performance | W | 2-3 hours | High | ✅ |
 
 **Total Estimate:** 10-14 hours
 
@@ -80,19 +80,17 @@ Quality-of-life improvements, stats tracking, documentation, and performance opt
 
 ---
 
-### Bundle W: Performance (TASK-090)
+### Bundle W: Performance (TASK-090) ✅ COMPLETED
 **Priority:** High - User experience
 **Estimate:** 2-3 hours
+**Completed:** 2024-12-27
 
 | Task | Description | Impact |
 |------|-------------|--------|
 | TASK-090 | Investigate & fix tab switching lag | Responsiveness |
 
-**Investigation areas:**
-- Progress bar rendering cost
-- Binding evaluation on tab switch
-- OperationViewModel.Refresh() overhead
-- Potential virtualization needs
+**Root cause found:** BuildOperationViewModels() ran on every tab switch
+**Fix:** Reuse ViewModels, only build once, cache resource colors
 
 ---
 
@@ -192,7 +190,7 @@ Note: Stats page is view-only, no toggle needed.
 - [x] **Bundle T Complete** - Quick UX fixes
 - [x] **Bundle U Complete** - Stats & documentation
 - [x] **Bundle V Complete** - UI refinements
-- [ ] **Bundle W Complete** - Performance investigation
+- [x] **Bundle W Complete** - Performance optimization
 - [x] **All Tests Pass** - 149+ tests passing
 - [x] **Build Clean** - 0 errors, minimal warnings
 - [x] **Prestige threshold restored** - $25,000 (from debug $250)
