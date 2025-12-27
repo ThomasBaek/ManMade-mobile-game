@@ -3,6 +3,7 @@ namespace MadeMan.IdleEmpire.Models;
 public static class GameConfig
 {
     // === OPERATIONS (Interval-Based Yields) ===
+    // v1.1 Rebalance: Halved income, increased unlock costs, standardized upgrade multiplier
     public static readonly Operation[] Operations = new[]
     {
         new Operation
@@ -12,10 +13,10 @@ public static class GameConfig
             Icon = "icon_pickpocket.png",
             Description = "Lift wallets from unsuspecting tourists",
             Interval = 1.0,       // 1 second
-            BaseYield = 1.0,      // $1 per cycle = $1/s effective
+            BaseYield = 0.5,      // $0.5 per cycle = $0.5/s effective (v1.1: was $1/s)
             UnlockCost = 0,       // FREE starter operation
             BaseUpgradeCost = 5,  // Upgrades start at $5
-            UpgradeMultiplier = 1.4
+            UpgradeMultiplier = 1.6  // v1.1: standardized
         },
         new Operation
         {
@@ -24,9 +25,9 @@ public static class GameConfig
             Icon = "icon_car.png",
             Description = "Steal cars, sell the parts",
             Interval = 5.0,       // 5 seconds
-            BaseYield = 20.0,     // $20 per cycle = $4/s effective
-            UnlockCost = 50,
-            UpgradeMultiplier = 1.5
+            BaseYield = 10.0,     // $10 per cycle = $2/s effective (v1.1: was $4/s)
+            UnlockCost = 75,      // v1.1: was $50
+            UpgradeMultiplier = 1.6  // v1.1: standardized
         },
         new Operation
         {
@@ -35,8 +36,8 @@ public static class GameConfig
             Icon = "icon_burglary.png",
             Description = "Break into the homes of the wealthy",
             Interval = 20.0,      // 20 seconds
-            BaseYield = 300.0,    // $300 per cycle = $15/s effective
-            UnlockCost = 250,
+            BaseYield = 160.0,    // $160 per cycle = $8/s effective (v1.1: was $15/s)
+            UnlockCost = 400,     // v1.1: was $250
             UpgradeMultiplier = 1.6
         },
         new Operation
@@ -46,9 +47,9 @@ public static class GameConfig
             Icon = "icon_speakeasy.png",
             Description = "Your first illegal watering hole",
             Interval = 60.0,      // 60 seconds
-            BaseYield = 3000.0,   // $3000 per cycle = $50/s effective
-            UnlockCost = 1000,
-            UpgradeMultiplier = 1.8
+            BaseYield = 1800.0,   // $1800 per cycle = $30/s effective (v1.1: was $50/s)
+            UnlockCost = 2000,    // v1.1: was $1000
+            UpgradeMultiplier = 1.6  // v1.1: standardized
         },
         new Operation
         {
@@ -57,23 +58,24 @@ public static class GameConfig
             Icon = "icon_casino.png",
             Description = "The house always wins",
             Interval = 120.0,     // 120 seconds
-            BaseYield = 24000.0,  // $24000 per cycle = $200/s effective
-            UnlockCost = 5000,
-            UpgradeMultiplier = 2.0
+            BaseYield = 12000.0,  // $12000 per cycle = $100/s effective (v1.1: was $200/s)
+            UnlockCost = 10000,   // v1.1: was $5000
+            UpgradeMultiplier = 1.6  // v1.1: standardized
         }
     };
 
     // === PRESTIGE ===
+    // v1.1: Threshold increased to $25K, bonus reduced to 20%
 #if DEBUG
-    public const double PrestigeThreshold = 100;  // Lower for testing
+    public const double PrestigeThreshold = 250;  // Lower for testing (v1.1: was 100)
 #else
-    public const double PrestigeThreshold = 10_000;
+    public const double PrestigeThreshold = 25_000;  // v1.1: was $10K
 #endif
-    public const double PrestigeBonusPerReset = 0.25;
+    public const double PrestigeBonusPerReset = 0.20;  // v1.1: was 0.25
 
     // === OFFLINE ===
     public const double MaxOfflineHours = 4;
-    public const double OfflineEfficiency = 0.5;
+    public const double OfflineEfficiency = 0.4;  // v1.1: was 0.5 (50% -> 40%)
 
     // === TIMING ===
     public const int TicksPerSecond = 2;  // Reduced from 10 - smoother, less frantic
