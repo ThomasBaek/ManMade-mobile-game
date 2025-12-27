@@ -1,7 +1,8 @@
 # Made Man: Idle Empire - Tasks Overview
 
-## Current Task
-**MVP COMPLETE!** All tasks finished.
+## Current Status
+**Version 1.0 (MVP)** - COMPLETE
+**Version 1.1 (Economy Rebalancing + Tests)** - COMPLETE
 
 ---
 
@@ -111,6 +112,28 @@
 | TASK-015 | UI Polish | 2024-12-26 | fd84671 |
 | TASK-016 | Bug Fixes | 2024-12-26 | (no bugs) |
 | TASK-017 | Final Testing | 2024-12-26 | (see Bundle F) |
+
+---
+
+## Version 1.1 Tasks
+
+See `docs/tasks/Version 1.1/TASKS_V1.1.md` for detailed task breakdown.
+
+### Bundle Summary
+
+| Bundle | Name | Tasks | Status | Commit |
+|--------|------|-------|--------|--------|
+| **J** | Economy Core | TASK-046 to TASK-050 | COMPLETED | f31844c |
+| **K** | Skills & Milestones | TASK-051 to TASK-055 | COMPLETED | 355e006 |
+| **L** | Test Infrastructure | TASK-056 to TASK-059 | COMPLETED | 5471b84 |
+| **M** | Income & Operation Tests | TASK-060 to TASK-064 | COMPLETED | fc48640 |
+| **N** | Offline & Prestige Tests | TASK-065 to TASK-069 | COMPLETED | eab94a4 |
+| **O** | Integration Tests | TASK-070 to TASK-074 | COMPLETED | 89302e1 |
+
+### Test Results
+- **Total Tests:** 149
+- **Passing:** 149
+- **Framework:** xUnit + Moq
 
 ---
 

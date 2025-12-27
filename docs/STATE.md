@@ -1,22 +1,38 @@
 # Made Man: Idle Empire - Current State
 
 ## Last Updated
-2024-12-26 (Performance Optimization completed)
+2024-12-27 (Version 1.1 Complete)
 
 ---
 
 ## Current Status
-**Phase 1 COMPLETED** - Foundation complete
-**Phase 2 COMPLETED** - UI implementation complete
-**Phase 3 COMPLETED** - Skill System (Bundle B+C+D all done!)
-**Phase 4 COMPLETED** - Gameplay verification passed
-**Phase 5 COMPLETED** - Persistence verification passed
-**Phase 6 COMPLETED** - Polish tasks done!
-**Performance OPTIMIZED** - Code review fixes applied!
+**Version 1.0 (MVP)** - COMPLETE
+**Version 1.1 (Economy Rebalancing + Tests)** - COMPLETE
 
-**MVP COMPLETE, POLISHED, AND OPTIMIZED!**
+---
+
+## Version Summary
+
+### Version 1.0 - MVP
+- Core gameplay loop
+- 5 operations (Pickpocket → Casino)
+- Prestige system
+- 18 skills across 4 categories
+- Save/Load with offline earnings
+- Performance optimized
+
+### Version 1.1 - Economy & Testing
+- Economy rebalanced (slower progression)
+- All skill effects tuned down ~20-25%
+- Milestone thresholds spread further
+- **149 unit tests** covering all skills
+- Shared Core library for testability
+
+---
 
 ## Bundle Overview
+
+### Version 1.0 Bundles
 | Bundle | Tasks | Status | Commit |
 |--------|-------|--------|--------|
 | Bundle A | TASK-001 to TASK-014 | COMPLETED | Various |
@@ -29,40 +45,96 @@
 | Bundle I | TASK-038 to TASK-040 | COMPLETED | 51b70de |
 | Code Review | Performance fixes | COMPLETED | 452410e |
 
----
-
-## Performance Improvements Applied
-
-### Issues Fixed
-| Issue | Severity | Fix |
-|-------|----------|-----|
-| Memory leak (PropertyChanged) | CRITICAL | Unsubscribe in OnDisappearing |
-| UpdateDisplay 60x/sec | CRITICAL | Throttled to 4x/sec |
-| Duplicate FormatNumber | MEDIUM | NumberFormatter utility |
-| Hardcoded colors | MEDIUM | GetResourceColor() helper |
-| Excessive binding updates | HIGH | Value caching pattern |
-| Deep XAML nesting | MEDIUM | Border instead of Frame |
-
-### Performance Gains
-- **CPU usage:** ~90% reduction in UI update overhead
-- **Memory:** No more event handler leaks
-- **Load time:** Faster Empire screen rendering
+### Version 1.1 Bundles
+| Bundle | Tasks | Status | Commit |
+|--------|-------|--------|--------|
+| Bundle J | TASK-046 to TASK-050 | COMPLETED | f31844c |
+| Bundle K | TASK-051 to TASK-055 | COMPLETED | 355e006 |
+| Bundle L | TASK-056 to TASK-059 | COMPLETED | 5471b84 |
+| Bundle M | TASK-060 to TASK-064 | COMPLETED | fc48640 |
+| Bundle N | TASK-065 to TASK-069 | COMPLETED | eab94a4 |
+| Bundle O | TASK-070 to TASK-074 | COMPLETED | 89302e1 |
 
 ---
 
 ## Project Structure
-- `/Models/` - 6 files (GameState, Operation, GameConfig, SkillConfig, TitleConfig, display models)
-- `/Services/` - 6 files (SaveManager, GameEngine, SkillService, MilestoneService, etc.)
-- `/ViewModels/` - 4 files (MainViewModel, OperationViewModel, SkillViewModel, SettingsViewModel)
-- `/Views/` - 4 pages + 5 components
-- `/Utilities/` - 1 file (NumberFormatter)
+
+```
+src/
+├── MadeMan.IdleEmpire/              # MAUI App
+│   ├── Services/                    # GameEngine, SaveManager
+│   ├── ViewModels/                  # 4 ViewModels
+│   ├── Views/                       # 4 pages + 5 components
+│   └── Utilities/                   # NumberFormatter
+│
+├── MadeMan.IdleEmpire.Core/         # Shared Library (net10.0)
+│   ├── Models/                      # 8 model files
+│   └── Services/                    # SkillService, MilestoneService, etc.
+│
+tests/
+└── MadeMan.IdleEmpire.Tests/        # xUnit Tests
+    ├── SmokeTests.cs                # 7 tests
+    ├── SkillTestBase.cs             # Base class
+    └── Skills/                      # 142 skill tests
+        ├── IncomeSkillsTests.cs
+        ├── OperationSkillsTests.cs
+        ├── OfflineSkillsTests.cs
+        ├── PrestigeSkillsTests.cs
+        ├── SkillStackingTests.cs
+        ├── PrestigeResetTests.cs
+        └── SkillEdgeCaseTests.cs
+```
+
+---
+
+## Test Coverage
+
+| Category | Tests |
+|----------|-------|
+| Smoke tests | 7 |
+| Income skills | 37 |
+| Operation skills | 12 |
+| Offline skills | 21 |
+| Prestige skills | 18 |
+| Skill stacking | 14 |
+| Prestige reset | 7 |
+| Edge cases | 16 |
+| **Total** | **149** |
+
+---
 
 ## Build Status
 - **Framework:** net10.0-android
-- **Errors:** 0
-- **Warnings:** 7 (deprecation - cosmetic)
+- **MAUI Errors:** 0
+- **MAUI Warnings:** 7 (deprecation - cosmetic)
+- **Tests:** 149 passing
+
+---
+
+## v1.1 Balance Changes
+
+### Operations
+| Operation | v1.0 Income | v1.1 Income | v1.0 Unlock | v1.1 Unlock |
+|-----------|-------------|-------------|-------------|-------------|
+| Pickpocket | $1/s | $0.5/s | FREE | FREE |
+| Car Theft | $4/s | $2/s | $50 | $75 |
+| Burglary | $15/s | $8/s | $250 | $400 |
+| Speakeasy | $50/s | $30/s | $1,000 | $2,000 |
+| Casino | $200/s | $100/s | $5,000 | $10,000 |
+
+### Prestige
+| Setting | v1.0 | v1.1 |
+|---------|------|------|
+| Threshold | $10,000 | $25,000 |
+| Bonus | +25% | +20% |
+| Offline Efficiency | 50% | 40% |
+
+### Milestones
+$2,500 → $10,000 → $30,000 → $75,000 → $200,000 → $600,000 → $2,000,000 → $7,500,000 → $25,000,000 → $100,000,000
+
+---
 
 ## Next Steps
-1. Consider v1.1 features from expansion roadmap
-2. Potential features: Territories, Crews, Events
-3. App store preparation
+1. Version 1.2: Crew & Mission System
+2. App store preparation
+3. Beta testing

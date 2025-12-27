@@ -3,6 +3,10 @@
 ## Vision
 Et idle/incremental mobile game hvor spilleren bygger et kriminelt imperium i 1930'ernes New Porto. Fra pickpocket til Godfather.
 
+## Current Status
+**Version 1.0 (MVP)** - COMPLETE
+**Version 1.1 (Economy Rebalancing + Tests)** - COMPLETE
+
 ## Tech Stack (Locked)
 | Komponent | Teknologi |
 |-----------|-----------|
@@ -12,6 +16,7 @@ Et idle/incremental mobile game hvor spilleren bygger et kriminelt imperium i 19
 | Pattern | MVVM med CommunityToolkit.Mvvm |
 | Storage | Preferences API (JSON) |
 | Target | Android 8.0+ (API 26) |
+| Testing | xUnit + Moq |
 
 ## Arkitektur Beslutninger
 
@@ -32,23 +37,22 @@ Et idle/incremental mobile game hvor spilleren bygger et kriminelt imperium i 19
 
 ## Projekt Struktur
 ```
-MadeMan.IdleEmpire/
-├── Models/
-│   ├── GameState.cs
-│   ├── Operation.cs
-│   └── GameConfig.cs
-├── ViewModels/
-│   ├── MainViewModel.cs
-│   └── OperationViewModel.cs
-├── Views/
-│   └── MainPage.xaml
-├── Services/
-│   ├── IGameEngine.cs
-│   ├── GameEngine.cs
-│   └── SaveManager.cs
-└── Resources/
-    ├── Styles/Theme.xaml
-    └── Images/*.png
+src/
+├── MadeMan.IdleEmpire/              # MAUI App (net10.0-android)
+│   ├── Services/                    # GameEngine, SaveManager
+│   ├── ViewModels/                  # 4 ViewModels
+│   ├── Views/                       # 4 pages + 5 components
+│   └── Utilities/                   # NumberFormatter
+│
+├── MadeMan.IdleEmpire.Core/         # Shared Library (net10.0)
+│   ├── Models/                      # 8 model files
+│   └── Services/                    # SkillService, MilestoneService, etc.
+│
+tests/
+└── MadeMan.IdleEmpire.Tests/        # xUnit Tests (net10.0)
+    ├── SmokeTests.cs                # 7 tests
+    ├── SkillTestBase.cs             # Base class
+    └── Skills/                      # 142 skill tests
 ```
 
 ## Kode Standarder
@@ -102,16 +106,17 @@ MadeMan.IdleEmpire/
 - Bug fixes
 - Final testing
 
-## Balance Tal
+## Balance Tal (v1.1)
 | Operation | Base Income | Unlock Cost |
 |-----------|-------------|-------------|
-| Pickpocket | $1/s | GRATIS (starter) |
-| Car Theft | $4/s | $50 |
-| Burglary | $15/s | $250 |
-| Speakeasy | $50/s | $1,000 |
-| Casino | $200/s | $5,000 |
+| Pickpocket | $0.5/s | GRATIS (starter) |
+| Car Theft | $2/s | $75 |
+| Burglary | $8/s | $400 |
+| Speakeasy | $30/s | $2,000 |
+| Casino | $100/s | $10,000 |
 
-**Prestige:** Ved $10,000 total earned -> +25% permanent multiplier
+**Prestige:** Ved $25,000 total earned -> +20% permanent multiplier
+**Offline Efficiency:** 40% (was 50%)
 
 ## Ikke i MVP (YAGNI)
 - Heat system
@@ -128,7 +133,28 @@ MadeMan.IdleEmpire/
 
 ## Success Metrics
 - Første upgrade: < 15 sekunder
-- Første unlock (Car Theft): < 2 minutter
-- Prestige mulighed: < 15 minutter
+- Første unlock (Car Theft): < 3 minutter (v1.1)
+- Prestige mulighed: < 30-45 minutter (v1.1)
 - Build uden errors
 - Kører stabilt på Android emulator
+- 149 unit tests passing (v1.1)
+
+## Test Coverage (v1.1)
+| Category | Tests |
+|----------|-------|
+| Smoke tests | 7 |
+| Income skills | 37 |
+| Operation skills | 12 |
+| Offline skills | 21 |
+| Prestige skills | 18 |
+| Skill stacking | 14 |
+| Prestige reset | 7 |
+| Edge cases | 16 |
+| **Total** | **149** |
+
+## Version History
+| Version | Focus | Status |
+|---------|-------|--------|
+| 1.0 | MVP - Core gameplay | COMPLETE |
+| 1.1 | Economy rebalancing + Tests | COMPLETE |
+| 1.2 | Crew & Mission System | PLANNED |
