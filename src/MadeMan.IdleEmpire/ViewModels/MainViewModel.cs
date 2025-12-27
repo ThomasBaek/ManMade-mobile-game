@@ -86,6 +86,10 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string _unlockedTitleDescription = "";
 
+    // Film effects overlay visibility (syncs with settings)
+    [ObservableProperty]
+    private bool _filmEffectsEnabled = true;
+
     public ObservableCollection<OperationViewModel> Operations { get; } = new();
 
     public SkillViewModel SkillVM { get; }
@@ -106,6 +110,9 @@ public partial class MainViewModel : ObservableObject
         BuildOperationViewModels();
         SkillVM.RefreshActiveSkills();
         SkillVM.UpdateProgress();
+
+        // Refresh film effects setting from Preferences (may have changed in Settings tab)
+        FilmEffectsEnabled = Preferences.Default.Get("settings_film_effects", true);
 
         // Only start game loop once - keep it running across tab switches
         if (!_isGameLoopRunning)

@@ -135,5 +135,24 @@
         <!-- === TITLE UNLOCK MODAL (Overlay - on top) === -->
         <components:TitleUnlockModal Grid.RowSpan="3"/>
 
+        <!-- === FILM EFFECT OVERLAYS === -->
+        <Image Source="overlay_vignette"
+               Grid.RowSpan="3"
+               Aspect="Fill"
+               Opacity="0.25"
+               InputTransparent="True"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
+               IsVisible="{Binding FilmEffectsEnabled}"/>
+
+        <Image Source="overlay_grain"
+               Grid.RowSpan="3"
+               Aspect="Fill"
+               Opacity="0.20"
+               InputTransparent="True"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
+               IsVisible="{Binding FilmEffectsEnabled}"/>
+
     </Grid>
 </ContentPage>
