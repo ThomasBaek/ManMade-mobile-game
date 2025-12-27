@@ -31,6 +31,9 @@ public partial class MainViewModel : ObservableObject
     private string _cashDisplay = "$0";
 
     [ObservableProperty]
+    private double _cashValue;
+
+    [ObservableProperty]
     private string _incomeDisplay = "+$0/s";
 
     [ObservableProperty]
@@ -171,6 +174,9 @@ public partial class MainViewModel : ObservableObject
 
     private void UpdateDisplay()
     {
+        // Update raw cash value for AnimatedNumberLabel
+        CashValue = _engine.State.Cash;
+
         // Use caching to avoid unnecessary binding updates
         var newCashDisplay = NumberFormatter.FormatCurrency(_engine.State.Cash);
         if (newCashDisplay != _lastCashDisplay)

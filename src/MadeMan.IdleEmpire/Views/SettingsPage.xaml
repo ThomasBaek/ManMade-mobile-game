@@ -11,10 +11,8 @@
         <VerticalStackLayout Padding="16" Spacing="0">
 
             <!-- Title -->
-            <Label Text="⚙️ Settings"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   TextColor="{StaticResource TextPrimary}"
+            <Label Text="SETTINGS"
+                   Style="{StaticResource ArtDecoHeader}"
                    HorizontalOptions="Center"
                    Margin="0,16,0,24"/>
 
