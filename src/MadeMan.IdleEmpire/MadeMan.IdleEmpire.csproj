@@ -62,4 +62,8 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\MadeMan.IdleEmpire.Core\MadeMan.IdleEmpire.Core.csproj" />
+	</ItemGroup>
+
 </Project>
