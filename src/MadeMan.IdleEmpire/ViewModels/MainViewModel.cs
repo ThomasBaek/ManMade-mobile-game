@@ -115,7 +115,21 @@ public partial class MainViewModel : ObservableObject
     public void OnAppearing()
     {
         _engine.Initialize();
-        BuildOperationViewModels();
+
+        // Only build ViewModels once - reuse on subsequent tab switches
+        if (Operations.Count == 0)
+        {
+            BuildOperationViewModels();
+        }
+        else
+        {
+            // Just refresh existing ViewModels instead of rebuilding
+            foreach (var op in Operations)
+            {
+                op.Refresh();
+            }
+        }
+
         SkillVM.RefreshActiveSkills();
         SkillVM.UpdateProgress();
 

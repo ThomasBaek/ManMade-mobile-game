@@ -12,6 +12,12 @@ public partial class OperationViewModel : ObservableObject
     private readonly Operation _operation;
     private readonly IGameEngine _engine;
 
+    // Cached resource colors (looked up once, never change at runtime)
+    private static Color? _successColor;
+    private static Color? _smokeColor;
+    private static Color SuccessColor => _successColor ??= GetResourceColor("Success");
+    private static Color SmokeColor => _smokeColor ??= GetResourceColor("Smoke");
+
     // Cached values to avoid unnecessary binding updates
     private string _lastButtonText = "";
     private string _lastYieldDisplay = "";
@@ -105,9 +111,7 @@ public partial class OperationViewModel : ObservableObject
             }
 
             var canUnlock = _engine.CanUnlock(_operation.Id);
-            var newButtonColor = canUnlock
-                ? GetResourceColor("Success")
-                : GetResourceColor("Smoke");
+            var newButtonColor = canUnlock ? SuccessColor : SmokeColor;
             if (newButtonColor != _lastButtonColor)
             {
                 ButtonColor = newButtonColor;
@@ -188,9 +192,7 @@ public partial class OperationViewModel : ObservableObject
             }
 
             var canUpgrade = _engine.CanUpgrade(_operation.Id);
-            var newButtonColor = canUpgrade
-                ? GetResourceColor("Success")
-                : GetResourceColor("Smoke");
+            var newButtonColor = canUpgrade ? SuccessColor : SmokeColor;
             if (newButtonColor != _lastButtonColor)
             {
                 ButtonColor = newButtonColor;
