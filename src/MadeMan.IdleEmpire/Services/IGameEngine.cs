@@ -5,6 +5,7 @@ namespace MadeMan.IdleEmpire.Services;
 public interface IGameEngine
 {
     GameState State { get; }
+    GameStats Stats { get; }
     double IncomePerSecond { get; }
 
     // Offline earnings info (for Welcome Back modal)

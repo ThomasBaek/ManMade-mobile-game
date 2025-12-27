@@ -6,6 +6,7 @@ namespace MadeMan.IdleEmpire.Services;
 public class SaveManager
 {
     private const string SaveKey = "gamestate_v1";
+    private const string StatsKey = "gamestats_v1";
 
     /// <summary>
     /// Saves game state asynchronously to prevent UI blocking.
@@ -68,10 +69,43 @@ public class SaveManager
         try
         {
             Preferences.Default.Remove(SaveKey);
+            Preferences.Default.Remove(StatsKey);
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Delete failed: {ex.Message}");
         }
+    }
+
+    // === STATS (Persistent across prestige) ===
+
+    public void SaveStats(GameStats stats)
+    {
+        try
+        {
+            var json = JsonSerializer.Serialize(stats);
+            Preferences.Default.Set(StatsKey, json);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"SaveStats failed: {ex.Message}");
+        }
+    }
+
+    public GameStats LoadStats()
+    {
+        try
+        {
+            var json = Preferences.Default.Get(StatsKey, string.Empty);
+            if (!string.IsNullOrEmpty(json))
+            {
+                return JsonSerializer.Deserialize<GameStats>(json) ?? new GameStats();
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"LoadStats failed: {ex.Message}");
+        }
+        return new GameStats();
     }
 }

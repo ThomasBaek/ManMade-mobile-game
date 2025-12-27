@@ -7,17 +7,17 @@ Quality-of-life improvements, stats tracking, documentation, and performance opt
 
 ## Task Summary
 
-| Task | Name | Bundle | Estimate | Priority |
-|------|------|--------|----------|----------|
-| TASK-082 | Zero Income Start | T | 30 min | High |
-| TASK-083 | Operations Locked UI | T | 45 min | High |
-| TASK-084 | Stats Page | U | 2 hours | Medium |
-| TASK-085 | Prestige Progress Visibility | V | 45 min | Medium |
-| TASK-086 | Milestone Descriptions | U | 1 hour | Medium |
-| TASK-087 | Info/Help Page | U | 2-3 hours | Low |
-| TASK-088 | Smooth Countdown Animation | V | 1-2 hours | Medium |
-| TASK-089 | Remove $ from TopBar | T | 15 min | Low |
-| TASK-090 | Tab Switching Performance | W | 2-3 hours | High |
+| Task | Name | Bundle | Estimate | Priority | Status |
+|------|------|--------|----------|----------|--------|
+| TASK-082 | Zero Income Start | T | 30 min | High | ✅ |
+| TASK-083 | Operations Locked UI | T | 45 min | High | ✅ |
+| TASK-084 | Stats Page | U | 2 hours | Medium | ✅ |
+| TASK-085 | Prestige Progress Visibility | V | 45 min | Medium | |
+| TASK-086 | Skills Guide Page | U | 1 hour | Medium | ✅ |
+| TASK-087 | How to Play Page | U | 2-3 hours | Low | ✅ |
+| TASK-088 | Smooth Countdown Animation | V | 1-2 hours | Medium | |
+| TASK-089 | Remove $ from TopBar | T | 15 min | Low | ✅ |
+| TASK-090 | Tab Switching Performance | W | 2-3 hours | High | |
 
 **Total Estimate:** 10-14 hours
 
@@ -25,7 +25,7 @@ Quality-of-life improvements, stats tracking, documentation, and performance opt
 
 ## Bundle Structure
 
-### Bundle T: Quick UX Fixes (TASK-082, TASK-083, TASK-089)
+### Bundle T: Quick UX Fixes (TASK-082, TASK-083, TASK-089) ✅ COMPLETED
 **Priority:** High - Immediate polish
 **Estimate:** 1.5 hours
 
@@ -42,9 +42,10 @@ Quality-of-life improvements, stats tracking, documentation, and performance opt
 
 ---
 
-### Bundle U: Stats & Documentation (TASK-084, TASK-086, TASK-087)
+### Bundle U: Stats & Documentation (TASK-084, TASK-086, TASK-087) ✅ COMPLETED
 **Priority:** Medium - New features
 **Estimate:** 5-6 hours
+**Completed:** 2024-12-27
 
 | Task | Description | Impact |
 |------|-------------|--------|
@@ -187,13 +188,13 @@ Note: Stats page is view-only, no toggle needed.
 
 ## Completion Checklist
 
-- [ ] **Bundle T Complete** - Quick UX fixes
-- [ ] **Bundle W Complete** - Performance investigation
+- [x] **Bundle T Complete** - Quick UX fixes
+- [x] **Bundle U Complete** - Stats & documentation
 - [ ] **Bundle V Complete** - UI refinements
-- [ ] **Bundle U Complete** - Stats & documentation
-- [ ] **All Tests Pass** - 149+ tests passing
-- [ ] **Build Clean** - 0 errors, minimal warnings
-- [ ] **Prestige threshold restored** - $25,000 (from debug $250)
+- [ ] **Bundle W Complete** - Performance investigation
+- [x] **All Tests Pass** - 149+ tests passing
+- [x] **Build Clean** - 0 errors, minimal warnings
+- [x] **Prestige threshold restored** - $25,000 (from debug $250)
 
 ---
 

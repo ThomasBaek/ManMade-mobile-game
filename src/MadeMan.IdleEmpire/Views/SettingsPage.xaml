@@ -2,21 +2,86 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MadeMan.IdleEmpire.ViewModels"
+             xmlns:components="clr-namespace:MadeMan.IdleEmpire.Views.Components"
              x:Class="MadeMan.IdleEmpire.Views.SettingsPage"
              x:DataType="vm:SettingsViewModel"
              BackgroundColor="{StaticResource Background}"
              Shell.NavBarIsVisible="False">
 
+    <Grid>
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="0">
 
             <!-- Title -->
-            <Label Text="SETTINGS"
+            <Label Text="INFO"
                    Style="{StaticResource ArtDecoHeader}"
                    HorizontalOptions="Center"
                    Margin="0,16,0,24"/>
 
-            <!-- Sound Settings -->
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CONTENT Section -->
+            <!-- ═══════════════════════════════════════ -->
+            <Label Text="CONTENT"
+                   FontSize="12"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Gold}"
+                   Margin="4,0,0,8"/>
+
+            <Frame BackgroundColor="{StaticResource Surface}"
+                   CornerRadius="12"
+                   Padding="16"
+                   BorderColor="Transparent"
+                   Margin="0,0,0,16">
+                <VerticalStackLayout Spacing="0">
+
+                    <!-- Skills Guide -->
+                    <Grid ColumnDefinitions="*,Auto" HeightRequest="48">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSkillsGuideTapped"/>
+                        </Grid.GestureRecognizers>
+                        <Label Text="Skills Guide"
+                               FontSize="16"
+                               TextColor="{StaticResource TextPrimary}"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Column="1"
+                               Text="›"
+                               FontSize="20"
+                               TextColor="{StaticResource TextSecondary}"
+                               VerticalOptions="Center"/>
+                    </Grid>
+
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="{StaticResource SurfaceLight}"
+                             Margin="0,8"/>
+
+                    <!-- How to Play -->
+                    <Grid ColumnDefinitions="*,Auto" HeightRequest="48">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnHelpTapped"/>
+                        </Grid.GestureRecognizers>
+                        <Label Text="How to Play"
+                               FontSize="16"
+                               TextColor="{StaticResource TextPrimary}"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Column="1"
+                               Text="›"
+                               FontSize="20"
+                               TextColor="{StaticResource TextSecondary}"
+                               VerticalOptions="Center"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SETTINGS Section -->
+            <!-- ═══════════════════════════════════════ -->
+            <Label Text="SETTINGS"
+                   FontSize="12"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Gold}"
+                   Margin="4,0,0,8"/>
+
             <Frame BackgroundColor="{StaticResource Surface}"
                    CornerRadius="12"
                    Padding="16"
@@ -107,7 +172,15 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Info Section -->
+            <!-- ═══════════════════════════════════════ -->
+            <!-- INFORMATION Section -->
+            <!-- ═══════════════════════════════════════ -->
+            <Label Text="INFORMATION"
+                   FontSize="12"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Gold}"
+                   Margin="4,0,0,8"/>
+
             <Frame BackgroundColor="{StaticResource Surface}"
                    CornerRadius="12"
                    Padding="16"
@@ -148,10 +221,32 @@
                                VerticalOptions="Center"/>
                     </Grid>
 
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="{StaticResource SurfaceLight}"
+                             Margin="0,8"/>
+
+                    <!-- Statistics -->
+                    <Grid ColumnDefinitions="*,Auto" HeightRequest="48">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStatisticsTapped"/>
+                        </Grid.GestureRecognizers>
+                        <Label Text="Statistics"
+                               FontSize="16"
+                               TextColor="{StaticResource TextPrimary}"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Column="1"
+                               Text="›"
+                               FontSize="20"
+                               TextColor="{StaticResource TextSecondary}"
+                               VerticalOptions="Center"/>
+                    </Grid>
+
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Danger Zone -->
+            <!-- ═══════════════════════════════════════ -->
+            <!-- DANGER ZONE -->
+            <!-- ═══════════════════════════════════════ -->
             <Frame BackgroundColor="{StaticResource Surface}"
                    CornerRadius="12"
                    Padding="16"
@@ -170,7 +265,7 @@
                              BackgroundColor="{StaticResource Primary}"
                              Opacity="0.3"/>
 
-                    <Button Text="🗑️ RESET GAME"
+                    <Button Text="RESET GAME"
                             Command="{Binding ResetGameCommand}"
                             BackgroundColor="{StaticResource Primary}"
                             TextColor="White"
@@ -191,4 +286,8 @@
         </VerticalStackLayout>
     </ScrollView>
 
+    <!-- Stats Modal Overlay -->
+    <components:StatsModal x:Name="StatsModalComponent" />
+
+    </Grid>
 </ContentPage>

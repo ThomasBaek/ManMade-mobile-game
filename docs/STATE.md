@@ -1,13 +1,14 @@
 # Made Man: Idle Empire - Current State
 
 ## Last Updated
-2024-12-27 (Version 1.1 Complete)
+2024-12-27 (Version 1.2.1 In Progress)
 
 ---
 
 ## Current Status
 **Version 1.0 (MVP)** - COMPLETE
 **Version 1.1 (Economy Rebalancing + Tests)** - COMPLETE
+**Version 1.2.1 (UX Improvements)** - IN PROGRESS
 
 ---
 
@@ -27,6 +28,15 @@
 - Milestone thresholds spread further
 - **149 unit tests** covering all skills
 - Shared Core library for testability
+
+### Version 1.2.1 - UX Improvements (In Progress)
+- Bundle T: Quick UX Fixes ✅
+- Bundle U: Stats & Documentation ✅
+  - TASK-084: Stats Page ✅
+  - TASK-086: Skills Guide Page ✅
+  - TASK-087: How to Play Page ✅
+- Bundle V: UI Refinements (pending)
+- Bundle W: Performance (pending)
 
 ---
 
@@ -135,6 +145,7 @@ $2,500 → $10,000 → $30,000 → $75,000 → $200,000 → $600,000 → $2,000,
 ---
 
 ## Next Steps
-1. Version 1.2: Crew & Mission System
-2. App store preparation
-3. Beta testing
+1. Complete Bundle V: UI Refinements (TASK-085, TASK-088)
+2. Complete Bundle W: Tab Performance (TASK-090)
+3. Version 1.2: Crew & Mission System
+4. App store preparation

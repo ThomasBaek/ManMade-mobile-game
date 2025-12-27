@@ -131,8 +131,9 @@ public partial class MainViewModel : ObservableObject
     public void OnDisappearing()
     {
         // Don't stop timers when switching tabs - game should keep running
-        // Only save the game state
+        // Only save the game state and stats
         _saveManager.Save(_engine.State);
+        _saveManager.SaveStats(_engine.Stats);
     }
 
     /// <summary>
@@ -144,6 +145,7 @@ public partial class MainViewModel : ObservableObject
         StopTimers();
         _isGameLoopRunning = false;
         _saveManager.Save(_engine.State);
+        _saveManager.SaveStats(_engine.Stats);
     }
 
     private void BuildOperationViewModels()
@@ -342,6 +344,7 @@ public partial class MainViewModel : ObservableObject
     private async void OnAutoSaveTick(object? sender, EventArgs e)
     {
         await _saveManager.SaveAsync(_engine.State);
+        _saveManager.SaveStats(_engine.Stats);
     }
 
     private void StopTimers()

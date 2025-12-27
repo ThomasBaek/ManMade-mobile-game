@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MadeMan.IdleEmpire.Views.HelpPage"
+             BackgroundColor="{StaticResource Background}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header with Back Button -->
+        <Grid BackgroundColor="{StaticResource Surface}"
+              Padding="16,12"
+              ColumnDefinitions="Auto,*,Auto">
+
+            <Button Text="‹"
+                    FontSize="28"
+                    TextColor="{StaticResource TextPrimary}"
+                    BackgroundColor="Transparent"
+                    Padding="0"
+                    WidthRequest="44"
+                    HeightRequest="44"
+                    Clicked="OnBackClicked"/>
+
+            <Label Grid.Column="1"
+                   Text="HOW TO PLAY"
+                   FontFamily="BebasNeue"
+                   FontSize="24"
+                   TextColor="{StaticResource Gold}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16" Spacing="16" x:Name="ContentList">
+                <!-- Content will be added programmatically -->
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

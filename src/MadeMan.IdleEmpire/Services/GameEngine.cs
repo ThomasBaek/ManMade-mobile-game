@@ -17,12 +17,16 @@ public class GameEngine : IGameEngine
     private bool _incomeCacheDirty = true;
     private bool _isInitialized;
 
+    // Lifetime stats (persist across prestige)
+    private GameStats _stats = new();
+
     // Offline earnings info (for Welcome Back modal)
     public double LastOfflineEarnings { get; private set; }
     public TimeSpan LastOfflineTime { get; private set; }
     public double LastOfflineEfficiency { get; private set; }
 
     public GameState State => _stateHolder.State;
+    public GameStats Stats => _stats;
 
     public double IncomePerSecond
     {
@@ -97,6 +101,7 @@ public class GameEngine : IGameEngine
         if (_isInitialized) return;
 
         _stateHolder.State = _saveManager.Load() ?? CreateNewGame();
+        _stats = _saveManager.LoadStats();
         CalculateOfflineEarnings();
         _isInitialized = true;
     }
@@ -124,6 +129,9 @@ public class GameEngine : IGameEngine
 
     public void Tick(double deltaSeconds)
     {
+        // Track time played
+        _stats.TimePlayed += TimeSpan.FromSeconds(deltaSeconds);
+
         // Interval-based tick: accumulate time and yield when interval is reached
         foreach (var op in GameConfig.Operations)
         {
@@ -142,7 +150,16 @@ public class GameEngine : IGameEngine
                 var yield = CalculateOperationYield(opState, op);
                 State.Cash += yield;
                 State.TotalEarned += yield;
+
+                // Track lifetime earnings
+                _stats.LifetimeEarned += yield;
             }
+        }
+
+        // Track highest cash
+        if (State.Cash > _stats.HighestCash)
+        {
+            _stats.HighestCash = State.Cash;
         }
 
         // Check for milestone
@@ -204,21 +221,26 @@ public class GameEngine : IGameEngine
         var opState = GetOperationState(operationId);
         if (op == null || opState == null) return;
 
-        double cost;
-        if (opState.Level == 0)
-        {
-            cost = GetUnlockCost(op);
-        }
-        else
-        {
-            cost = GetUpgradeCost(op, opState.Level);
-        }
+        bool isUnlock = opState.Level == 0;
+        double cost = isUnlock ? GetUnlockCost(op) : GetUpgradeCost(op, opState.Level);
 
         if (State.Cash >= cost)
         {
             State.Cash -= cost;
             opState.Level++;
             InvalidateIncomeCache(); // Operation level changed
+
+            // Track stats
+            _stats.LifetimeSpent += cost;
+            _stats.TotalTaps++;
+            if (isUnlock)
+            {
+                _stats.TotalUnlocks++;
+            }
+            else
+            {
+                _stats.TotalUpgrades++;
+            }
 
             // Cashback from The Skim skill
             var cashbackPercent = _skillService.GetCashbackPercent();
@@ -316,6 +338,10 @@ public class GameEngine : IGameEngine
         LastOfflineEarnings = totalEarnings;
         State.Cash += totalEarnings;
         State.TotalEarned += totalEarnings;
+
+        // Track in lifetime stats
+        _stats.LifetimeEarned += totalEarnings;
+        _stats.OfflineEarnings += totalEarnings;
 
         // Note: AccumulatedTime is NOT modified - progress continues from where player left
         State.LastPlayedUtc = DateTime.UtcNow;

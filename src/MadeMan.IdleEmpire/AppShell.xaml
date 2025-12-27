@@ -40,9 +40,9 @@
             ContentTemplate="{DataTemplate views:SkillsTabPage}"
             Route="Skills" />
 
-        <!-- Settings Tab -->
+        <!-- Info Tab -->
         <ShellContent
-            Title="Settings"
+            Title="Info"
             Icon="tab_settings"
             ContentTemplate="{DataTemplate views:SettingsPage}"
             Route="Settings" />

@@ -5,8 +5,9 @@
 - **Bundle**: U (Stats & Documentation)
 - **Dependencies**: None
 - **Estimated Time**: 2 hours
-- **Status**: READY
+- **Status**: ✅ COMPLETED
 - **Priority**: Medium
+- **Completed**: 2024-12-27
 
 ---
 
@@ -158,13 +159,31 @@ public void Stats_TrackSpending()
 
 ## Acceptance Criteria
 
-- [ ] GameStats model created
-- [ ] Stats save/load independently from game state
-- [ ] Stats do NOT reset on prestige
-- [ ] Stats section visible in Settings
-- [ ] All tracked stats display correctly
-- [ ] All tests pass
-- [ ] Build succeeds
+- [x] GameStats model created
+- [x] Stats save/load independently from game state
+- [x] Stats do NOT reset on prestige
+- [x] Stats section visible in Settings (as modal)
+- [x] All tracked stats display correctly
+- [x] All tests pass
+- [x] Build succeeds
+
+---
+
+## Completion Notes
+
+**Implementation Details:**
+- Created `GameStats.cs` in Core/Models with TimeSpan serialization fix (uses Ticks)
+- Created `StatsModal.xaml` component with animated show/hide
+- Added live-updating stats display using IDispatcherTimer
+- Stats accessible from "Statistics" menu item in Info page
+- Modal fills screen width with smooth animations
+
+**Files Created/Modified:**
+- `src/MadeMan.IdleEmpire.Core/Models/GameStats.cs` - New model
+- `src/MadeMan.IdleEmpire/Views/Components/StatsModal.xaml` - New modal UI
+- `src/MadeMan.IdleEmpire/Views/Components/StatsModal.xaml.cs` - Modal logic
+- `src/MadeMan.IdleEmpire/Views/SettingsPage.xaml` - Added Statistics menu item
+- `src/MadeMan.IdleEmpire/Views/SettingsPage.xaml.cs` - Added tap handler
 
 ---
 
@@ -181,4 +200,4 @@ public void Stats_TrackSpending()
 
 ---
 
-**Task Status**: READY
+**Task Status**: ✅ COMPLETED (2024-12-27)

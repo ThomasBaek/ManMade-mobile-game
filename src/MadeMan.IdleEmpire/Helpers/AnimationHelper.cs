@@ -61,7 +61,7 @@ public static class AnimationHelper
         catch
         {
             // Reset scale if animation fails
-            element.Scale = 1.0;
+            element.Scale = 1.0;    
         }
     }
 }

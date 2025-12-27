@@ -49,6 +49,10 @@ public static class MauiProgram
 		builder.Services.AddTransient<Views.SkillsTabPage>();
 		builder.Services.AddTransient<Views.SettingsPage>();
 
+		// Settings sub-pages
+		builder.Services.AddTransient<Views.SkillsGuidePage>();
+		builder.Services.AddTransient<Views.HelpPage>();
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
