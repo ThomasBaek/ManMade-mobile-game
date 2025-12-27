@@ -15,7 +15,7 @@ public partial class SplashPage : ContentPage
         await Task.Delay(2000);
 
         // Fade out
-        await this.FadeTo(0, 500);
+        await this.FadeToAsync(0, 500);
 
         // Navigate to main app (get AppShell from DI to ensure proper dependency injection)
         if (Application.Current != null && Handler?.MauiContext?.Services != null)

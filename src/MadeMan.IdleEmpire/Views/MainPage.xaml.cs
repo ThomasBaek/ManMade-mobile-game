@@ -45,8 +45,8 @@ public partial class MainPage : ContentPage
 
         // Fade in and scale up
         await Task.WhenAll(
-            PrestigeModal.FadeTo(1, 400, Easing.CubicOut),
-            PrestigeModal.ScaleTo(1, 400, Easing.CubicOut)
+            PrestigeModal.FadeToAsync(1, 400, Easing.CubicOut),
+            PrestigeModal.ScaleToAsync(1, 400, Easing.CubicOut)
         );
     }
 

@@ -71,21 +71,22 @@ MadeMan.IdleEmpire/
 START → Cash generates automatically ($/sec)
       → Use cash for Upgrade or Unlock
       → Income increases
-      → At $10,000 total: Prestige option
-      → Reset with +25% permanent bonus
+      → At $25,000 total: Prestige option
+      → Reset with +20% permanent bonus
       → Repeat faster
 ```
 
-## Key Numbers (Balance)
+## Key Numbers (Balance) - v1.1
 | Operation | Base Income | Unlock Cost |
 |-----------|-------------|-------------|
-| Pickpocket | $1/s | FREE (starter) |
-| Car Theft | $4/s | $50 |
-| Burglary | $15/s | $250 |
-| Speakeasy | $50/s | $1,000 |
-| Casino | $200/s | $5,000 |
+| Pickpocket | $0.5/s | FREE (starter) |
+| Car Theft | $2/s | $75 |
+| Burglary | $8/s | $400 |
+| Speakeasy | $30/s | $2,000 |
+| Casino | $100/s | $10,000 |
 
-**Prestige:** At $10,000 total earned → +25% permanent multiplier
+**Prestige:** At $25,000 total earned → +20% permanent multiplier
+**Offline Efficiency:** 40% (max 4 hours)
 
 ## Build Commands
 ```bash
@@ -146,7 +147,7 @@ TextSecondary: #8892A0
 ## Performance Patterns
 
 ### UI Update Throttling
-Game logic runs at 60fps, but UI updates are throttled to 4fps to reduce CPU usage:
+Game logic runs at 2 ticks/second, with UI updates throttled to 4fps to reduce CPU usage:
 ```csharp
 private const int DisplayUpdatesPerSecond = 4;
 private static readonly TimeSpan DisplayUpdateInterval = TimeSpan.FromMilliseconds(1000.0 / DisplayUpdatesPerSecond);

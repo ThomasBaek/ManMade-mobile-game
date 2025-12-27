@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MadeMan.IdleEmpire.Services;
+using MadeMan.IdleEmpire.Utilities;
 
 namespace MadeMan.IdleEmpire.ViewModels;
 
@@ -12,7 +13,6 @@ public partial class SettingsViewModel : ObservableObject
 
     private readonly SaveManager _saveManager;
     private readonly IGameEngine _gameEngine;
-    private readonly IServiceProvider _serviceProvider;
 
     public string Version => "1.1.0";
 
@@ -25,11 +25,10 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     private bool _notificationsEnabled;
 
-    public SettingsViewModel(SaveManager saveManager, IGameEngine gameEngine, IServiceProvider serviceProvider)
+    public SettingsViewModel(SaveManager saveManager, IGameEngine gameEngine)
     {
         _saveManager = saveManager;
         _gameEngine = gameEngine;
-        _serviceProvider = serviceProvider;
 
         // Load settings from Preferences
         SoundEnabled = Preferences.Default.Get(SoundKey, true);
@@ -58,7 +57,7 @@ public partial class SettingsViewModel : ObservableObject
         var page = GetCurrentPage();
         if (page != null)
         {
-            await page.DisplayAlert(
+            await page.DisplayAlertAsync(
                 "Credits",
                 "Made Man: Idle Empire\n\n" +
                 "Version 1.1.0\n\n" +
@@ -75,12 +74,12 @@ public partial class SettingsViewModel : ObservableObject
         if (page == null) return;
 
         // Step 1: First warning
-        var firstConfirm = await page.DisplayAlert(
+        var firstConfirm = await page.DisplayAlertAsync(
             "⚠️ WARNING",
             "Are you sure you want to delete ALL progress?\n\n" +
             "This CANNOT be undone!\n\n" +
             $"Prestige: {_gameEngine.State.PrestigeCount} → 0\n" +
-            $"Total Earned: ${FormatNumber(_gameEngine.State.TotalEarned)} → $0",
+            $"Total Earned: ${NumberFormatter.FormatNumber(_gameEngine.State.TotalEarned)} → $0",
             "CONTINUE",
             "Cancel");
 
@@ -115,7 +114,7 @@ public partial class SettingsViewModel : ObservableObject
             if (page != null)
             {
                 // Show confirmation
-                await page.DisplayAlert(
+                await page.DisplayAlertAsync(
                     "✓ Reset Complete",
                     "Game has been reset. Please restart the app.",
                     "OK");
@@ -130,7 +129,7 @@ public partial class SettingsViewModel : ObservableObject
             var page = GetCurrentPage();
             if (page != null)
             {
-                await page.DisplayAlert(
+                await page.DisplayAlertAsync(
                     "Error",
                     $"Reset failed: {ex.Message}",
                     "OK");
@@ -145,13 +144,5 @@ public partial class SettingsViewModel : ObservableObject
             return Application.Current.Windows[0].Page;
         }
         return null;
-    }
-
-    private static string FormatNumber(double value)
-    {
-        if (value >= 1_000_000_000) return $"{value / 1_000_000_000:F2}B";
-        if (value >= 1_000_000) return $"{value / 1_000_000:F2}M";
-        if (value >= 1_000) return $"{value / 1_000:F2}K";
-        return $"{value:F0}";
     }
 }
